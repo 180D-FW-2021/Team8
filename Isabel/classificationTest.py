@@ -40,6 +40,7 @@ y_th_front = 2000
 y_th_back = -1000
 
 movements = []
+motion_detected = False
 
 t = 0
 # one minute: 1200
@@ -67,25 +68,34 @@ while t < 1200:
 	if ACCz > z_th_up:
 		print("Up!")
 		movements.append("U")
+		motion_detected = True
 	elif ACCz < z_th_down:
 		print("Down!")
 		movements.append("D")
+		motion_detected = True
 
 	# Left right classification
 	if ACCx > x_th_right:
 		print("Right!")
 		movements.append("R")
+		motion_detected = True
 	elif ACCx < x_th_left:
 		print("Left!")
 		movements.append("L")
+		motion_detected = True
 
 	# Front back classification
 	if ACCy > y_th_front:
 		print("Forward!")
 		movements.append("F")
+		motion_detected = True
 	elif ACCy < y_th_back:
 		print("Back!")
 		movements.append("B")
+		motion_detected = True
+
+	if motion_detected:
+		time.sleep(0.5)
 	
 
 	#slow program down a bit, makes the output more readable
