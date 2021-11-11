@@ -37,7 +37,7 @@ x_th_left = -2500
 
 # Front back (likely not used)
 y_th_front = 2000
-y_th_back = -1000
+y_th_back = -2000
 
 movements = []
 motion_detected = False
@@ -95,8 +95,15 @@ while t < 1200:
 		motion_detected = True
 
 	if motion_detected:
-		time.sleep(0.5)
+		time.sleep(0.75)
 		motion_detected = False
+
+	# Square recognition (RDLU)
+	pure_square = ["R","D","L","U"]
+	shape = movements[-4:]
+
+	if pure_square == shape:
+		print("\tPure Square!")
 	
 
 	#slow program down a bit, makes the output more readable
