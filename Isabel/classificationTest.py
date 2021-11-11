@@ -41,7 +41,7 @@ y_th_back = -2000
 
 movements = []
 motion_detected = False
-cooldown = 0.5
+cooldown = 0.75
 
 t = 0
 # one minute: 1200
@@ -76,7 +76,7 @@ while t < 1200:
 		time.sleep(cooldown)
 
 	# Left right classification
-	if ACCx > x_th_right:
+	elif ACCx > x_th_right:
 		print("Right!")
 		movements.append("R")
 		time.sleep(cooldown)
@@ -86,7 +86,7 @@ while t < 1200:
 		time.sleep(cooldown)
 
 	# Front back classification
-	if ACCy > y_th_front:
+	elif ACCy > y_th_front:
 		print("Forward!")
 		movements.append("F")
 		time.sleep(cooldown)
