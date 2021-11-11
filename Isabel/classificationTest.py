@@ -41,9 +41,12 @@ y_th_back = -2000
 
 movements = []
 motion_detected = False
-cooldown = 0.75
+cooldown = 0.6
 
 t = 0
+
+print("Begin moving")
+
 # one minute: 1200
 while t < 1200:
 
