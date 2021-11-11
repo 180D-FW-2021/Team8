@@ -1,0 +1,15 @@
+References: https://google.github.io/mediapipe/getting_started/python.html
+https://google.github.io/mediapipe/solutions/hands.html
+
+Requirements: latest version of OpenCV
+
+-Activate your virtual environment and install via pip:
+pip install mediapipe
+
+-hands.py will detect the position of the wrist node (#0) and write the positions of the node on every frame that the node is present to wrist_sequential.csv.
+-hands_onelinecsv.py will also detect and write the wrist node position, but will only save the last detected node position in wrist_single.csv.
+
+-the wrist positions are relative to the cv2 output-- (x, y) = (0, 0) corresponds to the top right corner of the screen, and (x, y) = (1, 1) corresponds to the bottom left corner.
+
+Please run any of the tests and see how the frame rate/tracking ability is. Let me know if performance issues come up. ty
+-Alan

@@ -96,6 +96,7 @@ while t < 1200:
 
 	if motion_detected:
 		time.sleep(0.5)
+		motion_detected = False
 	
 
 	#slow program down a bit, makes the output more readable
