@@ -68,35 +68,31 @@ while t < 1200:
 	if ACCz > z_th_up:
 		print("Up!")
 		movements.append("U")
-		motion_detected = True
+		time.sleep(0.75)
 	elif ACCz < z_th_down:
 		print("Down!")
 		movements.append("D")
-		motion_detected = True
+		time.sleep(0.75)
 
 	# Left right classification
 	if ACCx > x_th_right:
 		print("Right!")
 		movements.append("R")
-		motion_detected = True
+		time.sleep(0.75)
 	elif ACCx < x_th_left:
 		print("Left!")
 		movements.append("L")
-		motion_detected = True
+		time.sleep(0.75)
 
 	# Front back classification
 	if ACCy > y_th_front:
 		print("Forward!")
 		movements.append("F")
-		motion_detected = True
+		time.sleep(0.75)
 	elif ACCy < y_th_back:
 		print("Back!")
 		movements.append("B")
-		motion_detected = True
-
-	if motion_detected:
 		time.sleep(0.75)
-		motion_detected = False
 
 	# Square recognition (RDLU)
 	pure_square = ["R","D","L","U"]
