@@ -95,7 +95,7 @@ while t < 1200:
 		motion_detected = True
 
 	if motion_detected:
-		time.sleep(0.5)
+		time.sleep(0.75)
 		motion_detected = False
 
 	# Square recognition (RDLU)
