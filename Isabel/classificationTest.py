@@ -29,7 +29,7 @@ gzs = []
 # Thresholds
 # Vertical
 z_th_up = 6000
-z_th_down = 2500
+z_th_down = 3000
 
 # Side to side
 x_th_right = 2000
