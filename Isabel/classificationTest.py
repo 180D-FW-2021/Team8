@@ -37,7 +37,7 @@ x_th_left = -2500
 
 # Front back (likely not used)
 y_th_front = 2000
-y_th_back = -1000
+y_th_back = -2000
 
 movements = []
 motion_detected = False
