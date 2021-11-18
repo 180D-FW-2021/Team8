@@ -19,10 +19,10 @@ public class LoadScene : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(10, 10, 100, 30), "Change Scene"))
+        if (GUI.Button(new Rect(50, 50, 100, 30), "START"))
         {
             Debug.Log("Scene2 loading");
-            SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
         }
     }
 }
