@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu2.unity
+    guid: b9626010905c544ce98e082f2fa97a15
+  - enabled: 1
+    path: Assets/Scenes/ChoppingMinigame.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/SpeechTest.unity
+    guid: b72e1a45bba6f41518f4ba527b858cbb
   m_configObjects: {}
