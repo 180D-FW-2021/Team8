@@ -323,3 +323,4 @@ crashlytics-build.properties
 
 gcp_credentials.json
 gcp_credentials.json.meta
+Assets/StreamingAssets/gcp_credentials.json.meta
