@@ -49,6 +49,8 @@ t = 0
 
 shape = "square"	 # default
 
+game_running = False
+
 # MQTT
 
 # 0. define callbacks - functions that run when events happen
@@ -72,7 +74,9 @@ def on_disconnect(client, userdata, rc):
 def on_message(client, userdata, message):
 	#print('Received message: "' + str(message.payload) + '" on topic "' +
 	#	message.topic + '" with QoS ' + str(message.qos))
-	if message.payload
+	if message.payload[0] == 's':
+		game_running = True
+
 
 
 client = mqtt.Client()
@@ -87,68 +91,69 @@ client.loop_start()
 
 # Cycle
 # one minute: 1200
-while t < 1200:
-
-	#Read the accelerometer,gyroscope and magnetometer values
-	ACCx = IMU.readACCx()
-	ACCy = IMU.readACCy()
-	ACCz = IMU.readACCz()
-	GYRx = IMU.readGYRx()
-	GYRy = IMU.readGYRy()
-	GYRz = IMU.readGYRz()
-	MAGx = IMU.readMAGx()
-	MAGy = IMU.readMAGy()
-	MAGz = IMU.readMAGz()
-
-	#axs.append(ACCx)
-	#ays.append(ACCy)
-	#azs.append(ACCz)
-	#gxs.append(GYRx)
-	#gys.append(GYRy)
-	#gzs.append(GYRz)
-
-	# Vertical classification
-	if ACCz > z_th_up:
-		#print("Up!")
-		movements.append("U")
-		time.sleep(cooldown)
-	elif ACCz < z_th_down:
-		#print("Down!")
-		movements.append("D")
-		time.sleep(cooldown)
-
-	# Left right classification
-	elif ACCx > x_th_right:
-		#print("Right!")
-		movements.append("R")
-		time.sleep(cooldown)
-	elif ACCx < x_th_left:
-		#print("Left!")
-		movements.append("L")
-		time.sleep(cooldown)
-
-	# Front back classification
-	elif ACCy > y_th_front:
-		#print("Forward!")
-		movements.append("F")
-		time.sleep(cooldown)
-	elif ACCy < y_th_back:
-		#print("Back!")
-		movements.append("B")
-		time.sleep(cooldown)
-
-	# Square recognition (RDLU)
-	pure_square = ["R","D","L","U"]
-	shape = movements[-4:]
-
-	if pure_square == shape:
-		print("\tPure Square!")
-		client.publish('ece180d/team8/motion', str("square"), qos=1)
+while True:
 	
+	if game_running:
+		#Read the accelerometer,gyroscope and magnetometer values
+		ACCx = IMU.readACCx()
+		ACCy = IMU.readACCy()
+		ACCz = IMU.readACCz()
+		GYRx = IMU.readGYRx()
+		GYRy = IMU.readGYRy()
+		GYRz = IMU.readGYRz()
+		MAGx = IMU.readMAGx()
+		MAGy = IMU.readMAGy()
+		MAGz = IMU.readMAGz()
 
-	#slow program down a bit, makes the output more readable
-	time.sleep(0.05)
-	t += 1
+		#axs.append(ACCx)
+		#ays.append(ACCy)
+		#azs.append(ACCz)
+		#gxs.append(GYRx)
+		#gys.append(GYRy)
+		#gzs.append(GYRz)
+
+		# Vertical classification
+		if ACCz > z_th_up:
+			#print("Up!")
+			movements.append("U")
+			time.sleep(cooldown)
+		elif ACCz < z_th_down:
+			#print("Down!")
+			movements.append("D")
+			time.sleep(cooldown)
+
+		# Left right classification
+		elif ACCx > x_th_right:
+			#print("Right!")
+			movements.append("R")
+			time.sleep(cooldown)
+		elif ACCx < x_th_left:
+			#print("Left!")
+			movements.append("L")
+			time.sleep(cooldown)
+
+		# Front back classification
+		elif ACCy > y_th_front:
+			#print("Forward!")
+			movements.append("F")
+			time.sleep(cooldown)
+		elif ACCy < y_th_back:
+			#print("Back!")
+			movements.append("B")
+			time.sleep(cooldown)
+
+		# Square recognition (RDLU)
+		pure_square = ["R","D","L","U"]
+		shape = movements[-4:]
+
+		if pure_square == shape:
+			print("\tPure Square!")
+			client.publish('ece180d/team8/motion', str("square"), qos=1)
+		
+
+		#slow program down a bit, makes the output more readable
+		time.sleep(0.05)
+		t += 1
 
 client.loop_stop()
 client.disconnect()
