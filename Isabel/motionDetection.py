@@ -1,3 +1,5 @@
+import paho.mqtt.client as mqtt
+
 # motionClassifierTest.py
 # Simple classifier to differentiate between forward push (Y) and upward lift (Z)
 
@@ -45,8 +47,45 @@ cooldown = 0.6
 
 t = 0
 
-print("Begin")
+shape = "square"	 # default
 
+# MQTT
+
+# 0. define callbacks - functions that run when events happen
+# The callback for when teh client receives a CONNACK respose from the server
+def on_connect(client, userdata, flags, rc):
+	print("Connection returned result: " + str(rc))
+
+	# Subscribing in on_connect() means that if we lose the connection and
+	# reconnect then subscriptions will be renewed
+	client.subscribe("ece180d/team8/unity", qos = 1)
+
+# The callback of the client when it disconnects.
+def on_disconnect(client, userdata, rc):
+	if rc != 0:
+		print('Unexpected Disconnect')
+	else:
+		print('Expected Disconnect')
+
+# The default message callback.
+# (won't be used if only publishing, but can still exist)
+def on_message(client, userdata, message):
+	#print('Received message: "' + str(message.payload) + '" on topic "' +
+	#	message.topic + '" with QoS ' + str(message.qos))
+	if message.payload
+
+
+client = mqtt.Client()
+
+client.on_connect = on_connect
+client.on_disconnect = on_disconnect
+client.on_message = on_message
+
+client.connect_async('mqtt.eclipseprojects.io')
+client.loop_start()
+
+
+# Cycle
 # one minute: 1200
 while t < 1200:
 
@@ -70,31 +109,31 @@ while t < 1200:
 
 	# Vertical classification
 	if ACCz > z_th_up:
-		print("Up!")
+		#print("Up!")
 		movements.append("U")
 		time.sleep(cooldown)
 	elif ACCz < z_th_down:
-		print("Down!")
+		#print("Down!")
 		movements.append("D")
 		time.sleep(cooldown)
 
 	# Left right classification
 	elif ACCx > x_th_right:
-		print("Right!")
+		#print("Right!")
 		movements.append("R")
 		time.sleep(cooldown)
 	elif ACCx < x_th_left:
-		print("Left!")
+		#print("Left!")
 		movements.append("L")
 		time.sleep(cooldown)
 
 	# Front back classification
 	elif ACCy > y_th_front:
-		print("Forward!")
+		#print("Forward!")
 		movements.append("F")
 		time.sleep(cooldown)
 	elif ACCy < y_th_back:
-		print("Back!")
+		#print("Back!")
 		movements.append("B")
 		time.sleep(cooldown)
 
@@ -104,9 +143,12 @@ while t < 1200:
 
 	if pure_square == shape:
 		print("\tPure Square!")
+		client.publish('ece180d/team8/motion', str("square"), qos=1)
 	
 
 	#slow program down a bit, makes the output more readable
 	time.sleep(0.05)
 	t += 1
-print(movements)
+
+client.loop_stop()
+client.disconnect()
