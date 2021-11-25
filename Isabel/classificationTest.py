@@ -45,7 +45,7 @@ cooldown = 0.6
 
 t = 0
 
-print("Begin moving")
+print("Begin")
 
 # one minute: 1200
 while t < 1200:
