@@ -89,7 +89,6 @@ public class ChoppingGameManager : MonoBehaviour
             DisplayTime(remainingTime);
         }
         else if (remainingTime <= 0) {
-            Debug.Log("Time has run out!");
             remainingTime = 0;
             gameState = StateType.LOSE;
         }

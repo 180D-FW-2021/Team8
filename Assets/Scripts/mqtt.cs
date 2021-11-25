@@ -7,11 +7,13 @@ using System.Net.Sockets;
 using uPLibrary.Networking.M2Mqtt.Exceptions;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using uPLibrary.Networking.M2Mqtt.Internal;
-
 using System.Security.Cryptography.X509Certificates;
-using uPLibrary.Networking.M2Mqtt.Messages;
+using uPLibrary.Networking.M2Mqtt.Session;
+using uPLibrary.Networking.M2Mqtt.Utility;
 using uPLibrary.Networking.M2Mqtt;
 using System.Net.Security;
+using System;
+using System.Text;
 
 public class MQTT : MonoBehaviour
 {
@@ -24,13 +26,13 @@ public class MQTT : MonoBehaviour
 	public string password = "test";
 	public TextAsset certificate;
 
-	static string subTopic = "";
+	static string subTopic = "ece180d/team8/test"; //For testing purposes
 
 	void Start()
 	{
 		if (brokerHostname != null && userName != null && password != null)
 		{
-			Debug.Log("connecting to " + brokerHostname + ":" + brokerPort);
+			Debug.Log("Connecting to " + brokerHostname + ":" + brokerPort);
 			Connect();
 			client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
 			byte[] qosLevels = { MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE };
@@ -38,9 +40,10 @@ public class MQTT : MonoBehaviour
 		}
 	}
 
+
 	private void Connect()
 	{
-		Debug.Log("about to connect on '" + brokerHostname + "'");
+		Debug.Log("About to connect on '" + brokerHostname + "'");
 		// Forming a certificate based on a TextAsset
 		X509Certificate cert = new X509Certificate();
 		cert.Import(certificate.bytes);
@@ -69,6 +72,6 @@ public class MQTT : MonoBehaviour
 
 	private void Publish(string _topic, string msg)
 	{
-		client.Publish(_topic, Encoding.UTF8.GetBytes(msg), MqttMsgbase.QOS_LEVEL_AT_MOST_ONCE, false);
+		client.Publish(_topic, Encoding.UTF8.GetBytes(msg), MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE, false);
 	}
 }
