@@ -47,7 +47,7 @@ cooldown = 0.6
 
 t = 0
 
-shape = "square"	 # default
+detect_shape = "square"	 # default
 
 game_running = False
 
@@ -74,8 +74,14 @@ def on_disconnect(client, userdata, rc):
 def on_message(client, userdata, message):
 	#print('Received message: "' + str(message.payload) + '" on topic "' +
 	#	message.topic + '" with QoS ' + str(message.qos))
-	if message.payload[0] == 's':
+
+	# Told to stop or no shape to detect
+	if message == "stop" or message == "N/A":
+		game_running = False
+	elif message == "start":
 		game_running = True
+	elif message == "square":
+		detect_shape = "square"
 
 
 
@@ -98,12 +104,12 @@ while True:
 		ACCx = IMU.readACCx()
 		ACCy = IMU.readACCy()
 		ACCz = IMU.readACCz()
-		GYRx = IMU.readGYRx()
-		GYRy = IMU.readGYRy()
-		GYRz = IMU.readGYRz()
-		MAGx = IMU.readMAGx()
-		MAGy = IMU.readMAGy()
-		MAGz = IMU.readMAGz()
+		#GYRx = IMU.readGYRx()
+		#GYRy = IMU.readGYRy()
+		#GYRz = IMU.readGYRz()
+		#MAGx = IMU.readMAGx()
+		#MAGy = IMU.readMAGy()
+		#MAGz = IMU.readMAGz()
 
 		#axs.append(ACCx)
 		#ays.append(ACCy)
@@ -146,14 +152,13 @@ while True:
 		pure_square = ["R","D","L","U"]
 		shape = movements[-4:]
 
-		if pure_square == shape:
-			print("\tPure Square!")
-			client.publish('ece180d/team8/motion', str("square"), qos=1)
+		if pure_square == shape && detect_shape == "square":
+			# print("\tPure Square!")
+			client.publish('ece180d/team8/imu', str("True"), qos=1)
 		
 
 		#slow program down a bit, makes the output more readable
 		time.sleep(0.05)
-		t += 1
 
 client.loop_stop()
 client.disconnect()

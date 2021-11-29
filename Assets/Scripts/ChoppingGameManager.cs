@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 
 public enum StateType
@@ -93,4 +94,16 @@ public class ChoppingGameManager : MonoBehaviour
             gameState = StateType.LOSE;
         }
     }
+}
+
+void readTextFile(string file_path)
+{
+    StreamReader inp_stm = new StreamReader(file_path);
+
+    while(!inp_stm.EndOfStream)
+    {
+        string inp_ln = inp_stm.ReadLine();
+        
+    }
+    inp_stm.Close();
 }
