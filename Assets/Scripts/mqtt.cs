@@ -45,8 +45,7 @@ public class MQTT : MonoBehaviour
 	{
 		Debug.Log("About to connect on '" + brokerHostname + "'");
 		// Forming a certificate based on a TextAsset
-		X509Certificate cert = new X509Certificate();
-		cert.Import(certificate.bytes);
+		X509Certificate cert = new X509Certificate(); //certificate.bytes
 		Debug.Log("Using the certificate '" + cert + "'");
 		client = new MqttClient(brokerHostname, brokerPort, true, cert, null, MqttSslProtocols.TLSv1_0, MyRemoteCertificateValidationCallback);
 		string clientId = Guid.NewGuid().ToString();
