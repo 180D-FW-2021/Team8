@@ -120,32 +120,32 @@ while True:
 
 		# Vertical classification
 		if ACCz > z_th_up:
-			#print("Up!")
+			print("U")
 			movements.append("U")
 			time.sleep(cooldown)
 		elif ACCz < z_th_down:
-			#print("Down!")
+			print("D")
 			movements.append("D")
 			time.sleep(cooldown)
 
 		# Left right classification
 		elif ACCx > x_th_right:
-			#print("Right!")
+			print("R")
 			movements.append("R")
 			time.sleep(cooldown)
 		elif ACCx < x_th_left:
-			#print("Left!")
+			print("L")
 			movements.append("L")
 			time.sleep(cooldown)
 
 		# Front back classification
 		elif ACCy > y_th_front:
 			#print("Forward!")
-			movements.append("F")
+			#movements.append("F")
 			time.sleep(cooldown)
 		elif ACCy < y_th_back:
 			#print("Back!")
-			movements.append("B")
+			#movements.append("B")
 			time.sleep(cooldown)
 
 		# Square recognition (RDLU)
