@@ -51,7 +51,8 @@ client.connect_async('mqtt.eclipseprojects.io')
 client.loop_start()
 
 while True:
-	with open("../IMUCommsTxt.txt", "r") as file:
+	try:
+		file = open("../IMUCommsTxt.txt", "r")
 		data = file.readlines()
 		print(data)
 
@@ -70,6 +71,8 @@ while True:
 		elif data[2] == "False":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
+	except (OSError, PermissionError):
+		print("Could not open")
 
 
 	time.sleep(0.05)
