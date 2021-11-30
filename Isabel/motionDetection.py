@@ -98,6 +98,7 @@ client.loop_start()
 # Cycle
 # one minute: 1200
 while True:
+	print("In loop")
 	
 	if game_running:
 		#Read the accelerometer,gyroscope and magnetometer values
