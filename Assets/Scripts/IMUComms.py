@@ -3,6 +3,7 @@
 
 import paho.mqtt.client as mqtt
 import numpy as np
+import time
 
 game_running = False
 shape_written = False
@@ -20,7 +21,7 @@ def on_disconnect(client, userdata, rc):
 	if rc != 0:
 		print('Unexpected Disconnect')
 	else:
-		print("Expected DIsconnect")
+		print("Expected Disconnect")
 
 # The default message callback
 # (can create separate callbacks per subscribed topic)

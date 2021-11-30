@@ -152,7 +152,7 @@ while True:
 		pure_square = ["R","D","L","U"]
 		shape = movements[-4:]
 
-		if pure_square == shape && detect_shape == "square":
+		if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")
 			client.publish('ece180d/team8/imu', str("True"), qos=1)
 		
