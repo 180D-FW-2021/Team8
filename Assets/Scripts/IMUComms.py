@@ -53,22 +53,23 @@ client.loop_start()
 while True:
 	with open("../IMUCommsTxt.txt", "r") as file:
 		data = file.readlines()
+		print(data)
 
-	if data[0] != "N/A" and not shape_written:
-		client.publish("ece180d/team8/unity", data[0], qos=1)
-		shape_written = True
-		game_running = True
-	elif data[0] == "N/A":
-		client.publish("ece180d/team8/unity", "stop", qos=1)
-		shape_written = False
-		game_running = False
+		if data[0] != "N/A" and not shape_written:
+			client.publish("ece180d/team8/unity", data[0], qos=1)
+			shape_written = True
+			game_running = True
+		elif data[0] == "N/A":
+			client.publish("ece180d/team8/unity", "stop", qos=1)
+			shape_written = False
+			game_running = False
 
-	if data[2] == "True":
-		client.publish("ece180d/team8/unity", "stop", qos=1)
-		game_running = False
-	elif data[2] == "False":
-		client.publish("ece180d/team8/unity", "start", qos=1)
-		game_running = True
+		if data[2] == "True":
+			client.publish("ece180d/team8/unity", "stop", qos=1)
+			game_running = False
+		elif data[2] == "False":
+			client.publish("ece180d/team8/unity", "start", qos=1)
+			game_running = True
 
 
 	time.sleep(0.05)

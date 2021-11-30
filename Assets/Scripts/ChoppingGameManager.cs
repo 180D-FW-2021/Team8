@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-using System.Threading.Tasks;
 using System.Linq;
+using System;
 
 public enum StateType
 {
@@ -22,7 +22,7 @@ public class ChoppingGameManager : MonoBehaviour
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
     private string shape = "square";
-    private string file_path = "../IMUCommsTxt.txt";
+    private string file_path = "IMUCommsTxt.txt";
 
     public GameObject WinScreen;
     public GameObject LoseScreen;
@@ -59,7 +59,16 @@ public class ChoppingGameManager : MonoBehaviour
         shape = "square";
         string[] lines = {shape, "False", "False"};
 
-        File.WriteAllLines(file_path, lines);
+        try {
+            using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                sw.WriteLine(lines[0]);
+                sw.WriteLine(lines[1]);
+                sw.WriteLine(lines[2]);
+            }
+        } catch (Exception e) {
+
+        }
+            
     }
 
     // Update is called once per frame
@@ -96,16 +105,32 @@ public class ChoppingGameManager : MonoBehaviour
             remainingTime -= Time.deltaTime;
             DisplayTime(remainingTime);
         }
-        else if (remainingTime <= 0) {
+        else if (remainingTime <= 0 && getState() != StateType.LOSE) {
             remainingTime = 0;
             gameState = StateType.LOSE;
             string[] lines = {"N/A", "False", "True"};
-            File.WriteAllLines(file_path, lines);
+
+            try {
+                using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                    sw.WriteLine(lines[0]);
+                    sw.WriteLine(lines[1]);
+                    sw.WriteLine(lines[2]);
+                }
+            } catch (Exception e) {
+
+            }
         }
 
-        string line = File.ReadLines(file_path).Skip(1).FirstOrDefault();
-        if (line == "True") {
-            gameState = StateType.WIN;
+        try {
+            using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
+                sr.ReadLine();
+                string line = sr.ReadLine();
+                if (line == "True") {
+                    gameState = StateType.WIN;
+                }
+            }
+        } catch (Exception e) {
+
         }
     }
 }
