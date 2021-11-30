@@ -20,6 +20,7 @@ public class ChoppingGameManager : MonoBehaviour
 
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
+    private string shape = "square";
 
     public GameObject WinScreen;
     public GameObject LoseScreen;
@@ -53,6 +54,9 @@ public class ChoppingGameManager : MonoBehaviour
     {
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
+        shape = "square";
+        string[] lines = {shape, "False", "False"};
+        await File.WriteAllLinesAsync(file_path, lines);
     }
 
     // Update is called once per frame
@@ -92,18 +96,13 @@ public class ChoppingGameManager : MonoBehaviour
         else if (remainingTime <= 0) {
             remainingTime = 0;
             gameState = StateType.LOSE;
+            string[] lines = {"N/A", "False", "True"};
+            await File.WriteAllLinesAsync(file_path, lines);
+        }
+
+        string line = File.ReadLines(file_path).Skip(1).Take(1).First();
+        if (line == "True") {
+            gameState = StateType.WIN;
         }
     }
-}
-
-void readTextFile(string file_path)
-{
-    StreamReader inp_stm = new StreamReader(file_path);
-
-    while(!inp_stm.EndOfStream)
-    {
-        string inp_ln = inp_stm.ReadLine();
-        
-    }
-    inp_stm.Close();
 }
