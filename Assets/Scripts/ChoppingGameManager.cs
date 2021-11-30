@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
-
+using System.Threading.Tasks;
+using System.Linq;
 
 public enum StateType
 {
@@ -21,6 +22,7 @@ public class ChoppingGameManager : MonoBehaviour
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
     private string shape = "square";
+    private string file_path = "../IMUCommsTxt.txt";
 
     public GameObject WinScreen;
     public GameObject LoseScreen;
@@ -56,7 +58,8 @@ public class ChoppingGameManager : MonoBehaviour
         remainingTime = timeToComplete;
         shape = "square";
         string[] lines = {shape, "False", "False"};
-        await File.WriteAllLinesAsync(file_path, lines);
+
+        File.WriteAllLines(file_path, lines);
     }
 
     // Update is called once per frame
@@ -97,10 +100,10 @@ public class ChoppingGameManager : MonoBehaviour
             remainingTime = 0;
             gameState = StateType.LOSE;
             string[] lines = {"N/A", "False", "True"};
-            await File.WriteAllLinesAsync(file_path, lines);
+            File.WriteAllLines(file_path, lines);
         }
 
-        string line = File.ReadLines(file_path).Skip(1).Take(1).First();
+        string line = File.ReadLines(file_path).Skip(1).FirstOrDefault();
         if (line == "True") {
             gameState = StateType.WIN;
         }

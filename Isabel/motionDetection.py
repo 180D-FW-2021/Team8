@@ -72,8 +72,8 @@ def on_disconnect(client, userdata, rc):
 # The default message callback.
 # (won't be used if only publishing, but can still exist)
 def on_message(client, userdata, message):
-	#print('Received message: "' + str(message.payload) + '" on topic "' +
-	#	message.topic + '" with QoS ' + str(message.qos))
+	print('Received message: "' + str(message.payload) + '" on topic "' +
+		message.topic + '" with QoS ' + str(message.qos))
 
 	# Told to stop or no shape to detect
 	if message == "stop" or message == "N/A":
@@ -149,8 +149,10 @@ while True:
 			time.sleep(cooldown)
 
 		# Square recognition (RDLU)
-		pure_square = ["R","D","L","U"]
-		shape = movements[-4:]
+		# pure_square = ["R","D","L","U"]
+		pure_square = ["U"]
+		#shape = movements[-4:]
+		shape = movements[-1:]
 
 		if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")
