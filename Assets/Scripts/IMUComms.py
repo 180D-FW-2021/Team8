@@ -33,7 +33,7 @@ def on_message(client, userdata, message):
 	if "True" in str(message.payload):
 		with open("../IMUCommsTxt.txt", "r") as file:
 			data = file.readlines()
-		data[1] = "True"
+		data[1] = "True\n"
 		with open("../IMUCommsTxt.txt", "w") as file:
 			file.writelines(data)
 

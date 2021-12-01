@@ -104,36 +104,40 @@ public class ChoppingGameManager : MonoBehaviour
                 break;
         }
 
-        if (remainingTime > 0 && getState() != StateType.PAUSING) {
-            remainingTime -= Time.deltaTime;
-            DisplayTime(remainingTime);
-        }
-        else if (remainingTime <= 0 && getState() != StateType.LOSE) {
-            remainingTime = 0;
-            gameState = StateType.LOSE;
-            string[] lines = {"N/A", "False", "True"};
+        if (getState() == StateType.PLAYING)
+        {
+            if (remainingTime > 0 && getState() != StateType.PAUSING) {
+                remainingTime -= Time.deltaTime;
+                DisplayTime(remainingTime);
+            }
+            else if (remainingTime <= 0 && getState() != StateType.LOSE) {
+                remainingTime = 0;
+                gameState = StateType.LOSE;
+                string[] lines = {"N/A", "False", "True"};
+
+                try {
+                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                        sw.WriteLine(lines[0]);
+                        sw.WriteLine(lines[1]);
+                        sw.WriteLine(lines[2]);
+                    }
+                } catch (Exception e) {
+                    Debug.Log(e);
+                }
+            }
 
             try {
-                using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
-                    sw.WriteLine(lines[0]);
-                    sw.WriteLine(lines[1]);
-                    sw.WriteLine(lines[2]);
+                using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    Debug.Log("Current state: " + line);
+                    if (line.Contains("True")) {
+                        gameState = StateType.WIN;
+                    }
                 }
             } catch (Exception e) {
                 Debug.Log(e);
             }
-        }
-
-        try {
-            using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
-                sr.ReadLine();
-                string line = sr.ReadLine();
-                if (line == "True\n") {
-                    gameState = StateType.WIN;
-                }
-            }
-        } catch (Exception e) {
-            Debug.Log(e);
         }
     }
 }
