@@ -29,10 +29,8 @@ def on_message(client, userdata, message):
 	print("Received message: " + str(message.payload) + '" on topic "' +
 		message.topic + '" with QoS' + str(message.qos))
 
-	m = message.payload[2:]
-
 	# If message is if the shape is recognized: true or false
-	if m == "True'":
+	if "True" in message.payload:
 		with open("../IMUCommsTxt.txt", "r") as file:
 			data = file.readlines()
 		data[1] = "True"
