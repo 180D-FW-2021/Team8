@@ -72,6 +72,7 @@ def on_disconnect(client, userdata, rc):
 # The default message callback.
 # (won't be used if only publishing, but can still exist)
 def on_message(client, userdata, message):
+	global game_running
 	print('Received message: "' + str(message.payload) + '" on topic "' +
 		message.topic + '" with QoS ' + str(message.qos))
 
