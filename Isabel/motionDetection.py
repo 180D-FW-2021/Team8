@@ -83,7 +83,7 @@ def on_message(client, userdata, message):
 	elif message == "square":
 		detect_shape = "square"
 
-
+print("About to connect...")
 
 client = mqtt.Client()
 
@@ -94,6 +94,7 @@ client.on_message = on_message
 client.connect_async('mqtt.eclipseprojects.io')
 client.loop_start()
 
+print("Connected")
 
 # Cycle
 # one minute: 1200
