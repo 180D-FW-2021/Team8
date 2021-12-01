@@ -1,65 +1,74 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using GoogleCloudStreamingSpeechToText;
 using GoogleCloudStreamingSpeechToText;
+using CursorObject;
 
-public class SpeechRec : MonoBehaviour
+namespace Speecher
 {
-    string transcriptRec;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public class SpeechRec : MonoBehaviour
     {
-        Debug.Log("Test");
-        /*GameObject speechObj = GameObject.Find("SpeechTest");
-        StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
-        Debug.Log("Hello");
-        transcriptRec = streamRec.transcript;
+        string transcriptRec;
+        public bool positioner = false;
 
-        //if (transcriptRec == "yes")
-        //{
-            Debug.Log("Hello");
+        // Start is called before the first frame update
+        void Start()
+        {
+            Debug.Log("Test");
+
+            //bool pos = CursorObject.fs_read_hands_csv.positioner;
         }
 
-        Debug.Log(transcriptRec);
-        */
 
-        // IMPORTANT SHIT
-
-        //GameObject speechObj = GameObject.Find("SpeechTest");
-        //StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
-        //Console.WriteLine("Hello");
-        //transcriptRec = streamRec.transcript;
-        //Debug.Log(transcriptRec);
-                
-
-        /*if (transcriptRec == "yes")
-        {
+            /*GameObject speechObj = GameObject.Find("SpeechTest");
+            StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
             Debug.Log("Hello");
-        }*/
-    }
+            transcriptRec = streamRec.transcript;
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*GameObject thePlayer = GameObject.Find("SpeechTest");
-        PlayerScript playerScript = thePlayer.GetComponent<PlayerScript>();
-        playerScript.Health -= 10.0f;*/
+            //if (transcriptRec == "yes")
+            //{
+                Debug.Log("Hello");
+            }
 
-        //transcriptRec = GameObject.Find("SpeechTest").GetComponent<StreamingRecognizer>().transcript; ;
-        /*
-        GameObject speechObj = GameObject.Find("SpeechTest");
-        StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
-        //Console.WriteLine("Hello");
-        transcriptRec = streamRec.transcript;
+            Debug.Log(transcriptRec);
+            */
 
-        if(transcriptRec == "yes")
+            // IMPORTANT SHIT
+
+            //GameObject speechObj = GameObject.Find("SpeechTest");
+            //StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
+            //Console.WriteLine("Hello");
+            //transcriptRec = streamRec.transcript;
+            //Debug.Log(transcriptRec);
+
+
+            /*if (transcriptRec == "yes")
+            {
+                Debug.Log("Hello");
+            }*/
+
+        // Update is called once per frame
+        void Update()
         {
-            Debug.Log("Hello");
+            /*GameObject thePlayer = GameObject.Find("SpeechTest");
+            PlayerScript playerScript = thePlayer.GetComponent<PlayerScript>();
+            playerScript.Health -= 10.0f;*/
+
+            //transcriptRec = GameObject.Find("SpeechTest").GetComponent<StreamingRecognizer>().transcript; ;
+            /*
+            GameObject speechObj = GameObject.Find("SpeechTest");
+            StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
+            //Console.WriteLine("Hello");
+            transcriptRec = streamRec.transcript;
+
+            if(transcriptRec == "yes")
+            {
+                Debug.Log("Hello");
+            }
+
+            Debug.Log(transcriptRec);
+            */
         }
-
-        Debug.Log(transcriptRec);
-        */
     }
 }
