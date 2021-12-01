@@ -71,11 +71,13 @@ while True:
 		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
+
+		file.close()
+		
 	except (OSError, PermissionError):
 		print("Could not open")
 
-
-	time.sleep(0.05)
+	time.sleep(0.4)
 
 
 client.loop_stop()

@@ -75,14 +75,14 @@ def on_message(client, userdata, message):
 	print('Received message: "' + str(message.payload) + '" on topic "' +
 		message.topic + '" with QoS ' + str(message.qos))
 
-	print(message)
+	m = message.payload[2:]
 
 	# Told to stop or no shape to detect
-	if message == "stop" or message == "N/A":
+	if m == "stop'":
 		game_running = False
-	elif message == "start":
+	elif message == "start'":
 		game_running = True
-	elif message == "square":
+	elif message == "square'":
 		detect_shape = "square"
 
 print("About to connect...")
