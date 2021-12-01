@@ -56,19 +56,19 @@ while True:
 		data = file.readlines()
 		print(data)
 
-		if data[0] != "N/A" and not shape_written:
+		if data[0] != "N/A\n" and not shape_written:
 			client.publish("ece180d/team8/unity", data[0], qos=1)
 			shape_written = True
 			game_running = True
-		elif data[0] == "N/A":
+		elif data[0] == "N/A\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			shape_written = False
 			game_running = False
 
-		if data[2] == "True":
+		if data[2] == "True\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			game_running = False
-		elif data[2] == "False":
+		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
 	except (OSError, PermissionError):
