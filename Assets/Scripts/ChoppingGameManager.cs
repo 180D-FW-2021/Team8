@@ -66,7 +66,7 @@ public class ChoppingGameManager : MonoBehaviour
                 sw.WriteLine(lines[2]);
             }
         } catch (Exception e) {
-
+            Debug.Log(e);
         }
             
     }
@@ -117,7 +117,7 @@ public class ChoppingGameManager : MonoBehaviour
                     sw.WriteLine(lines[2]);
                 }
             } catch (Exception e) {
-
+                Debug.Log(e);
             }
         }
 
@@ -130,7 +130,7 @@ public class ChoppingGameManager : MonoBehaviour
                 }
             }
         } catch (Exception e) {
-
+            Debug.Log(e);
         }
     }
 }
