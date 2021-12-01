@@ -75,6 +75,8 @@ def on_message(client, userdata, message):
 	print('Received message: "' + str(message.payload) + '" on topic "' +
 		message.topic + '" with QoS ' + str(message.qos))
 
+	print(message)
+
 	# Told to stop or no shape to detect
 	if message == "stop" or message == "N/A":
 		game_running = False
