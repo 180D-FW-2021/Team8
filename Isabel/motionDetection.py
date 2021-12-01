@@ -103,7 +103,6 @@ print("Connected")
 while True:
 	
 	if game_running:
-		print("Game running")
 		#Read the accelerometer,gyroscope and magnetometer values
 		ACCx = IMU.readACCx()
 		ACCy = IMU.readACCy()
@@ -114,13 +113,6 @@ while True:
 		#MAGx = IMU.readMAGx()
 		#MAGy = IMU.readMAGy()
 		#MAGz = IMU.readMAGz()
-
-		#axs.append(ACCx)
-		#ays.append(ACCy)
-		#azs.append(ACCz)
-		#gxs.append(GYRx)
-		#gys.append(GYRy)
-		#gzs.append(GYRz)
 
 		# Vertical classification
 		if ACCz > z_th_up:
@@ -160,7 +152,7 @@ while True:
 
 		if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")
-			client.publish('ece180d/team8/imu', str("True"), qos=1)
+			client.publish('ece180d/team8/imu', "True", qos=1)
 		
 
 		#slow program down a bit, makes the output more readable
