@@ -29,11 +29,13 @@ def on_message(client, userdata, message):
 	print("Received message: " + str(message.payload) + '" on topic "' +
 		message.topic + '" with QoS' + str(message.qos))
 
+	m = message.payload[2:]
+
 	# If message is if the shape is recognized: true or false
-	if message == "True" or message == "False":
+	if m == "True'":
 		with open("../IMUCommsTxt.txt", "r") as file:
 			data = file.readlines()
-		data[1] = message
+		data[1] = "True"
 		with open("../IMUCommsTxt.txt", "w") as file:
 			file.writelines(data)
 
@@ -73,7 +75,7 @@ while True:
 			game_running = True
 
 		file.close()
-		
+
 	except (OSError, PermissionError):
 		print("Could not open")
 

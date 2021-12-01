@@ -80,9 +80,9 @@ def on_message(client, userdata, message):
 	# Told to stop or no shape to detect
 	if m == "stop'":
 		game_running = False
-	elif message == "start'":
+	elif m == "start'":
 		game_running = True
-	elif message == "square'":
+	elif m == "square'":
 		detect_shape = "square"
 
 print("About to connect...")
@@ -101,9 +101,9 @@ print("Connected")
 # Cycle
 # one minute: 1200
 while True:
-	print("In loop")
 	
 	if game_running:
+		print("Game running")
 		#Read the accelerometer,gyroscope and magnetometer values
 		ACCx = IMU.readACCx()
 		ACCy = IMU.readACCy()
