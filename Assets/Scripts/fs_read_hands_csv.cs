@@ -52,11 +52,12 @@ public class fs_read_hands_csv : MonoBehaviour
                     includeText.SetActive(true);
                 }
                 */
-                if (((Cursor.position.x < apple.transform.position.x + 0.3) && (Cursor.position.x > apple.transform.position.x - 0.3))
+                /*if (((Cursor.position.x < apple.transform.position.x + 0.3) && (Cursor.position.x > apple.transform.position.x - 0.3))
                     && ((Cursor.position.z < apple.transform.position.z + 0.3) && (Cursor.position.z > apple.transform.position.z - 0.3)))
                 {
                     includeText.SetActive(true);
                 }
+                */
                 //Debug.Log(Cursor.position);       
             }
         }

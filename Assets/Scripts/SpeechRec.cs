@@ -11,12 +11,18 @@ namespace Speecher
     {
         string transcriptRec;
         public bool positioner = false;
+
+
         public GameObject cursor;
         public GameObject speechObj;
         public StreamingRecognizer streamRec;
+        //public fs_read_hands_csv handReader;
         public fs_read_hands_csv handReader;
-        public GameObject apple;
         public GameObject includeText;
+
+
+        public GameObject apple;
+        public GameObject fish;
 
         // Start is called before the first frame update
         void Start()
@@ -62,21 +68,39 @@ namespace Speecher
         {
             Transform cursy = handReader.Cursor;
             //public Transform cursy = handReader.Cursor;
-            if (((cursy.position.x < apple.transform.position.x + 0.3) && (cursy.position.x > apple.transform.position.x - 0.3))
-                    && ((cursy.position.z < apple.transform.position.z + 0.3) && (cursy.position.z > apple.transform.position.z - 0.3)))
-            {
-                includeText.SetActive(true);
-            }
-            transcriptRec = streamRec.transcript;
-            //Debug.Log("Tester: " + transcriptRec);
-
             string[] recipe = { "Watermelon", "Canteloupe", "Apple", "Pear", "Orange", "Grapefruit", "Banana", "Coconut" };
             string[] ingredients = new string[2];
+            transcriptRec = streamRec.transcript;
 
-            if (transcriptRec == "yes")
+            if (((cursy.position.x < apple.transform.position.x + 0.5) && (cursy.position.x > apple.transform.position.x - 0.5))
+                    && ((cursy.position.z < apple.transform.position.z + 0.5) && (cursy.position.z > apple.transform.position.z - 0.5)))
             {
-                ingredients[0] = apple.name;
+                includeText.SetActive(true);
+                if (transcriptRec == "yes")
+                {
+                    ingredients[0] = apple.name;
+                }
+                
+                //includeText.SetActive(false);
             }
+
+            //Debug.Log(cursy.position);
+
+            /*if (((cursy.position.x < fish.transform.position.x + 0.3) && (cursy.position.x > fish.transform.position.x - 0.3))
+                    && ((cursy.position.z < fish.transform.position.z + 0.3) && (cursy.position.z > fish.transform.position.z - 0.3)))
+            {
+                includeText.SetActive(true);
+                if (transcriptRec == "yes")
+                {
+                    ingredients[1] = fish.name;
+                }
+                includeText.SetActive(false);
+            }*/
+
+            //Debug.Log("Tester: " + transcriptRec);
+
+
+
 
             int points = 0;
             for (int i = 0; i < recipe.Length; i++)
