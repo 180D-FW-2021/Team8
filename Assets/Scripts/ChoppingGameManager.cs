@@ -57,13 +57,14 @@ public class ChoppingGameManager : MonoBehaviour
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
         shape = "square";
-        string[] lines = {shape, "False", "False"};
+        string[] lines = {shape, "False", "False", str(0)};
         for (int i = 0; i < 100; i++) {
             try {
                 using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
                     sw.WriteLine(lines[0]);
                     sw.WriteLine(lines[1]);
                     sw.WriteLine(lines[2]);
+                    sw.WriteLine(lines[3]);
                 }
                 return;
             } catch (Exception e) {

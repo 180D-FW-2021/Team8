@@ -2,8 +2,10 @@
 # Meant to run on host computer
 
 import paho.mqtt.client as mqtt
-import numpy as np
 import time
+
+
+numbers = [0,1,2,3,4]
 
 game_running = False
 shape_written = False
@@ -34,6 +36,13 @@ def on_message(client, userdata, message):
 		with open("../IMUCommsTxt.txt", "r") as file:
 			data = file.readlines()
 		data[1] = "True\n"
+		with open("../IMUCommsTxt.txt", "w") as file:
+			file.writelines(data)
+
+	elif int(message.payload) in numbers:
+		with open("../IMUCommsTxt.txt", "r") as file:
+			data = file.readlines()
+		data[3] = str(int(message.payload))
 		with open("../IMUCommsTxt.txt", "w") as file:
 			file.writelines(data)
 

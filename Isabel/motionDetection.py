@@ -9,7 +9,6 @@ import math
 import IMU
 import datetime
 import os
-import numpy as np
 import csv
 
 a = datetime.datetime.now()
@@ -48,6 +47,7 @@ cooldown = 0.6
 t = 0
 
 detect_shape = "square"	 # default
+shape_stage = 0
 
 game_running = False
 
@@ -147,10 +147,13 @@ while True:
 			time.sleep(cooldown)
 
 		# Square recognition (RDLU)
-		# pure_square = ["R","D","L","U"]
-		pure_square = ["U"]
+		pure_square = ["R","D","L","U"]
 		#shape = movements[-4:]
-		shape = movements[-1:]
+		move = movements[-1:]
+
+		if move == pure_square[shape_stage]:
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
+			shape_stage = shape_stage + 1
 
 		if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")

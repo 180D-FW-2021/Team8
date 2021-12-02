@@ -1,4 +1,3 @@
-N/A
-False
+square
 True
-se
+False
