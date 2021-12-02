@@ -12,6 +12,7 @@ namespace CursorObject {
 public class fs_read_hands_csv : MonoBehaviour
     {
         public GameObject includeText;
+        public GameObject apple;
         public Transform Cursor;
         public float x = -1;
         public float y = -1;
@@ -28,6 +29,7 @@ public class fs_read_hands_csv : MonoBehaviour
                            // there should be some delay to preserve resource use. Noticed less CPU temp increase when delay is used.
                            // Start is called before the first frame update
         
+     
         void Start()
         {
             Debug.Log("hands read script start");
@@ -41,11 +43,18 @@ public class fs_read_hands_csv : MonoBehaviour
             {
                 x = newx; y = newy; // z = newz;
                 posUpdate(5);
+                /*
                 if (Cursor.position.z > -2.2 && Cursor.position.z < -1.8 && Cursor.position.x > -3.2 && Cursor.position.x < -2.8)
                 {
                     //GameObject includeText;
 
                     //includeText = GameObject.Find("IncludeIngredient");
+                    includeText.SetActive(true);
+                }
+                */
+                if (((Cursor.position.x < apple.transform.position.x + 0.3) && (Cursor.position.x > apple.transform.position.x - 0.3))
+                    && ((Cursor.position.z < apple.transform.position.z + 0.3) && (Cursor.position.z > apple.transform.position.z - 0.3)))
+                {
                     includeText.SetActive(true);
                 }
                 //Debug.Log(Cursor.position);       

@@ -11,6 +11,12 @@ namespace Speecher
     {
         string transcriptRec;
         public bool positioner = false;
+        public GameObject cursor;
+        public GameObject speechObj;
+        public StreamingRecognizer streamRec;
+        public fs_read_hands_csv handReader;
+        public GameObject apple;
+        public GameObject includeText;
 
         // Start is called before the first frame update
         void Start()
@@ -18,6 +24,9 @@ namespace Speecher
             Debug.Log("Test");
 
             //bool pos = CursorObject.fs_read_hands_csv.positioner;
+
+
+            //transcriptRec = streamRec.transcript;
         }
 
 
@@ -51,6 +60,35 @@ namespace Speecher
         // Update is called once per frame
         void Update()
         {
+            Transform cursy = handReader.Cursor;
+            //public Transform cursy = handReader.Cursor;
+            if (((cursy.position.x < apple.transform.position.x + 0.3) && (cursy.position.x > apple.transform.position.x - 0.3))
+                    && ((cursy.position.z < apple.transform.position.z + 0.3) && (cursy.position.z > apple.transform.position.z - 0.3)))
+            {
+                includeText.SetActive(true);
+            }
+            transcriptRec = streamRec.transcript;
+            //Debug.Log("Tester: " + transcriptRec);
+
+            string[] recipe = { "Watermelon", "Canteloupe", "Apple", "Pear", "Orange", "Grapefruit", "Banana", "Coconut" };
+            string[] ingredients = new string[2];
+
+            if (transcriptRec == "yes")
+            {
+                ingredients[0] = apple.name;
+            }
+
+            int points = 0;
+            for (int i = 0; i < recipe.Length; i++)
+            {
+                if (ingredients[0] == recipe[i])
+                {
+                    points += 100;
+                }
+            }
+            Debug.Log("Points: " + points.ToString());
+
+
             /*GameObject thePlayer = GameObject.Find("SpeechTest");
             PlayerScript playerScript = thePlayer.GetComponent<PlayerScript>();
             playerScript.Health -= 10.0f;*/
