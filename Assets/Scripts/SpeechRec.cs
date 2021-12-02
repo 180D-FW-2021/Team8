@@ -23,6 +23,12 @@ namespace Speecher
 
         public GameObject apple;
         public GameObject fish;
+        int i = 0;
+        int j = 0;
+        int numOpts = 2;
+        int points = 0;
+        int missed = 0;
+        int correct = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -69,8 +75,11 @@ namespace Speecher
             Transform cursy = handReader.Cursor;
             //public Transform cursy = handReader.Cursor;
             string[] recipe = { "Watermelon", "Canteloupe", "Apple", "Pear", "Orange", "Grapefruit", "Banana", "Coconut" };
-            string[] ingredients = new string[2];
+            string[] ingredients = new string[5];
+            string[] notIncluded = new string[5];
             transcriptRec = streamRec.transcript;
+
+            includeText.SetActive(false);
 
             if (((cursy.position.x < apple.transform.position.x + 0.5) && (cursy.position.x > apple.transform.position.x - 0.5))
                     && ((cursy.position.z < apple.transform.position.z + 0.5) && (cursy.position.z > apple.transform.position.z - 0.5)))
@@ -79,38 +88,74 @@ namespace Speecher
                 if (transcriptRec == "yes")
                 {
                     ingredients[0] = apple.name;
+                    i++;
+                    apple.SetActive(false);
                 }
-                
+                else if (transcriptRec == "no")
+                {
+                    notIncluded[j] = apple.name;
+                    j++;
+                    apple.SetActive(false);
+                }
+
                 //includeText.SetActive(false);
             }
 
             //Debug.Log(cursy.position);
 
-            /*if (((cursy.position.x < fish.transform.position.x + 0.3) && (cursy.position.x > fish.transform.position.x - 0.3))
-                    && ((cursy.position.z < fish.transform.position.z + 0.3) && (cursy.position.z > fish.transform.position.z - 0.3)))
+            if (((cursy.position.x < fish.transform.position.x + 0.3) && (cursy.position.x > fish.transform.position.x - 0.3))
+                    && ((cursy.position.z < fish.transform.position.z + 0.7) && (cursy.position.z > fish.transform.position.z - 0.7)))
             {
                 includeText.SetActive(true);
                 if (transcriptRec == "yes")
                 {
-                    ingredients[1] = fish.name;
+                    ingredients[0] = fish.name;
+                    i++;
+                    fish.SetActive(false);
                 }
-                includeText.SetActive(false);
-            }*/
+                else if (transcriptRec == "no")
+                {
+                    notIncluded[j] = fish.name;
+                    j++;
+                    fish.SetActive(false);
+                }
+                // includeText.SetActive(false);
+            }
 
             //Debug.Log("Tester: " + transcriptRec);
 
 
-
-
-            int points = 0;
-            for (int i = 0; i < recipe.Length; i++)
+            if (i + j == numOpts)
             {
-                if (ingredients[0] == recipe[i])
+                for (int k = 0; k < ingredients.Length; k++)
                 {
-                    points += 100;
+                    //bool madeTheCut = false;
+                    for (int l = 0; l < recipe.Length; l++)
+                    {
+                        if (ingredients[k] == recipe[l])
+                        {
+                            points += 100;
+                            correct += 1;
+                            Debug.Log("Included: " + ingredients[k]);
+                        }
+                    }
                 }
+                for (int k = 0; k < notIncluded.Length; k++)
+                {
+                    //bool madeTheCut = true;
+                    for (int l = 0; l < recipe.Length; l++)
+                    {
+                        if (notIncluded[k] == recipe[l])
+                        {
+                            //madeTheCut = false;
+                            points -= 50;
+                            missed += 1;
+                            Debug.Log("Missed: " + notIncluded[k]);
+                        }
+                    }
+                }
+                Debug.Log("Points: " + points.ToString());
             }
-            Debug.Log("Points: " + points.ToString());
 
 
             /*GameObject thePlayer = GameObject.Find("SpeechTest");
