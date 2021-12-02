@@ -98,6 +98,8 @@ client.loop_start()
 
 print("Connected")
 
+client.publish('ece180d/team8/imu', "Test message", qos=1)
+
 # Cycle
 # one minute: 1200
 while True:
