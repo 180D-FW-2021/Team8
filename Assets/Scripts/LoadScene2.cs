@@ -19,10 +19,10 @@ public class LoadScene2 : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(50, 50, 120, 30), "Done with Speech"))
+        if (GUI.Button(new Rect(50, 50, 160, 30), "Return to Main Menu"))
         {
             Debug.Log("Scene2 loading");
-            SceneManager.LoadScene("SpeechTestPt2", LoadSceneMode.Single);
+            SceneManager.LoadScene("MAINTEST", LoadSceneMode.Single);
         }
     }
 }

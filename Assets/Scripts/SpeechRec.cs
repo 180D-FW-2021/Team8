@@ -29,6 +29,7 @@ namespace Speecher
         public GameObject done;
         public GameObject pointCtr;
         public GameObject gameOver;
+        public GameObject returnToMenu;
 
         public GameObject apple;
         public GameObject fish;
@@ -187,11 +188,13 @@ namespace Speecher
                 //includeText.SetActive(false);
             }
 
-            if (((cursy.position.x < done.transform.position.x + 1) && (cursy.position.x > done.transform.position.x - 1))
-                    && ((cursy.position.z < done.transform.position.z + 0.5) && (cursy.position.z > done.transform.position.z - 0.5)))
+            if (((cursy.position.x < done.transform.position.x + 2) && (cursy.position.x > done.transform.position.x - 2))
+                    && ((cursy.position.z < done.transform.position.z + 1) && (cursy.position.z > done.transform.position.z - 1)))
             {
                 pointCtr.SetActive(true);
                 gameOver.SetActive(true);
+                returnToMenu.SetActive(true);
+                cursor.SetActive(false);
             }
 
             //Debug.Log("Tester: " + transcriptRec);
