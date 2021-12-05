@@ -7,18 +7,18 @@ using System.Threading;
 using System.Threading.Tasks;
 
 
-// TODO: reader will need to retrieve the name of the python output .csv somehow. In the actual game, we might just make the name consistent.
+// uses non-async read.
+// Noticed small runtime speed decrease compared to async read 
+// (async read experiences a little over 60fps and sync read is around 58ish for delay_ms = 13)
 
-public class fs_read_hands_csv : MonoBehaviour
+public class st_read_hands_csv : MonoBehaviour
 {
 	public Transform Cursor;
 	public float x = -1;
 	public float y = -1;
-	public float z = -1;
 	public float newx = -1;
 	public float newy = -1;
-	public float newz = -1;
-	bool readX, readY, readZ; // used in TryParse().
+	bool readX, readY; // used in TryParse().
 	bool readSuccess;
 	string[] coordString;
 	string filepath = "PyOut/wrist_single.csv";
@@ -34,15 +34,15 @@ public class fs_read_hands_csv : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		asyncCSVRead();
+		CSVRead();
 		if(readSuccess)
 		{
-			x = newx; y = newy; // z = newz;
-			posUpdate(5);
+			x = newx; y = newy;
+			posUpdate(2);
 		}
     }
 	
-	async void asyncCSVRead()
+	void CSVRead()
 	{
 		/*
 		Reads from csv in filepath. Updates x and y according to first and second values in csv, respectively.
@@ -56,14 +56,13 @@ public class fs_read_hands_csv : MonoBehaviour
 			using (StreamReader sr = new StreamReader(new FileStream(filepath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)))  
 			{  
 				string line;
-				if((line = await sr.ReadLineAsync()) != null)
+				if((line = sr.ReadLine()) != null)
 				{
 					coordString = line.Split(',');
 					// Debug.Log(coordString[0]);
 					readX = float.TryParse(coordString[0], out newx);
 					readY = float.TryParse(coordString[1], out newy); // slow?
-					// readZ = float.TryParse(coordString[2], out newz); // why doesn't this work?
-					readSuccess = readX && readY; // all reads must be successful to update
+					readSuccess = readX && readY; // both reads must be successful to update
 				}
 			}  
         }
@@ -77,8 +76,7 @@ public class fs_read_hands_csv : MonoBehaviour
         Thread.Sleep(delay_ms);
 	}
 	
-	void posUpdate(float scale = 1) // perhaps make scale dependent on z-distance of wrist node? 
-									// i.e. increase scale for higher distance to maintain sensitivity.
+	void posUpdate(float scale = 1)
 	{
 		Cursor.position = new Vector3(scale*x, 0, scale*y); // actually corresponds to z in unity. Change according to final camera orientation
 		// needs scaling and tuning for actual game use.
