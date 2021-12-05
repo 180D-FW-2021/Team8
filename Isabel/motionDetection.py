@@ -155,8 +155,8 @@ while True:
 
 		if move == pure_square[shape_stage]:
 			print("Square motion found")
-			client.publish('ece180d/team8/imu', (shape_stage + 1), qos=1)
 			shape_stage = shape_stage + 1
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")
