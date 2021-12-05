@@ -143,7 +143,6 @@ public class ChoppingGameManager : MonoBehaviour
                 using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
                     sr.ReadLine();
                     string line = sr.ReadLine();
-                    Debug.Log("Current state: " + line);
                     if (line.Contains("True")) {
                         gameState = StateType.WIN;
                     }
