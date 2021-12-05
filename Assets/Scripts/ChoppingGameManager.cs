@@ -17,7 +17,7 @@ public enum StateType
 
 public class ChoppingGameManager : MonoBehaviour
 {
-    private int timeToComplete = 100;
+    private int timeToComplete = 40;
 
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
@@ -104,11 +104,27 @@ public class ChoppingGameManager : MonoBehaviour
                 WinScreen.SetActive(true);
                 LoseScreen.SetActive(false);
                 timeText.enabled = false;
+                string[] lines = {"N/A", "False", "True", "0"};
+
+                try {
+                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                        sw.WriteLine(lines[0]);
+                        sw.WriteLine(lines[1]);
+                        sw.WriteLine(lines[2]);
+                        sw.WriteLine(lines[3]);
+                    }
+                } catch (Exception e) {
+                    Debug.Log(e);
+                }
                 break;
             case StateType.LOSE:
                 Objective.SetActive(false);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(true);
+                FirstMotion.SetActive(false);
+                SecondMotion.SetActive(false);
+                ThirdMotion.SetActive(false);
+                FourthMotion.SetActive(false);
                 timeText.enabled = false;
                 break;
             default:

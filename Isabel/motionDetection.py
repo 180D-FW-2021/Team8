@@ -84,6 +84,8 @@ def on_message(client, userdata, message):
 		game_running = False
 	elif "start" in str(message.payload):
 		print("Start detected")
+		if game_running is False:
+			shape_stage = 0
 		game_running = True
 	elif "square" in str(message.payload):
 		detect_shape = "square"
