@@ -27,6 +27,7 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject WinScreen;
     public GameObject LoseScreen;
     public GameObject Objective;
+    public GameObject MainMenuButton;
     public Text timeText;
 
     public GameObject FirstMotion;
@@ -66,6 +67,7 @@ public class ChoppingGameManager : MonoBehaviour
         SecondMotion.SetActive(true);
         ThirdMotion.SetActive(true);
         FourthMotion.SetActive(true);
+        MainMenuButton.SetActive(false);
         // Setting up text file
         shape = "square";
         string[] lines = {shape, "False", "False", "0"};
@@ -103,6 +105,7 @@ public class ChoppingGameManager : MonoBehaviour
                 Objective.SetActive(false);
                 WinScreen.SetActive(true);
                 LoseScreen.SetActive(false);
+                MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 string[] lines = {"N/A", "False", "True", "0"};
 
@@ -125,6 +128,7 @@ public class ChoppingGameManager : MonoBehaviour
                 SecondMotion.SetActive(false);
                 ThirdMotion.SetActive(false);
                 FourthMotion.SetActive(false);
+                MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 break;
             default:
