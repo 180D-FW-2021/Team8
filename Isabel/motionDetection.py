@@ -118,25 +118,30 @@ while True:
 		#MAGx = IMU.readMAGx()
 		#MAGy = IMU.readMAGy()
 		#MAGz = IMU.readMAGz()
+		move = ""
 
 		# Vertical classification
 		if ACCz > z_th_up:
 			print("U")
 			movements.append("U")
+			move = "U"
 			time.sleep(cooldown)
 		elif ACCz < z_th_down:
 			print("D")
 			movements.append("D")
+			move = "D"
 			time.sleep(cooldown)
 
 		# Left right classification
 		elif ACCx > x_th_right:
 			print("R")
 			movements.append("R")
+			move = "R"
 			time.sleep(cooldown)
 		elif ACCx < x_th_left:
 			print("L")
 			movements.append("L")
+			move = "L"
 			time.sleep(cooldown)
 
 		# Front back classification
@@ -150,8 +155,8 @@ while True:
 			# time.sleep(cooldown)
 
 		# Square recognition (RDLU)
-		#shape = movements[-4:]
-		move = movements[-1:]
+		# shape = movements[-4:]
+		# move = movements[-1:]
 
 		if move == pure_square[shape_stage]:
 			print("Square motion found")
@@ -165,7 +170,7 @@ while True:
 
 		#slow program down a bit, makes the output more readable
 		time.sleep(0.05)
-	if shape_stage > 4:
+	if shape_stage > 3:
 		shape_stage = 0
 
 client.loop_stop()
