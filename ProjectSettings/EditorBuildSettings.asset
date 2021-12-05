@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SpeechTest.unity
     guid: b72e1a45bba6f41518f4ba527b858cbb
+  - enabled: 1
+    path: Assets/Scenes/MAINTEST.unity
+    guid: b96564d52ddf943e29592bf6b2182d5c
+  - enabled: 1
+    path: Assets/Scenes/GameSelection.unity
+    guid: ed2572b487c1d4ec4bc010b093e7b0c5
   m_configObjects: {}
