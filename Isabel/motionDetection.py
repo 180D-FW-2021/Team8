@@ -40,6 +40,9 @@ x_th_left = -2500
 y_th_front = 2000
 y_th_back = -2000
 
+# Shape classification
+pure_square = ["R","D","L","U"]
+
 movements = []
 motion_detected = False
 cooldown = 0.6
@@ -137,31 +140,32 @@ while True:
 			time.sleep(cooldown)
 
 		# Front back classification
-		elif ACCy > y_th_front:
-			#print("Forward!")
-			#movements.append("F")
-			time.sleep(cooldown)
-		elif ACCy < y_th_back:
-			#print("Back!")
-			#movements.append("B")
-			time.sleep(cooldown)
+		# elif ACCy > y_th_front:
+			# print("Forward!")
+			# movements.append("F")
+			# time.sleep(cooldown)
+		# elif ACCy < y_th_back:
+			# print("Back!")
+			# movements.append("B")
+			# time.sleep(cooldown)
 
 		# Square recognition (RDLU)
-		pure_square = ["R","D","L","U"]
 		#shape = movements[-4:]
 		move = movements[-1:]
 
 		if move == pure_square[shape_stage]:
-			client.publish('ece180d/team8/imu', shape_stage, qos=1)
+			client.publish('ece180d/team8/imu', (shape_stage + 1), qos=1)
 			shape_stage = shape_stage + 1
 
 		if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")
-			client.publish('ece180d/team8/imu', "True", qos=1)
+			# client.publish('ece180d/team8/imu', "True", qos=1)
 		
 
 		#slow program down a bit, makes the output more readable
 		time.sleep(0.05)
+	if shape_stage > 4:
+		shape_stage = 0
 
 client.loop_stop()
 client.disconnect()

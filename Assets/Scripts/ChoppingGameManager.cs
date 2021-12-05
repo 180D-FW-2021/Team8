@@ -29,6 +29,11 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject Objective;
     public Text timeText;
 
+    public GameObject FirstMotion;
+    public GameObject SecondMotion;
+    public GameObject ThirdMotion;
+    public GameObject FourthMotion;
+
     public void Pause(bool paused)
     {
         if(paused) {
@@ -56,8 +61,14 @@ public class ChoppingGameManager : MonoBehaviour
     {
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
+
+        FirstMotion.SetActive(true);
+        SecondMotion.SetActive(true);
+        ThirdMotion.SetActive(true);
+        FourthMotion.SetActive(true);
+        // Setting up text file
         shape = "square";
-        string[] lines = {shape, "False", "False", str(0)};
+        string[] lines = {shape, "False", "False", "0"};
         for (int i = 0; i < 100; i++) {
             try {
                 using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
@@ -114,13 +125,14 @@ public class ChoppingGameManager : MonoBehaviour
             else if (remainingTime <= 0 && getState() != StateType.LOSE) {
                 remainingTime = 0;
                 gameState = StateType.LOSE;
-                string[] lines = {"N/A", "False", "True"};
+                string[] lines = {"N/A", "False", "True", "0"};
 
                 try {
                     using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
                         sw.WriteLine(lines[0]);
                         sw.WriteLine(lines[1]);
                         sw.WriteLine(lines[2]);
+                        sw.WriteLine(lines[3]);
                     }
                 } catch (Exception e) {
                     Debug.Log(e);
@@ -133,6 +145,18 @@ public class ChoppingGameManager : MonoBehaviour
                     string line = sr.ReadLine();
                     Debug.Log("Current state: " + line);
                     if (line.Contains("True")) {
+                        gameState = StateType.WIN;
+                    }
+                    sr.ReadLine();
+                    line = sr.ReadLine();
+                    if (line.Contains("1")) {
+                        FirstMotion.SetActive(false);
+                    } else if (line.Contains("2")) {
+                        SecondMotion.SetActive(false);
+                    } else if (line.Contains("3")) {
+                        ThirdMotion.SetActive(false);
+                    } else if (line.Contains("4")) {
+                        FourthMotion.SetActive(false);
                         gameState = StateType.WIN;
                     }
                 }

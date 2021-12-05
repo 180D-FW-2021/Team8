@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import time
 
 
-numbers = [0,1,2,3,4]
+numbers = [0,1,2,3,4,5]
 
 game_running = False
 shape_written = False
