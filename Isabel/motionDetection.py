@@ -157,7 +157,7 @@ while True:
 			client.publish('ece180d/team8/imu', (shape_stage + 1), qos=1)
 			shape_stage = shape_stage + 1
 
-		if pure_square == shape and detect_shape == "square":
+		# if pure_square == shape and detect_shape == "square":
 			# print("\tPure Square!")
 			# client.publish('ece180d/team8/imu', "True", qos=1)
 		
