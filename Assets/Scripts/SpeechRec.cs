@@ -20,6 +20,9 @@ namespace Speecher
         public fs_read_hands_csv handReader;
         public GameObject includeText;
 
+        public GameObject addedText;
+        public GameObject notAddedText;
+
 
         public GameObject apple;
         public GameObject fish;
@@ -80,6 +83,8 @@ namespace Speecher
             transcriptRec = streamRec.transcript;
 
             includeText.SetActive(false);
+            addedText.SetActive(false);
+            notAddedText.SetActive(false);
 
             if (((cursy.position.x < apple.transform.position.x + 0.5) && (cursy.position.x > apple.transform.position.x - 0.5))
                     && ((cursy.position.z < apple.transform.position.z + 0.5) && (cursy.position.z > apple.transform.position.z - 0.5)))
@@ -89,12 +94,14 @@ namespace Speecher
                 {
                     ingredients[0] = apple.name;
                     i++;
+                    addedText.SetActive(true);
                     apple.SetActive(false);
                 }
                 else if (transcriptRec == "no")
                 {
                     notIncluded[j] = apple.name;
                     j++;
+                    notAddedText.SetActive(true);
                     apple.SetActive(false);
                 }
 
@@ -111,12 +118,14 @@ namespace Speecher
                 {
                     ingredients[0] = fish.name;
                     i++;
+                    addedText.SetActive(true);
                     fish.SetActive(false);
                 }
                 else if (transcriptRec == "no")
                 {
                     notIncluded[j] = fish.name;
                     j++;
+                    notAddedText.SetActive(true);
                     fish.SetActive(false);
                 }
                 // includeText.SetActive(false);
