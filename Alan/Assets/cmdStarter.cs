@@ -8,31 +8,22 @@ public class cmdStarter: MonoBehaviour
 	/*
 	Activates command processor for Mac/Windows.
 	*/
-	bool onWin = false; // 1 if using Windows, 0 if using Mac
+	bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
 						// assuming no other platforms at this time
 	string separator = " ; "; // ';' separates commands in bash, '&' separates commands in cmd
     // Start is called before the first frame update
     void Start()
-    {
-		// example call below
-        // CMDStart("E:/anaconda3/Scripts/activate.bat E:/anaconda3/envs/180DP & python PyOut/wrapperTest.py", noWindow: true);
-		onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor;
+    {	
 		
-		// test functionality
+		// testing
 		if(onWin)
 		{
-			// UnityEngine.Debug.Log("on windows");
-			separator = " & ";
-		}
-		
-		// CMDStart("E:/anaconda3/Scripts/activate.bat E:/anaconda3/envs/180DP & python PyOut/wrapperTest.py", startMinimized: false);
-		if(onWin)
-		{
-			CMDStart("echo hello world & echo Win", autoClose: false, startMinimized: false);
+			// CMDStart("echo hello world & echo Win", autoClose: false, startMinimized: false);
+			// CMDStart("E:/anaconda3/Scripts/activate.bat E:/anaconda3/envs/180DP & python PyOut/wrapperTest.py");
 		}
 		else
 		{
-			CMDStart("echo hello world ; echo Mac", autoClose: false, startMinimized: false);
+			// CMDStart("echo hello world ; echo Mac", autoClose: false, startMinimized: false);
 		}
     }
 
@@ -42,7 +33,7 @@ public class cmdStarter: MonoBehaviour
         
     }
 	
-	void CMDStart(string commands, bool autoClose = true, bool startMinimized = true, bool noWindow = false)
+	public void CMDStart(string commands, bool autoClose = true, bool startMinimized = true, bool noWindow = false)
 	{
 		/*
 		Starts terminal (either cmd or bash) in the base folder of the Unity Project.
@@ -64,6 +55,7 @@ public class cmdStarter: MonoBehaviour
 			{
 				process.StartInfo.FileName = "cmd.exe";
 				process.StartInfo.Arguments = "/K "; // must prepend args with this for cmd to actually execute
+				separator = " & ";
 			}
 			else
 			{
