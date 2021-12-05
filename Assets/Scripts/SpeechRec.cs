@@ -194,6 +194,7 @@ namespace Speecher
                 pointCtr.SetActive(true);
                 gameOver.SetActive(true);
                 returnToMenu.SetActive(true);
+                cursor.SetActive(false);
             }
 
             //Debug.Log("Tester: " + transcriptRec);
