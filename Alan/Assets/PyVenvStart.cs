@@ -9,18 +9,18 @@ public class PyVenvStart : MonoBehaviour
 	string separator = " ; "; // ';' separates commands in bash, '&' separates commands in cmd
 	GameObject startObj;
 	cmdStarter startScript;
-    // Start is called before the first frame update
-    void Start()
-    {
-		// testing
+  // Start is called before the first frame update
+  void Start()
+  {
+	  // testing
 		// pyStart("E:/anaconda3/Scripts/activate.bat", "E:/anaconda3/envs/180DP", "PyOut/wrapperTest.py");
-    }
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
+  // Update is called once per frame
+  void Update()
+  {
         
-    }
+  }
 	
 	public void pyStart(string activateLoc, string venvLoc, string pyPath, bool autoClose = true, bool startMinimized = true, bool noWindow = false)
 	{
@@ -29,7 +29,7 @@ public class PyVenvStart : MonoBehaviour
 		string pyStart = "";
 		string procArgs = "";
 		// assemble argument to CMDStarter
-        if(onWin)
+    if(onWin)
 		{
 			separator = " & ";
 		}
