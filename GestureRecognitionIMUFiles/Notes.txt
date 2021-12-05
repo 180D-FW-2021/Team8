@@ -1,0 +1,6 @@
+Isabel - IMU and gesture recgonition
+
+Test classification of motions using bare threshold values
+Once values can be detected, use MQTT to send that data to Unity for integration
+
+Should create independent scene for RPi to talk to

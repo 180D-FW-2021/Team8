@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.IO;
+using System.Linq;
+using System;
 
 public enum StateType
 {
@@ -15,15 +17,22 @@ public enum StateType
 
 public class ChoppingGameManager : MonoBehaviour
 {
-    private int timeToComplete = 10;
+    private int timeToComplete = 40;
 
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
+    private string shape = "square";
+    private string file_path = "IMUCommsTxt.txt";
 
     public GameObject WinScreen;
     public GameObject LoseScreen;
     public GameObject Objective;
     public Text timeText;
+
+    public GameObject FirstMotion;
+    public GameObject SecondMotion;
+    public GameObject ThirdMotion;
+    public GameObject FourthMotion;
 
     public void Pause(bool paused)
     {
@@ -52,6 +61,29 @@ public class ChoppingGameManager : MonoBehaviour
     {
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
+
+        FirstMotion.SetActive(true);
+        SecondMotion.SetActive(true);
+        ThirdMotion.SetActive(true);
+        FourthMotion.SetActive(true);
+        // Setting up text file
+        shape = "square";
+        string[] lines = {shape, "False", "False", "0"};
+        for (int i = 0; i < 100; i++) {
+            try {
+                using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                    sw.WriteLine(lines[0]);
+                    sw.WriteLine(lines[1]);
+                    sw.WriteLine(lines[2]);
+                    sw.WriteLine(lines[3]);
+                }
+                return;
+            } catch (Exception e) {
+                Debug.Log(e);
+                System.Threading.Thread.Sleep(250);
+            }
+        }
+        Debug.Log("Could not write shape");
     }
 
     // Update is called once per frame
@@ -72,11 +104,27 @@ public class ChoppingGameManager : MonoBehaviour
                 WinScreen.SetActive(true);
                 LoseScreen.SetActive(false);
                 timeText.enabled = false;
+                string[] lines = {"N/A", "False", "True", "0"};
+
+                try {
+                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                        sw.WriteLine(lines[0]);
+                        sw.WriteLine(lines[1]);
+                        sw.WriteLine(lines[2]);
+                        sw.WriteLine(lines[3]);
+                    }
+                } catch (Exception e) {
+                    Debug.Log(e);
+                }
                 break;
             case StateType.LOSE:
                 Objective.SetActive(false);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(true);
+                FirstMotion.SetActive(false);
+                SecondMotion.SetActive(false);
+                ThirdMotion.SetActive(false);
+                FourthMotion.SetActive(false);
                 timeText.enabled = false;
                 break;
             default:
@@ -84,14 +132,52 @@ public class ChoppingGameManager : MonoBehaviour
                 break;
         }
 
-        if (remainingTime > 0 && getState() != StateType.PAUSING) {
-            remainingTime -= Time.deltaTime;
-            DisplayTime(remainingTime);
-        }
-        else if (remainingTime <= 0) {
-            Debug.Log("Time has run out!");
-            remainingTime = 0;
-            gameState = StateType.LOSE;
+        if (getState() == StateType.PLAYING)
+        {
+            if (remainingTime > 0 && getState() != StateType.PAUSING) {
+                remainingTime -= Time.deltaTime;
+                DisplayTime(remainingTime);
+            }
+            else if (remainingTime <= 0 && getState() != StateType.LOSE) {
+                remainingTime = 0;
+                gameState = StateType.LOSE;
+                string[] lines = {"N/A", "False", "True", "0"};
+
+                try {
+                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                        sw.WriteLine(lines[0]);
+                        sw.WriteLine(lines[1]);
+                        sw.WriteLine(lines[2]);
+                        sw.WriteLine(lines[3]);
+                    }
+                } catch (Exception e) {
+                    Debug.Log(e);
+                }
+            }
+
+            try {
+                using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
+                    sr.ReadLine();
+                    string line = sr.ReadLine();
+                    if (line.Contains("True")) {
+                        gameState = StateType.WIN;
+                    }
+                    sr.ReadLine();
+                    line = sr.ReadLine();
+                    if (line.Contains("1")) {
+                        FirstMotion.SetActive(false);
+                    } else if (line.Contains("2")) {
+                        SecondMotion.SetActive(false);
+                    } else if (line.Contains("3")) {
+                        ThirdMotion.SetActive(false);
+                    } else if (line.Contains("4")) {
+                        FourthMotion.SetActive(false);
+                        gameState = StateType.WIN;
+                    }
+                }
+            } catch (Exception e) {
+                Debug.Log(e);
+            }
         }
     }
 }
