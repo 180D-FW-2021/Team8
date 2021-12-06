@@ -75,7 +75,7 @@ namespace Speecher
                 //streamRec.StartListening();
                 which.SetActive(true);
                 transcriptRec = streamRec.transcript;
-                if (transcriptRec == "include")
+                if (transcriptRec == "yes")
                 {
                     includeText.SetActive(true);
                     ingredients[0] = apple.name;
@@ -85,7 +85,7 @@ namespace Speecher
                     Debug.Log("Added apple");
                     //appleCompl = true;
                 }
-                else if (transcriptRec == "exclude")
+                else if (transcriptRec == "no")
                 {
                     excludeText.SetActive(true);
                     notIncluded[0] = apple.name;
@@ -107,7 +107,7 @@ namespace Speecher
                 //streamRec.StartListening();
                 transcriptRec = streamRec.transcript;
                 //includeText.SetActive(true);
-                if (transcriptRec == "include")
+                if (transcriptRec == "yes")
                 {
                     includeText.SetActive(true);
                     ingredients[0] = fish.name;
@@ -117,7 +117,7 @@ namespace Speecher
                     Debug.Log("Added fish");
                     //fishCompl = true;
                 }
-                else if (transcriptRec == "exclude")
+                else if (transcriptRec == "no")
                 {
                     excludeText.SetActive(true);
                     notIncluded[0] = fish.name;
@@ -137,7 +137,7 @@ namespace Speecher
                 //Debug.Log("Grapefruit");
                 transcriptRec = streamRec.transcript;
                 //includeText.SetActive(true);
-                if (transcriptRec == "include")
+                if (transcriptRec == "yes")
                 {
                     includeText.SetActive(true);
                     ingredients[0] = grapefruit.name;
@@ -147,7 +147,7 @@ namespace Speecher
                     Debug.Log("Added grapefruit");
                     //fishCompl = true;
                 }
-                else if (transcriptRec == "exclude")
+                else if (transcriptRec == "no")
                 {
                     excludeText.SetActive(true);
                     notIncluded[0] = grapefruit.name;
@@ -165,7 +165,7 @@ namespace Speecher
                 which.SetActive(true);
                 //streamRec.StartListening();
                 transcriptRec = streamRec.transcript;
-                if (transcriptRec == "include")
+                if (transcriptRec == "yes")
                 {
                     includeText.SetActive(true);
                     ingredients[0] = cabbage.name;
@@ -175,7 +175,7 @@ namespace Speecher
                     Debug.Log("Added cabbage");
                     //appleCompl = true;
                 }
-                else if (transcriptRec == "exclude")
+                else if (transcriptRec == "no")
                 {
                     excludeText.SetActive(true);
                     notIncluded[0] = cabbage.name;
