@@ -19,7 +19,7 @@ public class LoadScene2 : MonoBehaviour
 
     void OnGUI()
     {
-        if (GUI.Button(new Rect(50, 50, 160, 30), "Return to Main Menu"))
+        if (GUI.Button(new Rect(100, 100, 160, 50), "Return to Main Menu"))
         {
             Debug.Log("Scene2 loading");
             SceneManager.LoadScene("MAINTEST", LoadSceneMode.Single);
