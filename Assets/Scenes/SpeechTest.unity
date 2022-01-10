@@ -2249,7 +2249,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37f43be3dcef461f9ee3aa85dd4204bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transcript: 
   startOnAwake: 1
   returnInterimResults: 0
   enableDebugLogging: 1
@@ -2265,6 +2264,7 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
+  transcript: 
   _microphoneName: Built-in Microphone
 --- !u!82 &1941689983
 AudioSource:
