@@ -325,3 +325,5 @@ crashlytics-build.properties
 
 gcp_credentials.json
 gcp_credentials.json.meta
+
+*.DS_Store
