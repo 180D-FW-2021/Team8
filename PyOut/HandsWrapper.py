@@ -1,7 +1,7 @@
 import cv2
 import mediapipe as mp
 import csv
-import socketSender
+import socket
 
 '''
 The following functions are set up to track wrist positions and record them in .csv files.
@@ -166,7 +166,9 @@ def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes
 	# For webcam input:
 	cap = cv2.VideoCapture(0)
 	
-	sendClient = socketSender.socket_init(port, host_ip)
+	# initiate TCP client
+	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+	client.connect((host_ip, port))
 	
 	if(frame_wait <= 1):
 		frame_wait = 5 # set minimum frame delay to avoid locking program up
@@ -197,9 +199,9 @@ def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes
 					for ids, landmrk in enumerate(hand_landmarks.landmark):
 						# print(ids, landmrk)
 						if ids == 0: #wrist node. But for which hand if 2 are onscreen?
-							cx, cy, cz = '%.2f' % landmrk.x, '%.2f' % landmrk.y, '%.2f' % landmrk.z
+							cx, cy, cz = '%.3f' % landmrk.x, '%.3f' % landmrk.y, '%.3f' % landmrk.z
 							coords = ",".join([cx, cy, cz])
-							socketSender.socket_send(coords, sendClient)
+							client.send(coords.encode('ascii'))
 							# TODO: add break here to keep the loop from acting on the other nodes for potential speedup.
 					if(show_video and show_nodes):
 						mp_drawing.draw_landmarks(
@@ -214,5 +216,5 @@ def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes
 			if cv2.waitKey(frame_wait) & 0xFF == 27:
 			# press esc (ASCII 27) to stop
 				break
-	sendClient.close()
+	client.close()
 	cap.release()
