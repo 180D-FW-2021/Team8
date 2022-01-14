@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 # motionClassifierTest.py
 # Simple classifier to differentiate between forward push (Y) and upward lift (Z)
 
-import sys
+import sys,signal
 import time
 import math
 import IMU
@@ -45,7 +45,7 @@ pure_square = ["R","D","L","U"]
 
 movements = []
 motion_detected = False
-cooldown = 0.6
+cooldown = 0.5
 
 t = 0
 
