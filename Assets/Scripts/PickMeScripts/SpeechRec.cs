@@ -36,6 +36,11 @@ namespace Speecher
         public GameObject grapefruit;
         public GameObject cabbage;
 
+        //public HighScoreEntry curScore;
+        //public HighScores leaderboard;
+        //public HighScoreDisplay curPlayer;
+        public ScoreCounter addScore;
+
         int i = 0;
         int j = 0;
         //int k = 0;
@@ -51,6 +56,7 @@ namespace Speecher
         void Start()
         {
             Debug.Log("Test");
+            addScore.IncreaseScore(5000);
         }
 
         // Update is called once per frame
@@ -230,6 +236,8 @@ namespace Speecher
                     }
                 }
                 Debug.Log("Points: " + points.ToString());
+                //curPlayer.DisplayHighScore("Ralph", points);
+                addScore.IncreaseScore(points);
             }
 
 
