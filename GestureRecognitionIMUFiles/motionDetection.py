@@ -39,7 +39,7 @@ def accel_cal():
 		for direc_ii,direc in enumerate(cal_directions):
 			#input("-"*8+" Press Enter and Keep IMU Steady to Calibrate the Accelerometer with the -"+\
 			#  ax_qq+"-axis pointed "+direc)
-			[mpu6050_conv() for ii in range(0,cal_size)] # clear buffer between readings
+			[IMU.readACCx() for ii in range(0,cal_size)] # clear buffer between readings
 			mpu_array = []
 			while len(mpu_array)<cal_size:
 				try:
