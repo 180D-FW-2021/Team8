@@ -12,6 +12,7 @@ import IMU
 import datetime
 import os
 import csv
+import numpy as np
 
 # Accelerometer calibration functions
 
