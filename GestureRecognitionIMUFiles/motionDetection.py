@@ -23,7 +23,9 @@ def get_accel():
 	ay = IMU.readACCy()
 	az = IMU.readACCz()
 	return ax,ay,az
-	
+
+cal_size = 1000
+
 def accel_cal():
 	print("-"*50)
 	print("Accelerometer Calibration")
