@@ -6,14 +6,27 @@ using System.Diagnostics;
 public class cmdStarter: MonoBehaviour
 {
 	/*
-	Activates command prompt.
-	TODO: Create similar solution for Mac and configure to automatically select for Mac/Windows. Could be as simple as knowing what filename to use instead of cmd.exe
+	Activates command processor for Mac/Windows.
 	*/
+	bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
+						// assuming no other platforms at this time
+	string separator = " ; "; // ';' separates commands in bash, '&' separates commands in cmd
     // Start is called before the first frame update
     void Start()
-    {
-		// example call below
-        // winCMDStart("E:/anaconda3/Scripts/activate.bat E:/anaconda3/envs/180DP & python PyOut/wrapperTest.py", noWindow: true);
+    {	
+		
+		// testing
+		/*
+		if(onWin)
+		{
+			CMDStart("echo hello world & echo Win", autoClose: false, startMinimized: false);
+			CMDStart("E:/anaconda3/Scripts/activate.bat E:/anaconda3/envs/180DP & python PyOut/wrapperTest.py");
+		}
+		else
+		{
+			CMDStart("echo hello world ; echo Mac", autoClose: false, startMinimized: false);
+		}
+		*/
     }
 
     // Update is called once per frame
@@ -22,34 +35,38 @@ public class cmdStarter: MonoBehaviour
         
     }
 	
-	void winCMDStart(string commands, bool autoClose = true, bool startMinimized = true, bool noWindow = false)
+	public void CMDStart(string commands, bool autoClose = true, bool startMinimized = true, bool noWindow = false)
 	{
 		/*
-		Starts cmd.exe in the base folder of the Unity Project.
+		Starts terminal (either cmd or bash) in the base folder of the Unity Project.
 		See read_hands_start.cs for example on how to reach a particular Python virtual environment via cmd.exe arguments.
 		The user will have to input their virtual environment location and anaconda activation batch file into the game.
 		
-		commands: argument to pass to cmd.exe. Type similarly to how a command would be entered by hand, but replace backslashes (\) in filepaths by double backslashes (\\).
+		commands: argument to pass to terminal. Type similarly to how a command would be entered by hand, but replace backslashes (\) in filepaths by double backslashes (\\).
 			Or could use forward slashes for filepaths, at least on Win10.
-			Commands on consecutive lines can be separated by "&" or "&&" in the argument.
-		autoClose: if True, the terminal window will close whenever its task finishes. This coincides with the end of your Python codeif you are running a single .py through this.
+			Commands on consecutive lines can be separated by "&" or "&&" in the argument on windows or by ";" on mac.
+		autoClose: if True, the terminal window will close whenever its task finishes. This coincides with the end of your Python code if you are running a single .py through this.
 		startMinimized: if True, terminal window starts minimized.
 		noWindow: if True, terminal window will not appear at all, but the arguments will be executed.
-		useShell: if True, output will go to default shell rather than Unity std output stream.
 		
-		TODO: need to find a way to do the same on Mac. This will not work on Mac.
 		*/
 		using(var process = new Process())
 		{
-			process.StartInfo.FileName = "cmd.exe"; // could make this generic later
-			
-			if(autoClose)
+			process.StartInfo.Arguments = "";
+			if(onWin)
 			{
-				process.StartInfo.Arguments = "/C " + commands;
+				process.StartInfo.FileName = "cmd.exe";
+				process.StartInfo.Arguments = "/K "; // must prepend args with this for cmd to actually execute
+				separator = " & ";
 			}
 			else
 			{
-				process.StartInfo.Arguments = "/K " + commands;
+				process.StartInfo.FileName = "bash";
+			}
+			process.StartInfo.Arguments += commands;
+			if(autoClose)
+			{
+				process.StartInfo.Arguments += separator + "exit"; // exit terminal after completing
 			}
 			if(startMinimized && !noWindow)
 			{
@@ -61,6 +78,5 @@ public class cmdStarter: MonoBehaviour
 			}
 			process.Start();
 		}
-		
 	}
 }
