@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 
 # Accelerometer calibration code taken from: https://makersportal.com/blog/calibration-of-an-inertial-measurement-unit-imu-with-raspberry-pi-part-ii
 
-import sys
+import sys, signal
 import time
 import math
 import IMU
