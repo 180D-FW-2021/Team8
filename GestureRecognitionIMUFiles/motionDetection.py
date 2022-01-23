@@ -21,9 +21,6 @@ if(IMU.BerryIMUversion == 99):
 	sys.exit()
 IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
 
-signal.signal(signal.SIGINT, handle_ctrl_c)
-a = datetime.datetime.now()
-
 axs = []
 ays = []
 azs = []
