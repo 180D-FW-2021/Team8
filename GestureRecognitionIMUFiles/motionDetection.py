@@ -20,6 +20,7 @@ if(IMU.BerryIMUversion == 99):
 	print(" No BerryIMU found... exiting ")
 	sys.exit()
 IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
+accel_coeffs = accel_cal()
 
 axs = []
 ays = []
