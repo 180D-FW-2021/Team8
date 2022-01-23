@@ -53,7 +53,7 @@ t = 0
 detect_shape = "square"	 # default
 shape_stage = 0
 
-game_running = False
+game_running = True		# False
 is_calibrating = False
 
 # MQTT
