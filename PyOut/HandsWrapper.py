@@ -169,6 +169,8 @@ def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes
 	# initiate TCP client
 	client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	client.connect((host_ip, port))
+	client.setblocking(False) # needed to keep the shutdown flag listener from blocking
+	flag = 0x00 # stop signal from unity will be written to flag
 	
 	if(frame_wait <= 1):
 		frame_wait = 5 # set minimum frame delay to avoid locking program up
@@ -178,6 +180,14 @@ def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes
 		min_detection_confidence=0.5,
 		min_tracking_confidence=0.5) as hands:
 		while cap.isOpened():
+			# # Check if the Unity scene has sent the close signal.
+			# ready, _, _ = select.select([client], [], [], 0)
+			# if(len(ready) > 0):
+				# flag = client.recv(1) # this blocks...
+				# # TODO: implement select.select() to check if socket has data to read before calling recv()
+				# if flag == 0xFF:
+					# print('Received stop signal from Unity\n')
+					# break
 			success, image = cap.read()
 			if not success:
 			  print("Ignoring empty camera frame.")
@@ -213,8 +223,10 @@ def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes
 			if(show_video):
 			# Flip the image horizontally for a selfie-view display.
 				cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
-			if cv2.waitKey(frame_wait) & 0xFF == 27:
+
+			if ((cv2.waitKey(frame_wait) & 0xFF == 27) or flag == 0xFF):
 			# press esc (ASCII 27) to stop
+			# alternatively, stop if signal received from unity
 				break
 	client.close()
 	cap.release()

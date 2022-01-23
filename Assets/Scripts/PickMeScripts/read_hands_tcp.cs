@@ -28,6 +28,7 @@ public class read_hands_tcp : MonoBehaviour
     NetworkStream firstStream;
 	TcpListener server;
 	int status = 0;
+	int frameCount = 0; // temp for testing-- sets limit on runtime before closeHandsTcp() is called
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +53,13 @@ public class read_hands_tcp : MonoBehaviour
 			x = newx; y = newy; // z = newz;
 			posUpdate(16, 9);
 		}
+		// frameCount++;
+		/* if(frameCount >= 800)
+		{
+			Debug.Log("TcpReceive max runtime reached.");
+			closeHandsTcp(ref server, ref firstStream);
+			enabled = false;
+		} */
     }
 	
 	NetworkStream TcpInit(ref TcpListener server, int port = 13000)
@@ -148,5 +156,18 @@ public class read_hands_tcp : MonoBehaviour
 		float yOffset = -6;
 		Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset); // actually corresponds to z in unity. Change according to final camera orientation
 																  // needs scaling and tuning for actual game use.   
+	}
+	void closeHandsTcp(ref TcpListener server, ref NetworkStream stream)
+	{
+		// closes the TCP connection, closing both the local TCP client and its corresponding socket
+		// before closure, sends a signal to HandsWrapper.py to close the OpenCV window and halt its TCP connection.
+		
+		// send a signal to python tcp client
+		byte[] exitFlag = {0xFF};
+		stream.Write(exitFlag, 0, 1);
+		// close stream and server
+		// Thread.Sleep(1000); // wait for python side to process it
+		stream.Close();
+		server.Stop();
 	}
 }
