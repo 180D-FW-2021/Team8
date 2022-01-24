@@ -16,4 +16,5 @@ The Raspberry Pi should have the following packages installed:
 - smbus2
 - scipy
 - numpy
+
 Details on how to install these packages can be found in the User Guide under the Gesture Recognition section.
