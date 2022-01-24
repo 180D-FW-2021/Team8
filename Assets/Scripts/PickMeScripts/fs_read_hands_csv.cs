@@ -12,11 +12,11 @@ namespace CursorObject {
 public class fs_read_hands_csv : MonoBehaviour
     {
         public Transform Cursor;
-        public float x = -1;
-        public float y = -1;
-        public float z = -1;
-        public float newx = -1;
-        public float newy = -1;
+        public float x = 232;//-1;
+        public float y = 277;//-1;
+        public float z = 0;//-1;
+        public float newx = 232; //-1;
+        public float newy = 277; //-1;
         public float newz = -1;
         bool readX, readY, readZ; // used in TryParse().
         bool readSuccess;
@@ -79,13 +79,15 @@ public class fs_read_hands_csv : MonoBehaviour
             Thread.Sleep(delay_ms);
         }
 
-        void posUpdate(float scalex = 24, float scaley = 15) // perhaps make scale dependent on z-distance of wrist node? 
+        //void posUpdate(float scalex = 24, float scaley = 15) // perhaps make scale dependent on z-distance of wrist node? 
                                         // i.e. increase scale for higher distance to maintain sensitivity.
+        void posUpdate(float scalex = 200, float scaley = 200)
         {
-            float xOffset = -5;
-            float yOffset = -6;
-            Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset); // actually corresponds to z in unity. Change according to final camera orientation
-                                                                      // needs scaling and tuning for actual game use.   
+            float xOffset = -232; //-5;
+            float yOffset = -277; //-277;  //-6;
+                                  //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset); // actually corresponds to z in unity. Change according to final camera orientation
+                                  // needs scaling and tuning for actual game use.   
+            Cursor.position = new Vector3(-scalex * x - xOffset, -scaley * y - yOffset, 0);
         }
 
     }

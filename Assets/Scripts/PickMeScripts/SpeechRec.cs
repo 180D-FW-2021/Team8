@@ -39,7 +39,7 @@ namespace Speecher
         //public HighScoreEntry curScore;
         //public HighScores leaderboard;
         //public HighScoreDisplay curPlayer;
-        public ScoreCounter addScore;
+        public ScoreCounter counter;
 
         int i = 0;
         int j = 0;
@@ -56,7 +56,7 @@ namespace Speecher
         void Start()
         {
             Debug.Log("Test");
-            addScore.IncreaseScore(5000);
+            //counter.IncreaseScore(5000);
         }
 
         // Update is called once per frame
@@ -90,6 +90,20 @@ namespace Speecher
                     apple.SetActive(false);
                     Debug.Log("Added apple");
                     //appleCompl = true;
+                    // add points if correct
+                    bool found = false;
+                    for(int i = 0; i < recipe.Length; i++)
+                    {
+                        if(apple.name == recipe[i])
+                        {
+                            counter.IncreaseScore(100);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        counter.IncreaseScore(-50);
+                    }
                 }
                 else if (transcriptRec == "no")
                 {
@@ -98,7 +112,21 @@ namespace Speecher
                     j++;
                     notAddedText.SetActive(true);
                     apple.SetActive(false);
+                    Debug.Log("Did not add apple");
                     //appleCompl = true;
+                    bool found = false;
+                    for (int i = 0; i < recipe.Length; i++)
+                    {
+                        if (apple.name != recipe[i])
+                        {
+                            counter.IncreaseScore(100);
+                            found = true;
+                        }
+                    }
+                    if (!found)
+                    {
+                        counter.IncreaseScore(-50);
+                    }
                 }
 
                 //includeText.SetActive(false);
@@ -130,6 +158,7 @@ namespace Speecher
                     j++;
                     notAddedText.SetActive(true);
                     fish.SetActive(false);
+                    Debug.Log("Fish not included");
                     //fishCompl = true;
                 }
                 // includeText.SetActive(false);
@@ -237,7 +266,7 @@ namespace Speecher
                 }
                 Debug.Log("Points: " + points.ToString());
                 //curPlayer.DisplayHighScore("Ralph", points);
-                addScore.IncreaseScore(points);
+                //addScore.IncreaseScore(points);
             }
 
 
