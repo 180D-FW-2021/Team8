@@ -18,8 +18,12 @@ namespace Speecher
         public StreamingRecognizer streamRec;
         //public fs_read_hands_csv handReader;
         public fs_read_hands_csv handReader;
+        //public read_hands_tcp handReader;
+        public GameObject bread;
 
-        public GameObject includeText;
+            // THIS IS ACTUALLY SUPER IMPORTANT
+
+        /*public GameObject includeText;
         public GameObject excludeText;
         public GameObject which;
 
@@ -35,6 +39,7 @@ namespace Speecher
         public GameObject fish;
         public GameObject grapefruit;
         public GameObject cabbage;
+        */       
 
         //public HighScoreEntry curScore;
         //public HighScores leaderboard;
@@ -69,11 +74,37 @@ namespace Speecher
             string[] notIncluded = new string[5];
 
 
+            //if (((cursy.position.x < bread.transform.position.x + 36) && (cursy.position.x > bread.transform.position.x + 32))
+            // && ((cursy.position.y < bread.transform.position.y + 16) && (cursy.position.y > bread.transform.position.y + 12)))
+
+            // this works
+            //if(((cursy.position.x < 36) && (cursy.position.x > 30)) && ((cursy.position.y < 23) && (cursy.position.y > 16)))
+
+            // x around 36
+            //Debug.Log(bread.transform.position.y);
+
+            transcriptRec = streamRec.transcript;
+            Debug.Log(transcriptRec);
+
+            if(((cursy.position.x < bread.transform.position.x + 4) && (cursy.position.x > bread.transform.position.x - 4))
+                   && ((cursy.position.y < bread.transform.position.y + 4) && (cursy.position.y > bread.transform.position.y - 4)))
+            {
+                Debug.Log("Touching bread");
+
+                //includeText.SetActive(false);
+            }
+
+
+
+            // ALSO SUPER IMPORTANT!!!!
+            /*
             //transcriptRec = streamRec.transcript;
 
             includeText.SetActive(false);
             addedText.SetActive(false);
             notAddedText.SetActive(false);
+
+
 
             if (((cursy.position.x < apple.transform.position.x + 0.5) && (cursy.position.x > apple.transform.position.x - 0.5))
                     && ((cursy.position.z < apple.transform.position.z + 0.5) && (cursy.position.z > apple.transform.position.z - 0.5)))
@@ -270,6 +301,7 @@ namespace Speecher
                 //curPlayer.DisplayHighScore("Ralph", points);
                 //addScore.IncreaseScore(points);
             }
+            */
 
 
             /*GameObject thePlayer = GameObject.Find("SpeechTest");
