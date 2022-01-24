@@ -171,6 +171,7 @@ namespace Speecher
                 //streamRec.StartListening();
                 //Debug.Log("Grapefruit");
                 transcriptRec = streamRec.transcript;
+                Debug.Log("On grapefruit");
                 //includeText.SetActive(true);
                 if (transcriptRec == "yes")
                 {
@@ -193,13 +194,14 @@ namespace Speecher
                 }
                 // includeText.SetActive(false);
             }
-
-            if (((cursy.position.x < cabbage.transform.position.x + 0.5) && (cursy.position.x > cabbage.transform.position.x - 0.5))
-                    && ((cursy.position.z < cabbage.transform.position.z + 0.5) && (cursy.position.z > cabbage.transform.position.z - 0.5)))
+            // 347 and 204
+            if (((cursy.position.x < cabbage.transform.position.x + 400) && (cursy.position.x > cabbage.transform.position.x + 300))
+                    && ((cursy.position.y < cabbage.transform.position.y + 200) && (cursy.position.y > cabbage.transform.position.y + 208)))
             {
                 which.SetActive(true);
                 //streamRec.StartListening();
                 transcriptRec = streamRec.transcript;
+                Debug.Log("On Cabbage");
                 if (transcriptRec == "yes")
                 {
                     includeText.SetActive(true);
