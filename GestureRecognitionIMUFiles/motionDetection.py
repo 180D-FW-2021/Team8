@@ -13,6 +13,7 @@ import datetime
 import os
 import csv
 import numpy as np
+from scipy.optimize import curve_fit
 
 # Accelerometer calibration functions
 
