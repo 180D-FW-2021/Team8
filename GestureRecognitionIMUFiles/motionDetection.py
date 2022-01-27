@@ -177,9 +177,9 @@ while True:
 		ACCz = IMU.readACCz()
 
 		# calibrated values
-		cal_x = accel_fit(ACCx,*accel_coeffs[0])
-		cal_y = accel_fit(ACCy,*accel_coeffs[1])
-		cal_y = accel_fit(ACCz,*accel_coeffs[2])
+		cal_x = accel_fit(ACCx, accel_coeffs[0][0], accel_coeffs[0][1])
+		cal_y = accel_fit(ACCy, accel_coeffs[1][0], accel_coeffs[1][1])
+		cal_y = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
 
 		# print calibrated values
 		print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
