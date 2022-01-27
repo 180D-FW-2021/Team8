@@ -61,7 +61,7 @@ public class cmdStarter: MonoBehaviour
 			}
 			else
 			{
-				process.StartInfo.FileName = "bash";
+				process.StartInfo.FileName = "/System/Applications/Utilities/Terminal.app";
 			}
 			process.StartInfo.Arguments += commands;
 			if(autoClose)
