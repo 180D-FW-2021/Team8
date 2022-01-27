@@ -72,6 +72,7 @@ IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
 accel_coeffs = accel_cal()
 
 print(accel_coeffs)
+print(len(accel_coeffs))
 
 axs = []
 ays = []
