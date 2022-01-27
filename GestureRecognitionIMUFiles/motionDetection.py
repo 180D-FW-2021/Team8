@@ -73,6 +73,7 @@ accel_coeffs = accel_cal()
 
 print(accel_coeffs)
 print(len(accel_coeffs))
+print(accel_coeffs[0])
 
 axs = []
 ays = []
