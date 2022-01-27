@@ -71,6 +71,8 @@ if(IMU.BerryIMUversion == 99):
 IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
 accel_coeffs = accel_cal()
 
+print(accel_coeffs)
+
 axs = []
 ays = []
 azs = []
