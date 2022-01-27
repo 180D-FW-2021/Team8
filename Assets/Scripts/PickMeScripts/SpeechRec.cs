@@ -20,6 +20,8 @@ namespace Speecher
         public fs_read_hands_csv handReader;
         //public read_hands_tcp handReader;
         public GameObject bread;
+        public GameObject carrot;
+        public GameObject apple;
 
             // THIS IS ACTUALLY SUPER IMPORTANT
 
@@ -46,6 +48,7 @@ namespace Speecher
         //public HighScoreDisplay curPlayer;
         public ScoreCounter counter;
 
+        /*
         int i = 0;
         int j = 0;
         //int k = 0;
@@ -53,6 +56,12 @@ namespace Speecher
         int points = 0;
         int missed = 0;
         int correct = 0;
+        */       
+
+        bool breadFound = false;
+        bool carrotFound = false;
+        bool appleFound = false;
+        int numFoods = 0;
 
         //bool appleCompl = false;
         //bool fishCompl = false;
@@ -62,6 +71,8 @@ namespace Speecher
         {
             Debug.Log("Test");
             //counter.IncreaseScore(5000);
+            //counter.UpdateScoreDisplay();
+            //counter.IncreaseScore(5000);
         }
 
         // Update is called once per frame
@@ -69,9 +80,9 @@ namespace Speecher
         {
             Transform cursy = handReader.Cursor;
             //public Transform cursy = handReader.Cursor;
-            string[] recipe = { "Watermelon", "Canteloupe", "Apple", "Pear", "Orange", "Grapefruit", "Banana", "Coconut" };
-            string[] ingredients = new string[5];
-            string[] notIncluded = new string[5];
+           // string[] recipe = { "Watermelon", "Canteloupe", "Apple", "Pear", "Orange", "Grapefruit", "Banana", "Coconut" };
+           // string[] ingredients = new string[5];
+           // string[] notIncluded = new string[5];
 
 
             //if (((cursy.position.x < bread.transform.position.x + 36) && (cursy.position.x > bread.transform.position.x + 32))
@@ -86,15 +97,93 @@ namespace Speecher
             transcriptRec = streamRec.transcript;
             Debug.Log(transcriptRec);
 
-            if(((cursy.position.x < bread.transform.position.x + 4) && (cursy.position.x > bread.transform.position.x - 4))
-                   && ((cursy.position.y < bread.transform.position.y + 4) && (cursy.position.y > bread.transform.position.y - 4)))
+            if(numFoods == 3)
+            {
+                // Send to high score
+                // Make final score big on the screen or something
+                Debug.Log("Added all food");
+            }
+
+            if (((cursy.position.x < bread.transform.position.x + 1) && (cursy.position.x > bread.transform.position.x - 1))
+                   && ((cursy.position.y < bread.transform.position.y + 1) && (cursy.position.y > bread.transform.position.y - 1)))
             {
                 Debug.Log("Touching bread");
 
-                //includeText.SetActive(false);
+                if (transcriptRec == "yes" && breadFound == false)
+                {
+                    counter.IncreaseScore(-500);
+                    breadFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    bread.SetActive(false);
+                    Debug.Log("Added bread");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && breadFound == false)
+                {   
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    breadFound = true;
+                    Debug.Log(counter.score);
+                    bread.SetActive(false);
+                    Debug.Log("Did not add bread");
+                    numFoods++;
+                }
             }
 
+            if (((cursy.position.x < carrot.transform.position.x + 1) && (cursy.position.x > carrot.transform.position.x - 1))
+                   && ((cursy.position.y < carrot.transform.position.y + 1) && (cursy.position.y > carrot.transform.position.y - 1)))
+            {
+                Debug.Log("Touching carrot");
 
+                if (transcriptRec == "yes" && carrotFound == false)
+                {
+                    counter.IncreaseScore(-500);
+                    carrotFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    carrot.SetActive(false);
+                    Debug.Log("Added carrot");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && carrotFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    carrotFound = true;
+                    Debug.Log(counter.score);
+                    carrot.SetActive(false);
+                    Debug.Log("Did not add carrot");
+                    numFoods++;
+                }
+            }
+
+            if (((cursy.position.x < apple.transform.position.x + 1) && (cursy.position.x > apple.transform.position.x - 1))
+                   && ((cursy.position.y < apple.transform.position.y + 1) && (cursy.position.y > apple.transform.position.y - 1)))
+            {
+                Debug.Log("Touching apple");
+
+                if (transcriptRec == "yes" && appleFound == false)
+                {
+                    counter.IncreaseScore(-500);
+                    appleFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    apple.SetActive(false);
+                    Debug.Log("Added apple");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && appleFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    appleFound = true;
+                    Debug.Log(counter.score);
+                    apple.SetActive(false);
+                    Debug.Log("Did not add apple");
+                    numFoods++;
+                }
+            }
 
             // ALSO SUPER IMPORTANT!!!!
             /*

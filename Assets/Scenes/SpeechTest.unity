@@ -2894,7 +2894,8 @@ MonoBehaviour:
   speechObj: {fileID: 1941689981}
   streamRec: {fileID: 1941689982}
   handReader: {fileID: 2107202366}
-  counter: {fileID: 0}
+  bread: {fileID: 2018282819}
+  counter: {fileID: 1125127277}
 --- !u!65 &1181796486
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3320,7 +3321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1302105866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3740,6 +3741,7 @@ MonoBehaviour:
   speechObj: {fileID: 1873851792}
   streamRec: {fileID: 1873851793}
   handReader: {fileID: 0}
+  bread: {fileID: 0}
   counter: {fileID: 0}
 --- !u!65 &1326328774
 BoxCollider:
