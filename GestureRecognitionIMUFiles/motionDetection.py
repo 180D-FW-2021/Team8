@@ -178,7 +178,9 @@ while True:
 		ACCy = IMU.readACCy()
 		ACCz = IMU.readACCz()
 
-		ac_coeff_x = list(accel_coeffs[0])
+		print(accel_coeffs[0])
+
+		ac_coeff_x = accel_coeffs[0]
 		ac_coeff_y = accel_coeffs[1]
 		ac_coeff_z = accel_coeffs[2]
 
