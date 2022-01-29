@@ -75,13 +75,6 @@ print(accel_coeffs)
 print(len(accel_coeffs))
 print(accel_coeffs[0])
 
-axs = []
-ays = []
-azs = []
-gxs = []
-gys = []
-gzs = []
-
 # Thresholds
 # Vertical
 z_th_up = 6000
@@ -176,16 +169,10 @@ while True:
 		ACCy = IMU.readACCy()
 		ACCz = IMU.readACCz()
 
-		print(accel_coeffs)
-
-		ac_coeff_x = accel_coeffs[0]
-		ac_coeff_y = accel_coeffs[1]
-		ac_coeff_z = accel_coeffs[2]
-
 		# calibrated values
-		cal_x = accel_fit(ACCx, ac_coeff_x[0], ac_coeff_y[1])
+		cal_x = accel_fit(ACCx, accel_coeffs[0][0], accel_coeffs[0][1])
 		cal_y = accel_fit(ACCy, accel_coeffs[1][0], accel_coeffs[1][1])
-		cal_y = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
+		cal_z = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
 
 		# print calibrated values
 		print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
