@@ -94,6 +94,7 @@ pure_square = ["R","D","L","U"]
 movements = []
 motion_detected = False
 cooldown = 0.5
+move = ""
 
 t = 0
 
@@ -174,16 +175,8 @@ while True:
 		cal_y = accel_fit(ACCy, accel_coeffs[1][0], accel_coeffs[1][1])
 		cal_z = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
 
-		# print calibrated values
+		# print calibrated values (for debug reasons)
 		print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
-
-		#GYRx = IMU.readGYRx()
-		#GYRy = IMU.readGYRy()
-		#GYRz = IMU.readGYRz()
-		#MAGx = IMU.readMAGx()
-		#MAGy = IMU.readMAGy()
-		#MAGz = IMU.readMAGz()
-		move = ""
 
 		# Vertical classification
 		if ACCz > z_th_up:
@@ -224,12 +217,7 @@ while True:
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
-		# if pure_square == shape and detect_shape == "square":
-			# print("\tPure Square!")
-			# client.publish('ece180d/team8/imu', "True", qos=1)
-		
-
-		#slow program down a bit, makes the output more readable
+		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
 	if shape_stage > 3:
 		shape_stage = 0
