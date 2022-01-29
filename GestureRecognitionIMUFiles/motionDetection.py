@@ -82,8 +82,6 @@ gxs = []
 gys = []
 gzs = []
 
-accel_coeffs = []
-
 # Thresholds
 # Vertical
 z_th_up = 6000
