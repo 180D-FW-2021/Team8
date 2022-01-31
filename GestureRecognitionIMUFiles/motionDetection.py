@@ -77,8 +77,8 @@ print(accel_coeffs[0])
 
 # Thresholds
 # Vertical
-z_th_up = 9.8
-z_th_down = -9.8
+z_th_up = 9
+z_th_down = -9
 
 # Side to side
 x_th_right = 1
