@@ -81,8 +81,8 @@ z_th_up = 4
 z_th_down = -4
 
 # Side to side
-x_th_right = 2
-x_th_left = -2
+x_th_right = 3
+x_th_left = -3
 
 # Front back (likely not used)
 y_th_front = 4
@@ -91,7 +91,6 @@ y_th_back = -4
 # Shape classification
 pure_square = ["R","D","L","U"]
 
-movements = []
 motion_detected = False
 cooldown = 0.5
 move = ""
@@ -178,27 +177,23 @@ while True:
 		# print calibrated values (for debug reasons)
 		print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
 
-		# Vertical classification
+		# Vertical classification (invert up and down)
 		if cal_z > z_th_up:
-			print("U")
-			movements.append("U")
-			move = "U"
+			print("D")
+			move = "D"
 			time.sleep(cooldown)
 		elif cal_z < z_th_down:
-			print("D")
-			movements.append("D")
-			move = "D"
+			print("U")
+			move = "U"
 			time.sleep(cooldown)
 
 		# Left right classification
 		elif cal_x > x_th_right:
 			print("R")
-			movements.append("R")
 			move = "R"
 			time.sleep(cooldown)
 		elif cal_x < x_th_left:
 			print("L")
-			movements.append("L")
 			move = "L"
 			time.sleep(cooldown)
 
