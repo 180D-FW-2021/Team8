@@ -147,13 +147,11 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
-client.connect_async('mqtt.eclipseprojects.io')
+# client.connect_async('mqtt.eclipseprojects.io')
+client.connect_async('test.mosquitto.org')
 client.loop_start()
 
 print("Connected")
-
-client.publish('ece180d/team8/imu', "Test message", qos=1)
-
 
 
 # Cycle

@@ -56,8 +56,8 @@ client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 # 2. connect to a broker using one of the connect*() functions
-
-client.connect_async('mqtt.eclipseprojects.io')
+client.connect_async('test.mosquitto.org')
+#client.connect_async('mqtt.eclipseprojects.io')
 
 #3. call one of the loop*() functions to maintain network traffic flow with the broker.
 client.loop_start()
@@ -72,17 +72,21 @@ while True:
 			client.publish("ece180d/team8/unity", data[0], qos=1)
 			shape_written = True
 			game_running = True
+			print("Publishing shape")
 		elif data[0] == "N/A\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			shape_written = False
 			game_running = False
+			print("Publishing stop")
 
 		if data[2] == "True\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			game_running = False
+			print("Publishing stop")
 		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
+			print("Publishing start")
 
 		file.close()
 
