@@ -26,7 +26,7 @@ def get_accel():
 	az = IMU.readACCz()
 	return ax,ay,az
 
-cal_size = 500
+cal_size = 750
 
 def accel_cal():
 	print("-"*50)
@@ -81,8 +81,8 @@ z_th_up = 4
 z_th_down = -4
 
 # Side to side
-x_th_right = 4
-x_th_left = -4
+x_th_right = 2
+x_th_left = -2
 
 # Front back (likely not used)
 y_th_front = 4
