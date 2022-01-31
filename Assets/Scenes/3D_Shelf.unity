@@ -819,6 +819,7 @@ MonoBehaviour:
   apple: {fileID: 887066125}
   scoreboard: {fileID: 1796723878}
   counter: {fileID: 1016453759}
+  leaderboard: {fileID: 1796723877}
 --- !u!65 &320931840
 BoxCollider:
   m_ObjectHideFlags: 0

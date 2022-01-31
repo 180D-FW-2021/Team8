@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PyVenvStart : MonoBehaviour
 {
-	static bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
-						// assuming no other platforms at this time
-	string separator = onWin ? " & " : " ; "; // ';' separates commands in bash, '&' separates commands in cmd
+	
 	GameObject startObj;
 	cmdStarter startScript;
     // Start is called before the first frame update
@@ -27,7 +25,9 @@ public class PyVenvStart : MonoBehaviour
 	{
 		// Activates the virtual environment specified by envName and runs the .py specified by pyPath.
 		// last 3 arguments are just passed on to CMDStart.
-		
+		bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
+						// assuming no other platforms at this time
+		string separator = onWin ? " & " : " ; "; // ';' separates commands in bash, '&' separates commands in cmd
 		string pyStart = "";
 		string procArgs = "";
 		// assemble argument to CMDStarter
