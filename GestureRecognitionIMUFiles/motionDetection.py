@@ -77,16 +77,16 @@ print(accel_coeffs[0])
 
 # Thresholds
 # Vertical
-z_th_up = 2
-z_th_down = -2
+z_th_up = 4
+z_th_down = -4
 
 # Side to side
-x_th_right = 1
-x_th_left = -1
+x_th_right = 4
+x_th_left = -4
 
 # Front back (likely not used)
-y_th_front = 1
-y_th_back = -1
+y_th_front = 4
+y_th_back = -4
 
 # Shape classification
 pure_square = ["R","D","L","U"]
