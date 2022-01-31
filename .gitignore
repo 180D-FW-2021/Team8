@@ -261,8 +261,6 @@ dmypy.json
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
 
-!/[Ll]ibrary/PackageCache/com.oshoham.unity-google-cloud-streaming-speech-to-text@0.1.8/Runtime/*
-
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
@@ -327,3 +325,6 @@ gcp_credentials.json
 gcp_credentials.json.meta
 
 *.DS_Store
+
+!/[Ll]ibrary/PackageCache/com.oshoham.unity-google-cloud-streaming-speech-to-text@0.1.8/Runtime/*
+!/Library/PackageCache/com.oshoham.unity-google-cloud-streaming-speech-to-text@0.1.8/Runtime/*
