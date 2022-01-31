@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreCounter : MonoBehaviour
 {
-    public int score;
+    public float score;
     public float transitionSpeed = 100;
     float displayScore;
     public Text scoreText;
@@ -16,7 +16,7 @@ public class ScoreCounter : MonoBehaviour
         UpdateScoreDisplay();
     }
 
-    public void IncreaseScore(int amount)
+    public void IncreaseScore(float amount)
     {
         score += amount;
     }

@@ -10,8 +10,6 @@ numbers = [0,1,2,3,4,5]
 game_running = False
 shape_written = False
 
-loop_delay = 0.2
-
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
 	print("Connection returned result: " + str(rc))
@@ -88,7 +86,7 @@ while True:
 	except (OSError, PermissionError):
 		print("Could not open")
 
-	time.sleep(loop_delay)
+	time.sleep(0.4)
 
 
 client.loop_stop()
