@@ -23,6 +23,8 @@ namespace Speecher
         public GameObject carrot;
         public GameObject apple;
 
+        public HighScores scoreboard;
+
             // THIS IS ACTUALLY SUPER IMPORTANT
 
         /*public GameObject includeText;
@@ -56,7 +58,9 @@ namespace Speecher
         int points = 0;
         int missed = 0;
         int correct = 0;
-        */       
+        */
+
+        public GameObject leaderboard;       
 
         bool breadFound = false;
         bool carrotFound = false;
@@ -73,6 +77,8 @@ namespace Speecher
             //counter.IncreaseScore(5000);
             //counter.UpdateScoreDisplay();
             //counter.IncreaseScore(5000);
+            //entry1.SetActive(true);
+            //leaderboard.SetActive(true);
         }
 
         // Update is called once per frame
@@ -101,7 +107,13 @@ namespace Speecher
             {
                 // Send to high score
                 // Make final score big on the screen or something
+
+                scoreboard.AddNewScore("Player1", counter.score);
+
                 Debug.Log("Added all food");
+                //entry1.SetActive(true);
+                leaderboard.SetActive(true);
+
             }
 
             if (((cursy.position.x < bread.transform.position.x + 1) && (cursy.position.x > bread.transform.position.x - 1))
