@@ -101,7 +101,7 @@ t = 0
 detect_shape = "square"	 # default
 shape_stage = 0
 
-game_running = False		# False
+game_running = True		# False
 is_calibrating = False
 
 # MQTT
@@ -176,7 +176,7 @@ while True:
 		cal_z = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
 
 		# print calibrated values (for debug reasons)
-		# print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
+		print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
 
 		# Vertical classification
 		if cal_z > z_th_up:
