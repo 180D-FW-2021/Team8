@@ -179,24 +179,24 @@ while True:
 		print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
 
 		# Vertical classification
-		if ACCz > z_th_up:
+		if cal_z > z_th_up:
 			print("U")
 			movements.append("U")
 			move = "U"
 			time.sleep(cooldown)
-		elif ACCz < z_th_down:
+		elif cal_z < z_th_down:
 			print("D")
 			movements.append("D")
 			move = "D"
 			time.sleep(cooldown)
 
 		# Left right classification
-		elif ACCx > x_th_right:
+		elif cal_x > x_th_right:
 			print("R")
 			movements.append("R")
 			move = "R"
 			time.sleep(cooldown)
-		elif ACCx < x_th_left:
+		elif cal_x < x_th_left:
 			print("L")
 			movements.append("L")
 			move = "L"
