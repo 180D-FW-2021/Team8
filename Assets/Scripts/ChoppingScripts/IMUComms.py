@@ -10,7 +10,7 @@ numbers = [0,1,2,3,4,5]
 game_running = False
 shape_written = False
 
-loop_delay = 0.2
+loop_delay = 0.3
 file_path = "../../IMUCommsTxt.txt"
 
 # The callback for when the client receives a CONNACK response from the server.
