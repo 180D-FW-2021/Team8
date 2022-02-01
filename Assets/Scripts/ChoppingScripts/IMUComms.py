@@ -49,7 +49,8 @@ def on_message(client, userdata, message):
 		with open(file_path, "w") as file:
 			file.writelines(data)
 
-client = mqtt.Client()
+client = mqtt.Client("", True, None, mqtt.MQTTv31)
+# client = mqtt.Client()
 
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect

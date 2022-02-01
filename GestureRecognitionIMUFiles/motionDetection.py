@@ -141,7 +141,7 @@ def on_message(client, userdata, message):
 
 print("About to connect...")
 
-client = mqtt.Client()
+client = mqtt.Client("", True, None, mqtt.MQTTv31)
 
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
