@@ -50,15 +50,15 @@ def on_message(client, userdata, message):
 			file.writelines(data)
 
 client = mqtt.Client("", True, None, mqtt.MQTTv31)
-# client = mqtt.Client()
+#client = mqtt.Client()
 
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 # 2. connect to a broker using one of the connect*() functions
-#client.connect_async('test.mosquitto.org')
-client.connect_async('mqtt.eclipseprojects.io')
+client.connect_async('test.mosquitto.org', 1883, 60)
+#client.connect_async('mqtt.eclipseprojects.io', 1883)
 
 #3. call one of the loop*() functions to maintain network traffic flow with the broker.
 client.loop_start()

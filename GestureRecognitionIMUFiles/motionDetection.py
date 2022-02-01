@@ -147,8 +147,8 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
-client.connect_async('mqtt.eclipseprojects.io')
-#client.connect_async('test.mosquitto.org')
+#client.connect_async('mqtt.eclipseprojects.io')
+client.connect_async('test.mosquitto.org', 1883, 60)
 client.loop_start()
 
 print("Connected")
