@@ -12,7 +12,6 @@ namespace Speecher
         string transcriptRec;
         public bool positioner = false;
 
-
         public GameObject cursor;
         public GameObject speechObj;
         public StreamingRecognizer streamRec;
@@ -22,53 +21,32 @@ namespace Speecher
         public GameObject bread;
         public GameObject carrot;
         public GameObject apple;
+        public GameObject lemon;
+        public GameObject banana;
+        public GameObject tomato;
+        public GameObject watermelon;
+        public GameObject grape;
+        public GameObject mushroom;
+        public GameObject include;
+        public GameObject noInclude;
 
         public HighScores scoreboard;
 
-            // THIS IS ACTUALLY SUPER IMPORTANT
-
-        /*public GameObject includeText;
-        public GameObject excludeText;
-        public GameObject which;
-
-        public GameObject addedText;
-        public GameObject notAddedText;
-
-        public GameObject done;
-        public GameObject pointCtr;
-        public GameObject gameOver;
-        public GameObject returnToMenu;
-
-        public GameObject apple;
-        public GameObject fish;
-        public GameObject grapefruit;
-        public GameObject cabbage;
-        */       
-
-        //public HighScoreEntry curScore;
-        //public HighScores leaderboard;
-        //public HighScoreDisplay curPlayer;
         public ScoreCounter counter;
-
-        /*
-        int i = 0;
-        int j = 0;
-        //int k = 0;
-        int numOpts = 3;
-        int points = 0;
-        int missed = 0;
-        int correct = 0;
-        */
 
         public GameObject leaderboard;       
 
         bool breadFound = false;
         bool carrotFound = false;
         bool appleFound = false;
-        int numFoods = 0;
+        bool lemonFound = false;
+        bool bananaFound = false;
+        bool tomatoFound = false;
+        bool watermelonFound = false;
+        bool grapeFound = false;
+        bool mushroomFound = false;
 
-        //bool appleCompl = false;
-        //bool fishCompl = false;
+        int numFoods = 0;
 
         // Start is called before the first frame update
         void Start()
@@ -85,25 +63,11 @@ namespace Speecher
         void Update()
         {
             Transform cursy = handReader.Cursor;
-            //public Transform cursy = handReader.Cursor;
-           // string[] recipe = { "Watermelon", "Canteloupe", "Apple", "Pear", "Orange", "Grapefruit", "Banana", "Coconut" };
-           // string[] ingredients = new string[5];
-           // string[] notIncluded = new string[5];
-
-
-            //if (((cursy.position.x < bread.transform.position.x + 36) && (cursy.position.x > bread.transform.position.x + 32))
-            // && ((cursy.position.y < bread.transform.position.y + 16) && (cursy.position.y > bread.transform.position.y + 12)))
-
-            // this works
-            //if(((cursy.position.x < 36) && (cursy.position.x > 30)) && ((cursy.position.y < 23) && (cursy.position.y > 16)))
-
-            // x around 36
-            //Debug.Log(bread.transform.position.y);
 
             transcriptRec = streamRec.transcript;
             Debug.Log(transcriptRec);
 
-            if(numFoods == 3)
+            if(numFoods == 9)
             {
                 // Send to high score
                 // Make final score big on the screen or something
@@ -123,6 +87,8 @@ namespace Speecher
 
                 if (transcriptRec == "yes" && breadFound == false)
                 {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     breadFound = true;
                     counter.UpdateScoreDisplay();
@@ -132,7 +98,9 @@ namespace Speecher
                     numFoods++;
                 }
                 else if (transcriptRec == "no" && breadFound == false)
-                {   
+                {
+                    noInclude.SetActive(true);
+                    include.SetActive(false);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     breadFound = true;
@@ -150,6 +118,8 @@ namespace Speecher
 
                 if (transcriptRec == "yes" && carrotFound == false)
                 {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     carrotFound = true;
                     counter.UpdateScoreDisplay();
@@ -160,6 +130,8 @@ namespace Speecher
                 }
                 else if (transcriptRec == "no" && carrotFound == false)
                 {
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     carrotFound = true;
@@ -177,6 +149,8 @@ namespace Speecher
 
                 if (transcriptRec == "yes" && appleFound == false)
                 {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     appleFound = true;
                     counter.UpdateScoreDisplay();
@@ -187,6 +161,8 @@ namespace Speecher
                 }
                 else if (transcriptRec == "no" && appleFound == false)
                 {
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     appleFound = true;
@@ -197,232 +173,191 @@ namespace Speecher
                 }
             }
 
-            // ALSO SUPER IMPORTANT!!!!
-            /*
-            //transcriptRec = streamRec.transcript;
-
-            includeText.SetActive(false);
-            addedText.SetActive(false);
-            notAddedText.SetActive(false);
-
-
-
-            if (((cursy.position.x < apple.transform.position.x + 0.5) && (cursy.position.x > apple.transform.position.x - 0.5))
-                    && ((cursy.position.z < apple.transform.position.z + 0.5) && (cursy.position.z > apple.transform.position.z - 0.5)))
+            if (((cursy.position.x < lemon.transform.position.x + 1) && (cursy.position.x > lemon.transform.position.x - 1))
+                   && ((cursy.position.y < lemon.transform.position.y + 1) && (cursy.position.y > lemon.transform.position.y - 1)))
             {
-                //streamRec.StartListening();
-                which.SetActive(true);
-                transcriptRec = streamRec.transcript;
-                if (transcriptRec == "yes")
-                {
-                    includeText.SetActive(true);
-                    ingredients[0] = apple.name;
-                    i++;
-                    addedText.SetActive(true);
-                    apple.SetActive(false);
-                    Debug.Log("Added apple");
-                    //appleCompl = true;
-                    // add points if correct
-                    bool found = false;
-                    for(int i = 0; i < recipe.Length; i++)
-                    {
-                        if(apple.name == recipe[i])
-                        {
-                            counter.IncreaseScore(100);
-                            found = true;
-                        }
-                    }
-                    if (!found)
-                    {
-                        counter.IncreaseScore(-50);
-                    }
-                }
-                else if (transcriptRec == "no")
-                {
-                    excludeText.SetActive(true);
-                    notIncluded[0] = apple.name;
-                    j++;
-                    notAddedText.SetActive(true);
-                    apple.SetActive(false);
-                    Debug.Log("Did not add apple");
-                    //appleCompl = true;
-                    bool found = false;
-                    for (int i = 0; i < recipe.Length; i++)
-                    {
-                        if (apple.name != recipe[i])
-                        {
-                            counter.IncreaseScore(100);
-                            found = true;
-                        }
-                    }
-                    if (!found)
-                    {
-                        counter.IncreaseScore(-50);
-                    }
-                }
+                Debug.Log("Touching lemon");
 
-                //includeText.SetActive(false);
+                if (transcriptRec == "yes" && lemonFound == false)
+                {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
+                    counter.IncreaseScore(-500);
+                    lemonFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    lemon.SetActive(false);
+                    Debug.Log("Added lemon");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && lemonFound == false)
+                {
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    lemonFound = true;
+                    Debug.Log(counter.score);
+                    lemon.SetActive(false);
+                    Debug.Log("Did not add lemon");
+                    numFoods++;
+                }
             }
 
-            //Debug.Log(cursy.position);
-
-            if (((cursy.position.x < fish.transform.position.x + 0.3) && (cursy.position.x > fish.transform.position.x - 0.3))
-                    && ((cursy.position.z < fish.transform.position.z + 0.7) && (cursy.position.z > fish.transform.position.z - 0.7)))
+            if (((cursy.position.x < banana.transform.position.x + 1) && (cursy.position.x > banana.transform.position.x - 1))
+                   && ((cursy.position.y < banana.transform.position.y + 1) && (cursy.position.y > banana.transform.position.y - 1)))
             {
-                which.SetActive(true);
-                //streamRec.StartListening();
-                transcriptRec = streamRec.transcript;
-                //includeText.SetActive(true);
-                if (transcriptRec == "yes")
+                Debug.Log("Touching banana");
+
+                if (transcriptRec == "yes" && bananaFound == false)
                 {
-                    includeText.SetActive(true);
-                    ingredients[0] = fish.name;
-                    i++;
-                    addedText.SetActive(true);
-                    fish.SetActive(false);
-                    Debug.Log("Added fish");
-                    //fishCompl = true;
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
+                    counter.IncreaseScore(-500);
+                    bananaFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    banana.SetActive(false);
+                    Debug.Log("Added banana");
+                    numFoods++;
                 }
-                else if (transcriptRec == "no")
+                else if (transcriptRec == "no" && bananaFound == false)
                 {
-                    excludeText.SetActive(true);
-                    notIncluded[0] = fish.name;
-                    j++;
-                    notAddedText.SetActive(true);
-                    fish.SetActive(false);
-                    Debug.Log("Fish not included");
-                    //fishCompl = true;
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    bananaFound = true;
+                    Debug.Log(counter.score);
+                    banana.SetActive(false);
+                    Debug.Log("Did not add banana");
+                    numFoods++;
                 }
-                // includeText.SetActive(false);
             }
 
-            if (((cursy.position.x < grapefruit.transform.position.x + 0.3) && (cursy.position.x > grapefruit.transform.position.x - 0.3))
-                    && ((cursy.position.z < grapefruit.transform.position.z + 0.7) && (cursy.position.z > grapefruit.transform.position.z - 0.7)))
+            if (((cursy.position.x < tomato.transform.position.x + 1) && (cursy.position.x > tomato.transform.position.x - 1))
+                   && ((cursy.position.y < tomato.transform.position.y + 1) && (cursy.position.y > tomato.transform.position.y - 1)))
             {
-                which.SetActive(true);
-                //streamRec.StartListening();
-                //Debug.Log("Grapefruit");
-                transcriptRec = streamRec.transcript;
-                Debug.Log("On grapefruit");
-                //includeText.SetActive(true);
-                if (transcriptRec == "yes")
-                {
-                    includeText.SetActive(true);
-                    ingredients[0] = grapefruit.name;
-                    i++;
-                    addedText.SetActive(true);
-                    grapefruit.SetActive(false);
-                    Debug.Log("Added grapefruit");
-                    //fishCompl = true;
-                }
-                else if (transcriptRec == "no")
-                {
-                    excludeText.SetActive(true);
-                    notIncluded[0] = grapefruit.name;
-                    j++;
-                    notAddedText.SetActive(true);
-                    grapefruit.SetActive(false);
-                    //fishCompl = true;
-                }
-                // includeText.SetActive(false);
-            }
-            // 347 and 204
-            if (((cursy.position.x < cabbage.transform.position.x + 400) && (cursy.position.x > cabbage.transform.position.x + 300))
-                    && ((cursy.position.y < cabbage.transform.position.y + 200) && (cursy.position.y > cabbage.transform.position.y + 208)))
-            {
-                which.SetActive(true);
-                //streamRec.StartListening();
-                transcriptRec = streamRec.transcript;
-                Debug.Log("On Cabbage");
-                if (transcriptRec == "yes")
-                {
-                    includeText.SetActive(true);
-                    ingredients[0] = cabbage.name;
-                    i++;
-                    addedText.SetActive(true);
-                    cabbage.SetActive(false);
-                    Debug.Log("Added cabbage");
-                    //appleCompl = true;
-                }
-                else if (transcriptRec == "no")
-                {
-                    excludeText.SetActive(true);
-                    notIncluded[0] = cabbage.name;
-                    j++;
-                    notAddedText.SetActive(true);
-                    cabbage.SetActive(false);
-                    //appleCompl = true;
-                }
+                Debug.Log("Touching tomato");
 
-                //includeText.SetActive(false);
+                if (transcriptRec == "yes" && tomatoFound == false)
+                {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
+                    counter.IncreaseScore(-500);
+                    tomatoFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    tomato.SetActive(false);
+                    Debug.Log("Added tomato");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && tomatoFound == false)
+                {
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    tomatoFound = true;
+                    Debug.Log(counter.score);
+                    tomato.SetActive(false);
+                    Debug.Log("Did not add tomato");
+                    numFoods++;
+                }
             }
 
-            if (((cursy.position.x < done.transform.position.x + 2) && (cursy.position.x > done.transform.position.x - 2))
-                    && ((cursy.position.z < done.transform.position.z + 1) && (cursy.position.z > done.transform.position.z - 1)))
+            if (((cursy.position.x < watermelon.transform.position.x + 1) && (cursy.position.x > watermelon.transform.position.x - 1))
+                   && ((cursy.position.y < watermelon.transform.position.y + 1) && (cursy.position.y > watermelon.transform.position.y - 1)))
             {
-                pointCtr.SetActive(true);
-                gameOver.SetActive(true);
-                returnToMenu.SetActive(true);
-                cursor.SetActive(false);
-            }
+                Debug.Log("Touching watermelon");
 
-            //Debug.Log("Tester: " + transcriptRec);
-
-
-            if (i + j == numOpts)
-            {
-                for (int k = 0; k < ingredients.Length; k++)
+                if (transcriptRec == "yes" && watermelonFound == false)
                 {
-                    //bool madeTheCut = false;
-                    for (int l = 0; l < recipe.Length; l++)
-                    {
-                        if (ingredients[k] == recipe[l])
-                        {
-                            points += 100;
-                            correct += 1;
-                            Debug.Log("Included: " + ingredients[k]);
-                        }
-                    }
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
+                    counter.IncreaseScore(-500);
+                    watermelonFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    watermelon.SetActive(false);
+                    Debug.Log("Added watermelon");
+                    numFoods++;
                 }
-                for (int k = 0; k < notIncluded.Length; k++)
+                else if (transcriptRec == "no" && watermelonFound == false)
                 {
-                    //bool madeTheCut = true;
-                    for (int l = 0; l < recipe.Length; l++)
-                    {
-                        if (notIncluded[k] == recipe[l])
-                        {
-                            //madeTheCut = false;
-                            points -= 50;
-                            missed += 1;
-                            Debug.Log("Missed: " + notIncluded[k]);
-                        }
-                    }
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    watermelonFound = true;
+                    Debug.Log(counter.score);
+                    watermelon.SetActive(false);
+                    Debug.Log("Did not add watermelon");
+                    numFoods++;
                 }
-                Debug.Log("Points: " + points.ToString());
-                //curPlayer.DisplayHighScore("Ralph", points);
-                //addScore.IncreaseScore(points);
             }
-            */
 
-
-            /*GameObject thePlayer = GameObject.Find("SpeechTest");
-            PlayerScript playerScript = thePlayer.GetComponent<PlayerScript>();
-            playerScript.Health -= 10.0f;*/
-
-            //transcriptRec = GameObject.Find("SpeechTest").GetComponent<StreamingRecognizer>().transcript; ;
-            /*
-            GameObject speechObj = GameObject.Find("SpeechTest");
-            StreamingRecognizer streamRec = speechObj.GetComponent<StreamingRecognizer>();
-            //Console.WriteLine("Hello");
-            transcriptRec = streamRec.transcript;
-
-            if(transcriptRec == "yes")
+            if (((cursy.position.x < grape.transform.position.x + 1) && (cursy.position.x > grape.transform.position.x - 1))
+                   && ((cursy.position.y < grape.transform.position.y + 1) && (cursy.position.y > grape.transform.position.y - 1)))
             {
-                Debug.Log("Hello");
+                Debug.Log("Touching grape");
+
+                if (transcriptRec == "yes" && grapeFound == false)
+                {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
+                    counter.IncreaseScore(-500);
+                    grapeFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    grape.SetActive(false);
+                    Debug.Log("Added grape");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && grapeFound == false)
+                {
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    grapeFound = true;
+                    Debug.Log(counter.score);
+                    grape.SetActive(false);
+                    Debug.Log("Did not add grape");
+                    numFoods++;
+                }
             }
 
-            Debug.Log(transcriptRec);
-            */
+            if (((cursy.position.x < mushroom.transform.position.x + 1) && (cursy.position.x > mushroom.transform.position.x - 1))
+                   && ((cursy.position.y < mushroom.transform.position.y + 1) && (cursy.position.y > mushroom.transform.position.y - 1)))
+            {
+                Debug.Log("Touching mushroom");
+
+                if (transcriptRec == "yes" && mushroomFound == false)
+                {
+                    include.SetActive(true);
+                    noInclude.SetActive(false);
+                    counter.IncreaseScore(-500);
+                    mushroomFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    mushroom.SetActive(false);
+                    Debug.Log("Added mushroom");
+                    numFoods++;
+                }
+                else if (transcriptRec == "no" && mushroomFound == false)
+                {
+                    include.SetActive(false);
+                    noInclude.SetActive(true);
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    mushroomFound = true;
+                    Debug.Log(counter.score);
+                    mushroom.SetActive(false);
+                    Debug.Log("Did not add mushroom");
+                    numFoods++;
+                }
+            }
         }
     }
 }
