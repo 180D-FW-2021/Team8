@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.lootlocker.lootlockersdk": "file:/Users/karalyn/Downloads/unity-sdk-main",
     "com.oshoham.unity-google-cloud-streaming-speech-to-text": "0.1.8",
     "com.unity.collab-proxy": "1.12.5",
     "com.unity.ide.rider": "1.2.1",
