@@ -1,13 +1,5 @@
 {
   "dependencies": {
-    "com.lootlocker.lootlockersdk": {
-      "version": "file:/Users/karalyn/Downloads/unity-sdk-main",
-      "depth": 0,
-      "source": "local",
-      "dependencies": {
-        "com.unity.nuget.newtonsoft-json": "2.0.0"
-      }
-    },
     "com.oshoham.unity-google-cloud-streaming-speech-to-text": {
       "version": "0.1.8",
       "depth": 0,
@@ -50,13 +42,6 @@
     "com.unity.ide.vscode": {
       "version": "1.2.4",
       "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://packages.unity.com"
-    },
-    "com.unity.nuget.newtonsoft-json": {
-      "version": "2.0.0",
-      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"
