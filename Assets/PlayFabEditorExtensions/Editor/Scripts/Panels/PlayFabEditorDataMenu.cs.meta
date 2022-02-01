@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/PlayFabEditorExtensions/Editor/Scripts/Panels/PlayFabEditorDataMenu.cs.meta
+guid: 473b8182a10e24fd0aebe832f98f7779
+========
+guid: 76b8ce228d6194958a930883c1e61244
+>>>>>>>> main:Assets/Scripts/PickMeScripts/HighScoreDisplay.cs.meta
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

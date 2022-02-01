@@ -703,10 +703,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 49b79e45-839e-41e4-a0ec-0f8ae67f9bc4
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: Team8
+  organizationId: sawchukk
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
