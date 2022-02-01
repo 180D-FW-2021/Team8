@@ -161,7 +161,7 @@ public class ChoppingGameManager : MonoBehaviour
 
             try {
                 using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
-                    Debug.Log("Reading from tect file");
+                    Debug.Log("Reading from text file");
                     sr.ReadLine();
                     string line = sr.ReadLine();
                     if (line.Contains("True")) {

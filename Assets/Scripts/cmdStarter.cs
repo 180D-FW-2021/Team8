@@ -8,9 +8,7 @@ public class cmdStarter: MonoBehaviour
 	/*
 	Activates command processor for Mac/Windows.
 	*/
-	bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
-						// assuming no other platforms at this time
-	string separator = " ; "; // ';' separates commands in bash, '&' separates commands in cmd
+	
     // Start is called before the first frame update
     void Start()
     {	
@@ -52,6 +50,9 @@ public class cmdStarter: MonoBehaviour
 		*/
 		using(var process = new Process())
 		{
+			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
+						// assuming no other platforms at this time
+			string separator = " ; "; // ';' separates commands in bash, '&' separates commands in cmd
 			process.StartInfo.Arguments = "";
 			if(onWin)
 			{

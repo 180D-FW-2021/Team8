@@ -10,7 +10,8 @@ numbers = [0,1,2,3,4,5]
 game_running = False
 shape_written = False
 
-loop_delay = 0.2
+loop_delay = 0.3
+file_path = "../../IMUCommsTxt.txt"
 
 # The callback for when the client receives a CONNACK response from the server.
 def on_connect(client, userdata, flags, rc):
@@ -35,35 +36,36 @@ def on_message(client, userdata, message):
 
 	# If message is if the shape is recognized: true or false
 	if "True" in str(message.payload):
-		with open("../IMUCommsTxt.txt", "r") as file:
+		with open(file_path, "r") as file:
 			data = file.readlines()
 		data[1] = "True\n"
-		with open("../IMUCommsTxt.txt", "w") as file:
+		with open(file_path, "w") as file:
 			file.writelines(data)
 
 	elif int(message.payload) in numbers:
-		with open("../IMUCommsTxt.txt", "r") as file:
+		with open(file_path, "r") as file:
 			data = file.readlines()
 		data[3] = str(int(message.payload))
-		with open("../IMUCommsTxt.txt", "w") as file:
+		with open(file_path, "w") as file:
 			file.writelines(data)
 
-client = mqtt.Client()
+client = mqtt.Client("", True, None, mqtt.MQTTv31)
+# client = mqtt.Client()
 
 client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 # 2. connect to a broker using one of the connect*() functions
-
-client.connect_async('mqtt.eclipseprojects.io')
+client.connect_async('test.mosquitto.org')
+#client.connect_async('mqtt.eclipseprojects.io')
 
 #3. call one of the loop*() functions to maintain network traffic flow with the broker.
 client.loop_start()
 
 while True:
 	try:
-		file = open("../IMUCommsTxt.txt", "r")
+		file = open(file_path, "r")
 		data = file.readlines()
 		print(data)
 
@@ -71,17 +73,21 @@ while True:
 			client.publish("ece180d/team8/unity", data[0], qos=1)
 			shape_written = True
 			game_running = True
+			print("Publishing shape")
 		elif data[0] == "N/A\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			shape_written = False
 			game_running = False
+			print("Publishing stop")
 
 		if data[2] == "True\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			game_running = False
+			print("Publishing stop")
 		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
+			print("Publishing start")
 
 		file.close()
 
