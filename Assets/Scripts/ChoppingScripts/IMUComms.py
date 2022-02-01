@@ -10,7 +10,7 @@ numbers = [0,1,2,3,4,5]
 game_running = False
 shape_written = False
 
-loop_delay = 0.3
+loop_delay = 0.2
 file_path = "../../IMUCommsTxt.txt"
 
 # The callback for when the client receives a CONNACK response from the server.
@@ -73,21 +73,17 @@ while True:
 			client.publish("ece180d/team8/unity", data[0], qos=1)
 			shape_written = True
 			game_running = True
-			print("Publishing shape")
 		elif data[0] == "N/A\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			shape_written = False
 			game_running = False
-			print("Publishing stop")
 
 		if data[2] == "True\n":
 			client.publish("ece180d/team8/unity", "stop", qos=1)
 			game_running = False
-			print("Publishing stop")
 		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
-			print("Publishing start")
 
 		file.close()
 

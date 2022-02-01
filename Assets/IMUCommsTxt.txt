@@ -1,6 +1,4 @@
-N/A
+square
 False
-True
-0
-
+False
 1
