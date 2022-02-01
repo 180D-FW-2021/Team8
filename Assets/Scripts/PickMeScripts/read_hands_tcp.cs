@@ -150,13 +150,15 @@ public class read_hands_tcp : MonoBehaviour
 	}
 	
 	void posUpdate(float scalex = 24, float scaley = 15) // perhaps make scale dependent on z-distance of wrist node? 
-                                        // i.e. increase scale for higher distance to maintain sensitivity.
+									// i.e. increase scale for higher distance to maintain sensitivity.
 	{
-		float xOffset = -5;
-		float yOffset = -6;
-		Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset); // actually corresponds to z in unity. Change according to final camera orientation
-																  // needs scaling and tuning for actual game use.   
+		float xOffset = -50;  //-232; //-5;
+		float yOffset = -25;  //-277; //-277;  //-6;
+							 //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset); // actually corresponds to z in unity. Change according to final camera orientation needs scaling and tuning for actual game use.   
+		Cursor.position = new Vector3(-scalex * x - xOffset, -scaley * y - yOffset, 0);
+		//Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset);
 	}
+	
 	void closeHandsTcp(ref TcpListener server, ref NetworkStream stream)
 	{
 		// closes the TCP connection, closing both the local TCP client and its corresponding socket
@@ -169,5 +171,10 @@ public class read_hands_tcp : MonoBehaviour
 		// Thread.Sleep(1000); // wait for python side to process it
 		stream.Close();
 		server.Stop();
+	}
+	
+	void OnDestroy()
+	{
+		closeHandsTcp(ref server, ref firstStream);
 	}
 }
