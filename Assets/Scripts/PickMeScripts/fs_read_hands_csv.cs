@@ -78,13 +78,13 @@ public class fs_read_hands_csv : MonoBehaviour
             }
             Thread.Sleep(delay_ms);
         }
-
         void posUpdate(float scalex = 24, float scaley = 15) // perhaps make scale dependent on z-distance of wrist node? 
                                         // i.e. increase scale for higher distance to maintain sensitivity.
         //void posUpdate(float scalex = 200, float scaley = 200)
-        {
-            float xOffset = -50;  //-232; //-5;
-            float yOffset = -25;  //-277; //-277;  //-6;
+        //void posUpdate(float scalex = 100, float scaley = 50)
+		{
+            float xOffset = -50; //-50;  //-232; //-5;
+            float yOffset = -25;//-25;  //-277; //-277;  //-6;
                                  //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset); // actually corresponds to z in unity. Change according to final camera orientation needs scaling and tuning for actual game use.   
             Cursor.position = new Vector3(-scalex * x - xOffset, -scaley * y - yOffset, 0);
             //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset);
