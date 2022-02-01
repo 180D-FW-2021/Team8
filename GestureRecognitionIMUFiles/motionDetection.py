@@ -77,12 +77,12 @@ print(accel_coeffs[0])
 
 # Thresholds
 # Vertical
-z_th_up = 4
-z_th_down = -4
+z_th_up = 3.5
+z_th_down = -3.7
 
 # Side to side
-x_th_right = 3
-x_th_left = -3
+x_th_right = 2.8
+x_th_left = -2.8
 
 # Front back (likely not used)
 y_th_front = 4

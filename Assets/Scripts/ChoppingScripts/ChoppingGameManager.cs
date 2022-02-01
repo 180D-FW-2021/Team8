@@ -172,10 +172,16 @@ public class ChoppingGameManager : MonoBehaviour
                     if (line.Contains("1")) {
                         FirstMotion.SetActive(false);
                     } else if (line.Contains("2")) {
+                        FirstMotion.SetActive(false);
                         SecondMotion.SetActive(false);
                     } else if (line.Contains("3")) {
+                        FirstMotion.SetActive(false);
+                        SecondMotion.SetActive(false);
                         ThirdMotion.SetActive(false);
                     } else if (line.Contains("4")) {
+                        FirstMotion.SetActive(false);
+                        SecondMotion.SetActive(false);
+                        ThirdMotion.SetActive(false);
                         FourthMotion.SetActive(false);
                         gameState = StateType.WIN;
                     }
