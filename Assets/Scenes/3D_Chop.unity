@@ -669,6 +669,11 @@ MonoBehaviour:
   SecondMotion: {fileID: 0}
   ThirdMotion: {fileID: 0}
   FourthMotion: {fileID: 0}
+  FullCake: {fileID: 0}
+  cakeSlice1: {fileID: 0}
+  cakeSlice2: {fileID: 0}
+  cakeSlice3: {fileID: 0}
+  cakeSlice4: {fileID: 0}
 --- !u!4 &552163697
 Transform:
   m_ObjectHideFlags: 0
@@ -805,8 +810,9 @@ GameObject:
   - component: {fileID: 788832042}
   - component: {fileID: 788832041}
   - component: {fileID: 788832040}
+  - component: {fileID: 788832043}
   m_Layer: 0
-  m_Name: EventSystem
+  m_Name: CakeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,6 +866,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &788832043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788832039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9a86b435e15e34da39aead85d8d01a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WinScreen: {fileID: 0}
+  LoseScreen: {fileID: 0}
+  Objective: {fileID: 0}
+  MainMenuButton: {fileID: 0}
+  timeText: {fileID: 0}
+  FirstMotion: {fileID: 1897301598}
+  SecondMotion: {fileID: 2008213683}
+  ThirdMotion: {fileID: 909143888}
+  FourthMotion: {fileID: 990375038}
+  FullCake: {fileID: 923088712}
+  cakeSlice1: {fileID: 187198931}
+  cakeSlice2: {fileID: 638061152}
+  cakeSlice3: {fileID: 1929125390}
+  cakeSlice4: {fileID: 1228823182}
 --- !u!1 &909143888
 GameObject:
   m_ObjectHideFlags: 0
