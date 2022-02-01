@@ -185,8 +185,13 @@ while True:
 			move = "L"
 			time.sleep(cooldown)
 
+		if move == pure_square[shape_stage]:
+			print("Square motion found")
+			shape_stage = shape_stage + 1
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
+
 		# Vertical classification (invert up and down)
-		elif cal_z > z_th_up:
+		if cal_z > z_th_up:
 			print("D")
 			move = "D"
 			time.sleep(cooldown)
@@ -194,16 +199,6 @@ while True:
 			print("U")
 			move = "U"
 			time.sleep(cooldown)
-
-		# Front back classification
-		# elif ACCy > y_th_front:
-			# print("Forward!")
-			# movements.append("F")
-			# time.sleep(cooldown)
-		# elif ACCy < y_th_back:
-			# print("Back!")
-			# movements.append("B")
-			# time.sleep(cooldown)
 
 		if move == pure_square[shape_stage]:
 			print("Square motion found")
