@@ -62,11 +62,7 @@ namespace GoogleCloudStreamingSpeechToText {
         private const float MicInitializationTimeout = 1;
         private const int StreamingLimit = 290000; // almost 5 minutes
 
-<<<<<<< Updated upstream
         public string transcript;
-
-=======
->>>>>>> Stashed changes
         public void StartListening() {
             if (!_initialized) {
                 return;
@@ -244,11 +240,7 @@ namespace GoogleCloudStreamingSpeechToText {
 
                 _resultEndTime = (int)((result.ResultEndTime.Seconds * 1000) + (result.ResultEndTime.Nanos / 1000000));
 
-<<<<<<< Updated upstream
                 transcript = result.Alternatives[0].Transcript.Trim();
-=======
-                string transcript = result.Alternatives[0].Transcript.Trim();
->>>>>>> Stashed changes
 
                 if (result.IsFinal) {
                     if (enableDebugLogging) {
