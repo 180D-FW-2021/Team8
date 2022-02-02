@@ -910,7 +910,7 @@ MonoBehaviour:
   SecondMotion: {fileID: 2008213683}
   ThirdMotion: {fileID: 909143888}
   FourthMotion: {fileID: 990375038}
-  FullCake: {fileID: 187198931}
+  FullCake: {fileID: 923088712}
   cakeSlice1: {fileID: 187198931}
   cakeSlice2: {fileID: 638061152}
   cakeSlice3: {fileID: 1929125390}
