@@ -35,6 +35,17 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject ThirdMotion;
     public GameObject FourthMotion;
 
+    public GameObject FullCake;
+    public GameObject cakeSlice1;
+    public GameObject cakeSlice2;
+    public GameObject cakeSlice3;
+    public GameObject cakeSlice4;
+
+    Rigidbody c1_Rigidbody;
+    Rigidbody c2_Rigidbody;
+    Rigidbody c3_Rigidbody;
+    Rigidbody c4_Rigidbody;
+
     public void Pause(bool paused)
     {
         if(paused) {
@@ -60,6 +71,11 @@ public class ChoppingGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        cakeSlice1.SetActive(false);
+        cakeSlice2.SetActive(false);
+        cakeSlice3.SetActive(false);
+        cakeSlice4.SetActive(false);
+
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
 
@@ -108,6 +124,28 @@ public class ChoppingGameManager : MonoBehaviour
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 string[] lines = {"N/A", "False", "True", "0"};
+
+                //CAKE ANIMATION AFTER CHOPPING IS COMPLETED
+                FullCake.SetActive(false);
+                cakeSlice1.SetActive(true);
+                cakeSlice2.SetActive(true);
+                cakeSlice3.SetActive(true);
+                cakeSlice4.SetActive(true);
+
+                c1_Rigidbody = cakeSlice1.GetComponent<Rigidbody()>;
+                c2_Rigidbody = cakeSlice2.GetComponent<Rigidbody()>;
+                c3_Rigidbody = cakeSlice3.GetComponent<Rigidbody()>;
+                c4_Rigidbody = cakeSlice4.GetComponent<Rigidbody()>;
+
+                c1_Rigidbody.constraints = RigidbodyConstraints.None;
+                c2_Rigidbody.constraints = RigidbodyConstraints.None;
+                c3_Rigidbody.constraints = RigidbodyConstraints.None;
+                c4_Rigidbody.constraints = RigidbodyConstraints.None;
+
+                cakeSlice2.SetActive(true);
+                cakeSlice3.SetActive(true);
+                cakeSlice4.SetActive(true);
+
 
                 try {
                     using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
