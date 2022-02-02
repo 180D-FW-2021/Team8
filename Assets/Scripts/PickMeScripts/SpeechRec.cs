@@ -151,7 +151,7 @@ namespace Speecher
                 {
                     include.SetActive(true);
                     noInclude.SetActive(false);
-                    counter.IncreaseScore(-500);
+                    counter.IncreaseScore(1000);
                     appleFound = true;
                     counter.UpdateScoreDisplay();
                     Debug.Log(counter.score);
@@ -163,7 +163,7 @@ namespace Speecher
                 {
                     include.SetActive(false);
                     noInclude.SetActive(true);
-                    counter.IncreaseScore(1000);
+                    counter.IncreaseScore(-500);
                     counter.UpdateScoreDisplay();
                     appleFound = true;
                     Debug.Log(counter.score);
@@ -213,7 +213,7 @@ namespace Speecher
                 {
                     include.SetActive(true);
                     noInclude.SetActive(false);
-                    counter.IncreaseScore(-500);
+                    counter.IncreaseScore(1000);
                     bananaFound = true;
                     counter.UpdateScoreDisplay();
                     Debug.Log(counter.score);
@@ -225,7 +225,7 @@ namespace Speecher
                 {
                     include.SetActive(false);
                     noInclude.SetActive(true);
-                    counter.IncreaseScore(1000);
+                    counter.IncreaseScore(-500);
                     counter.UpdateScoreDisplay();
                     bananaFound = true;
                     Debug.Log(counter.score);
@@ -275,7 +275,7 @@ namespace Speecher
                 {
                     include.SetActive(true);
                     noInclude.SetActive(false);
-                    counter.IncreaseScore(-500);
+                    counter.IncreaseScore(1000);
                     watermelonFound = true;
                     counter.UpdateScoreDisplay();
                     Debug.Log(counter.score);
@@ -287,7 +287,7 @@ namespace Speecher
                 {
                     include.SetActive(false);
                     noInclude.SetActive(true);
-                    counter.IncreaseScore(1000);
+                    counter.IncreaseScore(-500);
                     counter.UpdateScoreDisplay();
                     watermelonFound = true;
                     Debug.Log(counter.score);
