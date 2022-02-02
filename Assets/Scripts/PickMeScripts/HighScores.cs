@@ -15,13 +15,13 @@ public class HighScores : MonoBehaviour
     void Start()
     {
         // Adds some test data
-        /*AddNewScore("John", 4500);
-        AddNewScore("Max", 5520);
+        AddNewScore("Megalodon", 10900);
+        AddNewScore("Doug", 4900);
         AddNewScore("Dave", 380);
         AddNewScore("Steve", 6654);
-        AddNewScore("Mike", 11021);
+        AddNewScore("Mike", 9021);
         AddNewScore("Teddy", 3252);
-        */
+        
         UpdateDisplay();
     }
 
