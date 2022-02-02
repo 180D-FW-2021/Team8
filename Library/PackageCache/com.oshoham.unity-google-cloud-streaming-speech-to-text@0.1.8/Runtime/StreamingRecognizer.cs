@@ -56,13 +56,13 @@ namespace GoogleCloudStreamingSpeechToText {
         private int _isFinalEndTime = 0;
         private int _finalRequestEndTime = 0;
         private double _bridgingOffset = 0;
+        public string transcript;
 
         private const string CredentialFileName = "gcp_credentials.json";
         private const double NormalizedFloatTo16BitConversionFactor = 0x7FFF + 0.4999999999999999;
         private const float MicInitializationTimeout = 1;
         private const int StreamingLimit = 290000; // almost 5 minutes
 
-        public string transcript;
         public void StartListening() {
             if (!_initialized) {
                 return;

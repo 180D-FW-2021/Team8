@@ -132,10 +132,10 @@ public class ChoppingGameManager : MonoBehaviour
                 cakeSlice3.SetActive(true);
                 cakeSlice4.SetActive(true);
 
-                c1_Rigidbody = cakeSlice1.GetComponent<Rigidbody()>;
-                c2_Rigidbody = cakeSlice2.GetComponent<Rigidbody()>;
-                c3_Rigidbody = cakeSlice3.GetComponent<Rigidbody()>;
-                c4_Rigidbody = cakeSlice4.GetComponent<Rigidbody()>;
+                c1_Rigidbody = cakeSlice1.GetComponent<Rigidbody>();
+                c2_Rigidbody = cakeSlice2.GetComponent<Rigidbody>();
+                c3_Rigidbody = cakeSlice3.GetComponent<Rigidbody>();
+                c4_Rigidbody = cakeSlice4.GetComponent<Rigidbody>();
 
                 c1_Rigidbody.constraints = RigidbodyConstraints.None;
                 c2_Rigidbody.constraints = RigidbodyConstraints.None;
