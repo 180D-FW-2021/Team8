@@ -95,7 +95,18 @@ namespace Speecher
 				remainingTime = 0;
 			}
 
-            if(numFoods == 9)
+            if(transcriptRec == "yes")
+            {
+                include.SetActive(true);
+                noInclude.SetActive(false);
+            }
+            if(transcriptRec == "no")
+            {
+                include.SetActive(false);
+                noInclude.SetActive(true);
+            }
+
+            if (numFoods == 9)
             {
                 // Send to high score
                 // Make final score big on the screen or something
