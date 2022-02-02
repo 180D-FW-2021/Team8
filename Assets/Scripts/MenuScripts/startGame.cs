@@ -42,7 +42,7 @@ public class startGame : MonoBehaviour
 
     public void ingredientStart(){
         Debug.Log("Ingredient minigame loading");
-        SceneManager.LoadScene("SpeechTest", LoadSceneMode.Single);
+        SceneManager.LoadScene("3D_Shelf", LoadSceneMode.Single);
         if(IngredientPanel != null){
             IngredientPanel.SetActive(false);
         }
@@ -53,7 +53,7 @@ public class startGame : MonoBehaviour
 
     public void chopStart(){
         Debug.Log("Chopping minigame loading");        
-        SceneManager.LoadScene("ChoppingMinigame", LoadSceneMode.Single);
+        SceneManager.LoadScene("3D_Chop", LoadSceneMode.Single);
         if(IngredientPanel != null){
             IngredientPanel.SetActive(false);
         }
