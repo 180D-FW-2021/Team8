@@ -89,7 +89,7 @@ y_th_front = 4
 y_th_back = -4
 
 # Shape classification
-pure_square = ["R","D","L","U"]
+pure_square = ["L","D","R","U"]
 
 motion_detected = False
 cooldown = 0.5
