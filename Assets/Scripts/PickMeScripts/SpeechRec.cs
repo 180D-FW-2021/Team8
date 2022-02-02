@@ -99,7 +99,9 @@ namespace Speecher
             {
                 // Send to high score
                 // Make final score big on the screen or something
-				counter.IncreaseScore(remainingTime*100);
+				int timeBonus = (int)Math.Round(remainingTime);
+				timeBonus = timeBonus*100;
+				counter.IncreaseScore(timeBonus);
 
                 scoreboard.AddNewScore("Player1", counter.score);
 
