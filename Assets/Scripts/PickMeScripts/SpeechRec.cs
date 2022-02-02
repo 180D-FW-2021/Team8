@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+using System.Linq;
+using System;
 //using GoogleCloudStreamingSpeechToText;
 using GoogleCloudStreamingSpeechToText;
 using CursorObject;
@@ -9,6 +13,9 @@ namespace Speecher
 {
     public class SpeechRec : MonoBehaviour
     {
+		private int timeToComplete = 90;
+		private float remainingTime = 0;
+		
         string transcriptRec;
         public bool positioner = false;
 
@@ -45,13 +52,23 @@ namespace Speecher
         bool watermelonFound = false;
         bool grapeFound = false;
         bool mushroomFound = false;
+		public Text timeText;
 
         int numFoods = 0;
+		
+		void DisplayTime(float timeToDisplay)
+		{
+			float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+			float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+			timeText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+		}
 
         // Start is called before the first frame update
         void Start()
         {
             Debug.Log("Test");
+			remainingTime = timeToComplete;
             //counter.IncreaseScore(5000);
             //counter.UpdateScoreDisplay();
             //counter.IncreaseScore(5000);
@@ -62,21 +79,34 @@ namespace Speecher
         // Update is called once per frame
         void Update()
         {
+			timeText.enabled=true;
             Transform cursy = handReader.Cursor;
 
             transcriptRec = streamRec.transcript;
             Debug.Log(transcriptRec);
+			
+			if(remainingTime > 0) 
+			{
+				remainingTime -= Time.deltaTime;
+				DisplayTime(remainingTime);
+			}
+			else if(remainingTime <=0)
+			{
+				remainingTime = 0;
+			}
 
             if(numFoods == 9)
             {
                 // Send to high score
                 // Make final score big on the screen or something
+				counter.IncreaseScore(remainingTime*100);
 
                 scoreboard.AddNewScore("Player1", counter.score);
 
                 Debug.Log("Added all food");
                 //entry1.SetActive(true);
                 leaderboard.SetActive(true);
+				timeText.enabled=false;
 
             }
 
