@@ -48,8 +48,9 @@ def on_message(client, userdata, message):
 		data[3] = str(int(message.payload))
 		with open(file_path, "w") as file:
 			file.writelines(data)
+	mqtt.reinitialise("computer", True, None, mqtt.MQTTv31)
 
-client = mqtt.Client("computer", False, None, mqtt.MQTTv31)
+client = mqtt.Client("computer", True, None, mqtt.MQTTv31)
 #client = mqtt.Client()
 
 client.on_connect = on_connect
@@ -89,6 +90,7 @@ while True:
 
 	except (OSError, PermissionError):
 		print("Could not open")
+
 
 	time.sleep(loop_delay)
 

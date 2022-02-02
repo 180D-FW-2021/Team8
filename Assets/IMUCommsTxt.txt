@@ -1,6 +1,5 @@
 N/A
 False
 True
-0
-
-4
+1
+2
