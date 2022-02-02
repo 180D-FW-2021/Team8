@@ -46,6 +46,11 @@ public class ChoppingGameManager : MonoBehaviour
     Rigidbody c3_Rigidbody;
     Rigidbody c4_Rigidbody;
 
+    public GameObject darkFirst;
+    public GameObject darkSecond;
+    public GameObject darkThird;
+    public GameObject darkFourth;
+
     public void Pause(bool paused)
     {
         if(paused) {
@@ -75,6 +80,11 @@ public class ChoppingGameManager : MonoBehaviour
         cakeSlice2.SetActive(false);
         cakeSlice3.SetActive(false);
         cakeSlice4.SetActive(false);
+
+        darkFirst.SetActive(true);
+        darkSecond.SetActive(false);;
+        darkThird.SetActive(false);;
+        darkFourth.SetActive(false);;
 
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
@@ -209,18 +219,31 @@ public class ChoppingGameManager : MonoBehaviour
                     line = sr.ReadLine();
                     if (line.Contains("1")) {
                         FirstMotion.SetActive(false);
+                        darkFirst.SetActive(false);
+                        darkSecond.SetActive(true);
                     } else if (line.Contains("2")) {
                         FirstMotion.SetActive(false);
                         SecondMotion.SetActive(false);
+                        darkFirst.SetActive(false);
+                        darkSecond.SetActive(false);
+                        darkThird.SetActive(true);
                     } else if (line.Contains("3")) {
                         FirstMotion.SetActive(false);
                         SecondMotion.SetActive(false);
                         ThirdMotion.SetActive(false);
+                        darkFirst.SetActive(false);
+                        darkSecond.SetActive(false);
+                        darkThird.SetActive(false);
+                        darkFourth.SetActive(true);
                     } else if (line.Contains("4")) {
                         FirstMotion.SetActive(false);
                         SecondMotion.SetActive(false);
                         ThirdMotion.SetActive(false);
                         FourthMotion.SetActive(false);
+                        darkFirst.SetActive(false);
+                        darkSecond.SetActive(false);
+                        darkThird.SetActive(false);
+                        darkFourth.SetActive(false);
                         gameState = StateType.WIN;
                     }
                 }
