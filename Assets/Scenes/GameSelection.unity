@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -655,13 +655,13 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 6
     m_MaxSize: 64
-    m_Alignment: 0
+    m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ingredient
+  m_Text: Pick Me!
 --- !u!222 &483438184
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -739,13 +739,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "This minigame requires a working camera and microphone. \n\nNavigate the
-    game using your hand. The cursor will follow your hand movements which are captured
-    with your camera. \n\nWhen the game starts you will be prompted to say 'select'
-    or 'exclude.' After chosing one, either select the ingredients you want to include
-    in the recipe by hovering over them with your cursor (by moving your hand) or
-    chose the ingedients that should be excluded from the recipe. Once finished,
-    hover the cursor over 'finished.'"
+  m_Text: "It's time to sort out your ingredients! Classify them depending on whether
+    or not they are included in the recipe. This minigame requires a working camera
+    and microphone. \n\nNavigate the game using your hand. The cursor will follow
+    your hand movements which are captured with your camera. \n\nWhen the game starts,
+    it will listen for your voice commands. Say \"yes\" or \"no\" to indciate whether
+    you are selecting food included on the recipe or not. Select the ingredients
+    that meet the category by hovering over them with your cursor (by moving your
+    hand). The game is completed once all food items have been classified. Happy
+    picking!"
 --- !u!222 &499539045
 CanvasRenderer:
   m_ObjectHideFlags: 0
