@@ -7,12 +7,14 @@ public class PyVenvStart : MonoBehaviour
 	
 	GameObject startObj;
 	cmdStarter startScript;
+    public string env_name = "capstoneenv";
+    public string script_path = "Assets/Scripts/ChoppingScripts/IMUComms.py";
     // Start is called before the first frame update
     void Start()
     {
 		// testing
 		
-		pyStart("180DP", "PyOut/wrapperTest.py");
+		pyStart(env_name, script_path, autoClose : false);
     }
 
     // Update is called once per frame

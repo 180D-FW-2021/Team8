@@ -23,8 +23,8 @@ namespace Speecher
         public GameObject speechObj;
         public StreamingRecognizer streamRec;
         //public fs_read_hands_csv handReader;
-        public fs_read_hands_csv handReader;
-        //public read_hands_tcp handReader;
+        //public fs_read_hands_csv handReader;
+        public read_hands_tcp handReader;
         public GameObject bread;
         public GameObject carrot;
         public GameObject apple;

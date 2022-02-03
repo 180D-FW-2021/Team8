@@ -947,7 +947,7 @@ MonoBehaviour:
   cursor: {fileID: 666218580}
   speechObj: {fileID: 1850510737}
   streamRec: {fileID: 1850510738}
-  handReader: {fileID: 666218581}
+  handReader: {fileID: 666218582}
   bread: {fileID: 1072999278}
   carrot: {fileID: 1519746594}
   apple: {fileID: 1126343594}
@@ -1152,6 +1152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de533b6dd8676b48b54aec69b866230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  env_name: capstoneenv
+  script_path: Assets/Scripts/ChoppingScripts/IMUComms.py
 --- !u!114 &654528022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3795,7 +3797,7 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: Built-in Microphone
+  _microphoneName: Microphone (Realtek(R) Audio)
   transcript: 
 --- !u!82 &1850510739
 AudioSource:
