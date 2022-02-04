@@ -221,7 +221,7 @@ while x < 1200:
 	if shape_stage > 3:
 		shape_stage = 0
 
-a = np.asarray([x_cal, y_cal, z_cal])
+a = np.asarray([x_vals, y_vals, z_vals])
 np.savetxt("calibrated_still.csv", a, delimiter=",")
 
 client.loop_stop()
