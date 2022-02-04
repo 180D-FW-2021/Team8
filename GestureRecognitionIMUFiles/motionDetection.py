@@ -160,9 +160,10 @@ print("Connected")
 
 
 # Cycle
-# one minute: 1200
-while True:
-
+# one minute: 1200]
+x = 0
+while x < 1200:
+	x = x + 1
 	if is_calibrating:
 		accel_coeffs = accel_cal()
 	
