@@ -166,7 +166,8 @@ while True:
 	if is_calibrating:
 		accel_coeffs = accel_cal()
 	
-	if game_running:
+	#if game_running:
+	if True:
 		#Read the accelerometer,gyroscope and magnetometer values
 		ACCx = IMU.readACCx()
 		ACCy = IMU.readACCy()
