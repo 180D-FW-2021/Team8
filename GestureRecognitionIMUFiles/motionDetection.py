@@ -103,6 +103,11 @@ shape_stage = 0
 game_running = False		# False
 is_calibrating = False
 
+
+x_vals = []
+y_vals = []
+z_vals = []
+
 # MQTT
 
 # 0. define callbacks - functions that run when events happen
@@ -172,6 +177,10 @@ while True:
 		cal_y = accel_fit(ACCy, accel_coeffs[1][0], accel_coeffs[1][1])
 		cal_z = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
 
+		x_vals.append(cal_x)
+		y_vals.append(cal_y)
+		z_vals.append(cal_z)
+
 		# print calibrated values (for debug reasons)
 		# print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
 
@@ -209,6 +218,9 @@ while True:
 		time.sleep(0.05)
 	if shape_stage > 3:
 		shape_stage = 0
+
+a = np.asarray([x_cal, y_cal, z_cal])
+np.savetxt("calibrated_still.csv", a, delimiter=",")
 
 client.loop_stop()
 client.disconnect()
