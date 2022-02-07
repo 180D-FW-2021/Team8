@@ -34,6 +34,7 @@ public class MemoryRead : MonoBehaviour
     bool icecreamPicked = false;
     bool yogurtPicked = false;
     bool timeUp = false;
+    string transcriptRecOld = "";
 
     void DisplayTime(float timeToDisplay)
     {
@@ -55,7 +56,11 @@ public class MemoryRead : MonoBehaviour
         timeText.enabled = true;
 
         transcriptRec = streamRec.transcript;
-        Debug.Log(transcriptRec);
+        if (transcriptRec != "" && transcriptRec != transcriptRecOld)
+        {
+            Debug.Log(transcriptRec);
+            transcriptRecOld = transcriptRec;
+        }
 
         if (remainingTime > 0)
         {
@@ -67,14 +72,50 @@ public class MemoryRead : MonoBehaviour
             remainingTime = 0;
         }
 
-        if (remainingTime == timeToComplete - 5)
+        if (remainingTime <= timeToComplete - 5)
         {
             smoothieRecipe.SetActive(false);
-            apple.SetActive(false);
-            banana.SetActive(false);
-            yogurt.SetActive(false);
-            icecream.SetActive(false);
+            if(applePicked == false)
+                apple.SetActive(false);
+            if(bananaPicked == false)
+                banana.SetActive(false);
+            if(yogurtPicked == false)
+                yogurt.SetActive(false);
+            if(icecreamPicked == false)
+                icecream.SetActive(false);
+            if ((transcriptRec.Contains("Apple") || transcriptRec.Contains("apple")) && applePicked == false)
+            {
+                counter.IncreaseScore(500);
+                // Debug.Log(transcriptRec);
+                applePicked = true;
+                apple.SetActive(true);
+            }
+
+            if ((transcriptRec.Contains("Banana") || transcriptRec.Contains("banana")) && bananaPicked == false)
+            {
+                counter.IncreaseScore(500);
+                // Debug.Log(transcriptRec);
+                bananaPicked = true;
+                banana.SetActive(true);
+            }
+
+            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && yogurtPicked == false)
+            {
+                counter.IncreaseScore(500);
+                // Debug.Log(transcriptRec);
+                yogurtPicked = true;
+                yogurt.SetActive(true);
+            }
+
+            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && icecreamPicked == false)
+            {
+                counter.IncreaseScore(500);
+                // Debug.Log(transcriptRec);
+                icecreamPicked = true;
+                icecream.SetActive(true);
+            }
         }
+        /*
         if (remainingTime < timeToComplete - 5)
         {
             // if (remainingTime < timeToComplete - 20)
@@ -111,6 +152,7 @@ public class MemoryRead : MonoBehaviour
                 icecream.SetActive(true);
             }
         }
+        */
             //}
         if (remainingTime <= 0)
         {
