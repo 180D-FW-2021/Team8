@@ -107,7 +107,7 @@ public class PickMe : MonoBehaviour
             noInclude.SetActive(true);
         }*/
 
-        if (numFoods == 9)
+        if (numFoods == 3)
         {
             // Send to high score
             // Make final score big on the screen or something
