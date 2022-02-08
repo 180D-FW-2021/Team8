@@ -147,6 +147,13 @@ public class MemoryRead : MonoBehaviour
                 numPicked++;
             }
         }
+
+        if (numPicked == 4)
+        {
+            gameOver.SetActive(true);
+            winner.SetActive(true);
+        }
+
         /*
         if (remainingTime < timeToComplete - 5)
         {
@@ -185,7 +192,7 @@ public class MemoryRead : MonoBehaviour
             }
         }
         */
-            //}
+        //}
         if (remainingTime <= 0 && gameStarted == true)
         {
             if (applePicked == false) // transcriptRec != ""
