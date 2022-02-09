@@ -62,7 +62,7 @@ public class cmdStarter: MonoBehaviour
 			}
 			else
 			{
-				process.StartInfo.FileName = "/System/Applications/Utilities/Terminal.app";
+				process.StartInfo.FileName = "/System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal";
 			}
 			process.StartInfo.Arguments += commands;
 			if(autoClose)
