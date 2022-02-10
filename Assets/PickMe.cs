@@ -20,9 +20,9 @@ public class PickMe : MonoBehaviour
     public GameObject cursor;
     //public GameObject speechObj;
     //public StreamingRecognizer streamRec;
+    public fs_read_hands_csv handReader;
     //public fs_read_hands_csv handReader;
-    //public fs_read_hands_csv handReader;
-    public read_hands_tcp handReader;
+    //public read_hands_tcp handReader;
     public GameObject bread;
     public GameObject carrot;
     public GameObject apple;
@@ -127,18 +127,21 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < bread.transform.position.x + 1) && (cursy.position.x > bread.transform.position.x - 1))
                && ((cursy.position.y < bread.transform.position.y + 1) && (cursy.position.y > bread.transform.position.y - 1)))
         {
-            Debug.Log("Touching bread");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && breadFound == false)
-            //{
-            counter.IncreaseScore(-500);
-            breadFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            bread.SetActive(false);
-            Debug.Log("Added bread");
-            numFoods++;
-            //}
+			if(breadFound == false)
+			{
+				Debug.Log("Touching bread");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && breadFound == false)
+				//{
+				counter.IncreaseScore(-500);
+				breadFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				bread.SetActive(false);
+				Debug.Log("Added bread");
+				numFoods++;
+			}
+			//}
             /*
             else if (transcriptRec.Contains("no") && breadFound == false)
             {
@@ -155,17 +158,21 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < carrot.transform.position.x + 1) && (cursy.position.x > carrot.transform.position.x - 1))
                && ((cursy.position.y < carrot.transform.position.y + 1) && (cursy.position.y > carrot.transform.position.y - 1)))
         {
-            Debug.Log("Touching carrot");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && carrotFound == false)
-            //{
-            counter.IncreaseScore(-500);
-            carrotFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            carrot.SetActive(false);
-            Debug.Log("Added carrot");
-            numFoods++;
+			if(carrotFound == false)
+			{
+				Debug.Log("Touching carrot");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && carrotFound == false)
+				//{
+				counter.IncreaseScore(-500);
+				carrotFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				carrot.SetActive(false);
+				Debug.Log("Added carrot");
+				numFoods++;
+			}
+            
             //}
             /*else if (transcriptRec.Contains("no") && carrotFound == false)
             {
@@ -182,17 +189,21 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < apple.transform.position.x + 1) && (cursy.position.x > apple.transform.position.x - 1))
                && ((cursy.position.y < apple.transform.position.y + 1) && (cursy.position.y > apple.transform.position.y - 1)))
         {
-            Debug.Log("Touching apple");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && appleFound == false)
-            //{
-            counter.IncreaseScore(1000);
-            appleFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            apple.SetActive(false);
-            Debug.Log("Added apple");
-            numFoods++;
+			if(appleFound == false)
+			{
+				Debug.Log("Touching apple");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && appleFound == false)
+				//{
+				counter.IncreaseScore(1000);
+				appleFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				apple.SetActive(false);
+				Debug.Log("Added apple");
+				numFoods++;
+			}
+            
             //}
             /*else if (transcriptRec.Contains("no") && appleFound == false)
             {
@@ -209,18 +220,22 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < lemon.transform.position.x + 1) && (cursy.position.x > lemon.transform.position.x - 1))
                && ((cursy.position.y < lemon.transform.position.y + 1) && (cursy.position.y > lemon.transform.position.y - 1)))
         {
-            Debug.Log("Touching lemon");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && lemonFound == false)
-            //{
-            counter.IncreaseScore(-500);
-            lemonFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            lemon.SetActive(false);
-            Debug.Log("Added lemon");
-            numFoods++;
-            //}
+			if(lemonFound == false)
+			{
+				Debug.Log("Touching lemon");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && lemonFound == false)
+				//{
+				counter.IncreaseScore(-500);
+				lemonFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				lemon.SetActive(false);
+				Debug.Log("Added lemon");
+				numFoods++;
+			}
+            
+            //
             /*else if (transcriptRec.Contains("no") && lemonFound == false)
             {
                 counter.IncreaseScore(1000);
@@ -236,17 +251,21 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < banana.transform.position.x + 1) && (cursy.position.x > banana.transform.position.x - 1))
                && ((cursy.position.y < banana.transform.position.y + 1) && (cursy.position.y > banana.transform.position.y - 1)))
         {
-            Debug.Log("Touching banana");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && bananaFound == false)
-            //{
-            counter.IncreaseScore(1000);
-            bananaFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            banana.SetActive(false);
-            Debug.Log("Added banana");
-            numFoods++;
+			if(bananaFound == false)
+			{
+				Debug.Log("Touching banana");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && bananaFound == false)
+				//{
+				counter.IncreaseScore(1000);
+				bananaFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				banana.SetActive(false);
+				Debug.Log("Added banana");
+				numFoods++;
+			}
+            
             //}
             /*else if (transcriptRec.Contains("no") && bananaFound == false)
             {
@@ -263,18 +282,21 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < tomato.transform.position.x + 1) && (cursy.position.x > tomato.transform.position.x - 1))
                && ((cursy.position.y < tomato.transform.position.y + 1) && (cursy.position.y > tomato.transform.position.y - 1)))
         {
-            Debug.Log("Touching tomato");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && tomatoFound == false)
-            //{
-            counter.IncreaseScore(-500);
-            tomatoFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            tomato.SetActive(false);
-            Debug.Log("Added tomato");
-            numFoods++;
-            //}
+			if(tomatoFound == false)
+			{
+				Debug.Log("Touching tomato");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && tomatoFound == false)
+				//{
+				counter.IncreaseScore(-500);
+				tomatoFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				tomato.SetActive(false);
+				Debug.Log("Added tomato");
+				numFoods++;
+			}
+			//}
             /*else if (transcriptRec.Contains("no") && tomatoFound == false)
             {
                 counter.IncreaseScore(1000);
@@ -290,17 +312,21 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < watermelon.transform.position.x + 1) && (cursy.position.x > watermelon.transform.position.x - 1))
                && ((cursy.position.y < watermelon.transform.position.y + 1) && (cursy.position.y > watermelon.transform.position.y - 1)))
         {
-            Debug.Log("Touching watermelon");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && watermelonFound == false)
-            //{
-            counter.IncreaseScore(1000);
-            watermelonFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            watermelon.SetActive(false);
-            Debug.Log("Added watermelon");
-            numFoods++;
+			if(watermelonFound == false)
+			{
+				Debug.Log("Touching watermelon");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && watermelonFound == false)
+				//{
+				counter.IncreaseScore(1000);
+				watermelonFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				watermelon.SetActive(false);
+				Debug.Log("Added watermelon");
+				numFoods++;
+			}
+            
             //}
             /*else if (transcriptRec.Contains("no") && watermelonFound == false)
             {
@@ -317,6 +343,7 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < grape.transform.position.x + 1) && (cursy.position.x > grape.transform.position.x - 1))
                && ((cursy.position.y < grape.transform.position.y + 1) && (cursy.position.y > grape.transform.position.y - 1)))
         {
+			if(grapeFound == false) {
             Debug.Log("Touching grape");
             include.SetActive(true);
             //if (transcriptRec.Contains("yes") && grapeFound == false)
@@ -327,7 +354,7 @@ public class PickMe : MonoBehaviour
             Debug.Log(counter.score);
             grape.SetActive(false);
             Debug.Log("Added grape");
-            numFoods++;
+            numFoods++;}
             //}
             /*else if (transcriptRec.Contains("no") && grapeFound == false)
             {
@@ -344,17 +371,20 @@ public class PickMe : MonoBehaviour
         if (((cursy.position.x < mushroom.transform.position.x + 1) && (cursy.position.x > mushroom.transform.position.x - 1))
                && ((cursy.position.y < mushroom.transform.position.y + 1) && (cursy.position.y > mushroom.transform.position.y - 1)))
         {
-            Debug.Log("Touching mushroom");
-            include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && mushroomFound == false)
-            //{
-            counter.IncreaseScore(-500);
-            mushroomFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            mushroom.SetActive(false);
-            Debug.Log("Added mushroom");
-            numFoods++;
+			if(mushroomFound == false)
+			{
+				Debug.Log("Touching mushroom");
+				include.SetActive(true);
+				//if (transcriptRec.Contains("yes") && mushroomFound == false)
+				//{
+				counter.IncreaseScore(-500);
+				mushroomFound = true;
+				counter.UpdateScoreDisplay();
+				Debug.Log(counter.score);
+				mushroom.SetActive(false);
+				Debug.Log("Added mushroom");
+				numFoods++;
+			}
             //}
             /*else if (transcriptRec.Contains("no") && mushroomFound == false)
             {
