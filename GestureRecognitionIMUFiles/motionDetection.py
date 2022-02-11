@@ -332,37 +332,37 @@ while x < 1200:
 
 		# print calibrated values (for debug reasons)
 		# print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
-"""
+
 		# Left right classification
-		if ACCx > x_th_right:
-			print("R")
-			move = "R"
-			time.sleep(cooldown)
-		elif ACCx < x_th_left:
-			print("L")
-			move = "L"
-			time.sleep(cooldown)
+		# if ACCx > x_th_right:
+		# 	print("R")
+		# 	move = "R"
+		# 	time.sleep(cooldown)
+		# elif ACCx < x_th_left:
+		# 	print("L")
+		# 	move = "L"
+		# 	time.sleep(cooldown)
 
-		if move == pure_square[shape_stage]:
-			print("Square motion found")
-			shape_stage = shape_stage + 1
-			client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		# if move == pure_square[shape_stage]:
+		# 	print("Square motion found")
+		# 	shape_stage = shape_stage + 1
+		# 	client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
-		# Vertical classification (invert up and down)
-		if ACCz > z_th_up:
-			print("D")
-			move = "D"
-			time.sleep(cooldown)
-		elif ACCz < z_th_down:
-			print("U")
-			move = "U"
-			time.sleep(cooldown)
+		# # Vertical classification (invert up and down)
+		# if ACCz > z_th_up:
+		# 	print("D")
+		# 	move = "D"
+		# 	time.sleep(cooldown)
+		# elif ACCz < z_th_down:
+		# 	print("U")
+		# 	move = "U"
+		# 	time.sleep(cooldown)
 
-		if move == pure_square[shape_stage]:
-			print("Square motion found")
-			shape_stage = shape_stage + 1
-			client.publish('ece180d/team8/imu', shape_stage, qos=1)
-"""
+		# if move == pure_square[shape_stage]:
+		# 	print("Square motion found")
+		# 	shape_stage = shape_stage + 1
+		# 	client.publish('ece180d/team8/imu', shape_stage, qos=1)
+
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
 	if shape_stage > 3:
