@@ -108,9 +108,15 @@ z_th_down = -3.7
 x_th_right = 2.8
 x_th_left = -2.8
 
+xa_th_front = 20
+xa_th_back = -20
+
 # Front back (likely not used)
 y_th_front = 4
 y_th_back = -4
+
+ya_th_right = 20
+ya_th_left = -20
 
 #Kalman filter variables
 Q_angle = 0.02
@@ -313,55 +319,35 @@ while x < 1200:
 
 		##################### END Tilt Compensation ########################
 
-		if 1:                       #Change to '0' to stop showing the angles from the accelerometer
-			outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (AccXangle, AccYangle)
-
-		if 1:                       #Change to '0' to stop  showing the angles from the gyro
-			outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (gyroXangle,gyroYangle,gyroZangle)
-
-		if 1:                       #Change to '0' to stop  showing the angles from the complementary filter
-			outputString +="\t#  CFangleX Angle %5.2f   CFangleY Angle %5.2f  #" % (CFangleX,CFangleY)
-
-		if 1:                       #Change to '0' to stop  showing the heading
-			outputString +="\t# HEADING %5.2f  tiltCompensatedHeading %5.2f #" % (heading,tiltCompensatedHeading)
-
-		if 1:                       #Change to '0' to stop  showing the angles from the Kalman filter
-			outputString +="# kalmanX %5.2f   kalmanY %5.2f #" % (kalmanX,kalmanY)
-
-		print(outputString)
-
-		# print calibrated values (for debug reasons)
-		# print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
-
 		# Left right classification
-		# if ACCx > x_th_right:
-		# 	print("R")
-		# 	move = "R"
-		# 	time.sleep(cooldown)
-		# elif ACCx < x_th_left:
-		# 	print("L")
-		# 	move = "L"
-		# 	time.sleep(cooldown)
+		if kalmanX > xa_th_front:
+			print("D")
+			move = "D"
+			time.sleep(cooldown)
+		elif kalmanX < xa_th_back:
+			print("U")
+			move = "U"
+			time.sleep(cooldown)
 
-		# if move == pure_square[shape_stage]:
-		# 	print("Square motion found")
-		# 	shape_stage = shape_stage + 1
-		# 	client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		if move == pure_square[shape_stage]:
+			print("Square motion found")
+			shape_stage = shape_stage + 1
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
-		# # Vertical classification (invert up and down)
-		# if ACCz > z_th_up:
-		# 	print("D")
-		# 	move = "D"
-		# 	time.sleep(cooldown)
-		# elif ACCz < z_th_down:
-		# 	print("U")
-		# 	move = "U"
-		# 	time.sleep(cooldown)
+		# Vertical classification (invert up and down)
+		if kalmanY > ya_th_right:
+			print("R")
+			move = "R"
+			time.sleep(cooldown)
+		elif kalmanY < ya_th_left:
+			print("L")
+			move = "L"
+			time.sleep(cooldown)
 
-		# if move == pure_square[shape_stage]:
-		# 	print("Square motion found")
-		# 	shape_stage = shape_stage + 1
-		# 	client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		if move == pure_square[shape_stage]:
+			print("Square motion found")
+			shape_stage = shape_stage + 1
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
