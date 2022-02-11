@@ -123,6 +123,13 @@ YP_11 = 0.0
 KFangleX = 0.0
 KFangleY = 0.0
 
+magXmin =  0
+magYmin =  0
+magZmin =  0
+magXmax =  0
+magYmax =  0
+magZmax =  0
+
 # Shape classification
 pure_square = ["L","D","R","U"]
 
