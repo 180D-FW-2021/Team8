@@ -12,68 +12,86 @@ import IMU
 import datetime
 import os
 import csv
-import numpy as np
-from scipy.optimize import curve_fit
+#import numpy as np
+#from scipy.optimize import curve_fit
 
-# Accelerometer calibration functions
+def kalmanFilterY ( accAngle, gyroRate, DT):
+    y=0.0
+    S=0.0
 
-def accel_fit(x_input,m_x,b):
-	return (m_x*x_input)+b # fit equation for accel calibration
+    global KFangleY
+    global Q_angle
+    global Q_gyro
+    global y_bias
+    global YP_00
+    global YP_01
+    global YP_10
+    global YP_11
 
-def get_accel():
-	ax = IMU.readACCx()
-	ay = IMU.readACCy()
-	az = IMU.readACCz()
-	return ax,ay,az
+    KFangleY = KFangleY + DT * (gyroRate - y_bias)
 
-cal_size = 500
+    YP_00 = YP_00 + ( - DT * (YP_10 + YP_01) + Q_angle * DT )
+    YP_01 = YP_01 + ( - DT * YP_11 )
+    YP_10 = YP_10 + ( - DT * YP_11 )
+    YP_11 = YP_11 + ( + Q_gyro * DT )
 
-def accel_cal():
-	print("-"*50)
-	print("Accelerometer Calibration")
-	mpu_offsets = [[],[],[]] # offset array to be printed
-	axis_vec = ['z','y','x'] # axis labels
-	cal_directions = ["upward","downward","perpendicular to gravity"] # direction for IMU cal
-	cal_indices = [2,1,0] # axis indices
-	for qq,ax_qq in enumerate(axis_vec):
-		ax_offsets = [[],[],[]]
-		print("-"*50)
-		for direc_ii,direc in enumerate(cal_directions):
-			#input("-"*8+" Press Enter and Keep IMU Steady to Calibrate the Accelerometer with the -"+\
-			#  ax_qq+"-axis pointed "+direc)
-			[IMU.readACCx() for ii in range(0,cal_size)] # clear buffer between readings
-			mpu_array = []
-			while len(mpu_array)<cal_size:
-				try:
-					ax,ay,az = get_accel()
-					mpu_array.append([ax,ay,az]) # append to array
-				except:
-					continue
-			ax_offsets[direc_ii] = np.array(mpu_array)[:,cal_indices[qq]] # offsets for direction
+    y = accAngle - KFangleY
+    S = YP_00 + R_angle
+    K_0 = YP_00 / S
+    K_1 = YP_10 / S
 
-		# Use three calibrations (+1g, -1g, 0g) for linear fit
-		popts,_ = curve_fit(accel_fit,np.append(np.append(ax_offsets[0],
-								ax_offsets[1]),ax_offsets[2]),
-								np.append(np.append(1.0*np.ones(np.shape(ax_offsets[0])),
-								-1.0*np.ones(np.shape(ax_offsets[1]))),
-								0.0*np.ones(np.shape(ax_offsets[2]))),
-								maxfev=10000)
-		mpu_offsets[cal_indices[qq]] = popts # place slope and intercept in offset array
-	print('Accelerometer Calibrations Complete')
-	return mpu_offsets
+    KFangleY = KFangleY + ( K_0 * y )
+    y_bias = y_bias + ( K_1 * y )
 
+    YP_00 = YP_00 - ( K_0 * YP_00 )
+    YP_01 = YP_01 - ( K_0 * YP_01 )
+    YP_10 = YP_10 - ( K_1 * YP_00 )
+    YP_11 = YP_11 - ( K_1 * YP_01 )
+
+    return KFangleY
+
+def kalmanFilterX ( accAngle, gyroRate, DT):
+    x=0.0
+    S=0.0
+
+    global KFangleX
+    global Q_angle
+    global Q_gyro
+    global x_bias
+    global XP_00
+    global XP_01
+    global XP_10
+    global XP_11
 
 
+    KFangleX = KFangleX + DT * (gyroRate - x_bias)
+
+    XP_00 = XP_00 + ( - DT * (XP_10 + XP_01) + Q_angle * DT )
+    XP_01 = XP_01 + ( - DT * XP_11 )
+    XP_10 = XP_10 + ( - DT * XP_11 )
+    XP_11 = XP_11 + ( + Q_gyro * DT )
+
+    x = accAngle - KFangleX
+    S = XP_00 + R_angle
+    K_0 = XP_00 / S
+    K_1 = XP_10 / S
+
+    KFangleX = KFangleX + ( K_0 * x )
+    x_bias = x_bias + ( K_1 * x )
+
+    XP_00 = XP_00 - ( K_0 * XP_00 )
+    XP_01 = XP_01 - ( K_0 * XP_01 )
+    XP_10 = XP_10 - ( K_1 * XP_00 )
+    XP_11 = XP_11 - ( K_1 * XP_01 )
+
+    return KFangleX
+
+# Berry IMU setup
 IMU.detectIMU()	 #Detect if BerryIMU is connected.
 if(IMU.BerryIMUversion == 99):
 	print(" No BerryIMU found... exiting ")
 	sys.exit()
 IMU.initIMU()	   #Initialise the accelerometer, gyroscope and compass
-accel_coeffs = accel_cal()
-
-print(accel_coeffs)
-print(len(accel_coeffs))
-print(accel_coeffs[0])
 
 # Thresholds
 # Vertical
@@ -88,6 +106,23 @@ x_th_left = -2.8
 y_th_front = 4
 y_th_back = -4
 
+#Kalman filter variables
+Q_angle = 0.02
+Q_gyro = 0.0015
+R_angle = 0.005
+y_bias = 0.0
+x_bias = 0.0
+XP_00 = 0.0
+XP_01 = 0.0
+XP_10 = 0.0
+XP_11 = 0.0
+YP_00 = 0.0
+YP_01 = 0.0
+YP_10 = 0.0
+YP_11 = 0.0
+KFangleX = 0.0
+KFangleY = 0.0
+
 # Shape classification
 pure_square = ["L","D","R","U"]
 
@@ -100,9 +135,16 @@ t = 0
 detect_shape = "square"	 # default
 shape_stage = 0
 
-game_running = False		# False
+game_running = True		# False
 is_calibrating = False
 
+gyroXangle = 0.0
+gyroYangle = 0.0
+gyroZangle = 0.0
+CFangleX = 0.0
+CFangleY = 0.0
+kalmanX = 0.0
+kalmanY = 0.0
 
 x_vals = []
 y_vals = []
@@ -152,7 +194,6 @@ client.on_connect = on_connect
 client.on_disconnect = on_disconnect
 client.on_message = on_message
 
-#client.connect_async('mqtt.eclipseprojects.io')
 client.connect_async('test.mosquitto.org', 1883, 60)
 client.loop_start()
 
@@ -160,28 +201,120 @@ print("Connected")
 
 
 # Cycle
-# one minute: 1200]
+# one minute: 1200
 x = 0
 while x < 1200:
 	x = x + 1
-	if is_calibrating:
-		accel_coeffs = accel_cal()
 	
 	#if game_running:
-	if True:
+	if game_running:
 		#Read the accelerometer,gyroscope and magnetometer values
 		ACCx = IMU.readACCx()
 		ACCy = IMU.readACCy()
 		ACCz = IMU.readACCz()
+		GYRx = IMU.readGYRx()
+		GYRy = IMU.readGYRy()
+		GYRz = IMU.readGYRz()
+		MAGx = IMU.readMAGx()
+		MAGy = IMU.readMAGy()
+		MAGz = IMU.readMAGz()
 
-		# calibrated values
-		cal_x = accel_fit(ACCx, accel_coeffs[0][0], accel_coeffs[0][1])
-		cal_y = accel_fit(ACCy, accel_coeffs[1][0], accel_coeffs[1][1])
-		cal_z = accel_fit(ACCz, accel_coeffs[2][0], accel_coeffs[2][1])
+		#Apply compass calibration
+		MAGx -= (magXmin + magXmax) /2
+		MAGy -= (magYmin + magYmax) /2
+		MAGz -= (magZmin + magZmax) /2
 
-		x_vals.append(cal_x)
-		y_vals.append(cal_y)
-		z_vals.append(cal_z)
+		##Calculate loop Period(LP). How long between Gyro Reads
+		b = datetime.datetime.now() - a
+		a = datetime.datetime.now()
+		LP = b.microseconds/(1000000*1.0)
+		outputString = "Loop Time %5.2f " % ( LP )
+
+		#Convert Gyro raw to degrees per second
+		rate_gyr_x =  GYRx * G_GAIN
+		rate_gyr_y =  GYRy * G_GAIN
+		rate_gyr_z =  GYRz * G_GAIN
+
+		#Calculate the angles from the gyro.
+		gyroXangle += rate_gyr_x*LP
+		gyroYangle += rate_gyr_y*LP
+		gyroZangle += rate_gyr_z*LP
+
+		#Convert Accelerometer values to degrees
+		AccXangle =  (math.atan2(ACCy,ACCz)*RAD_TO_DEG)
+		AccYangle =  (math.atan2(ACCz,ACCx)+M_PI)*RAD_TO_DEG
+
+		#convert the values to -180 and +180
+		if AccYangle > 90:
+			AccYangle -= 270.0
+		else:
+			AccYangle += 90.0
+
+		#Complementary filter used to combine the accelerometer and gyro values.
+		CFangleX = AA*(CFangleX+rate_gyr_x*LP) +(1 - AA) * AccXangle
+		CFangleY = AA*(CFangleY+rate_gyr_y*LP) +(1 - AA) * AccYangle
+
+		#Kalman filter used to combine the accelerometer and gyro values.
+		kalmanY = kalmanFilterY(AccYangle, rate_gyr_y,LP)
+		kalmanX = kalmanFilterX(AccXangle, rate_gyr_x,LP)
+
+
+		#Calculate heading
+		heading = 180 * math.atan2(MAGy,MAGx)/M_PI
+
+		#Only have our heading between 0 and 360
+		if heading < 0:
+			heading += 360
+
+		###################Tilt compensated heading#########################
+		#Normalize accelerometer raw values.
+		accXnorm = ACCx/math.sqrt(ACCx * ACCx + ACCy * ACCy + ACCz * ACCz)
+		accYnorm = ACCy/math.sqrt(ACCx * ACCx + ACCy * ACCy + ACCz * ACCz)
+
+		#Calculate pitch and roll
+		pitch = math.asin(accXnorm)
+		roll = -math.asin(accYnorm/math.cos(pitch))
+
+		#Calculate the new tilt compensated values
+		#The compass and accelerometer are orientated differently on the the BerryIMUv1, v2 and v3.
+		#This needs to be taken into consideration when performing the calculations
+
+		#X compensation
+		if(IMU.BerryIMUversion == 1 or IMU.BerryIMUversion == 3):			#LSM9DS0 and (LSM6DSL & LIS2MDL)
+			magXcomp = MAGx*math.cos(pitch)+MAGz*math.sin(pitch)
+		else:																#LSM9DS1
+			magXcomp = MAGx*math.cos(pitch)-MAGz*math.sin(pitch)
+
+		#Y compensation
+		if(IMU.BerryIMUversion == 1 or IMU.BerryIMUversion == 3):			#LSM9DS0 and (LSM6DSL & LIS2MDL)
+			magYcomp = MAGx*math.sin(roll)*math.sin(pitch)+MAGy*math.cos(roll)-MAGz*math.sin(roll)*math.cos(pitch)
+		else:                                                                #LSM9DS1
+			magYcomp = MAGx*math.sin(roll)*math.sin(pitch)+MAGy*math.cos(roll)+MAGz*math.sin(roll)*math.cos(pitch)
+
+		#Calculate tilt compensated heading
+		tiltCompensatedHeading = 180 * math.atan2(magYcomp,magXcomp)/M_PI
+
+		if tiltCompensatedHeading < 0:
+			tiltCompensatedHeading += 360
+
+		##################### END Tilt Compensation ########################
+
+		if 1:                       #Change to '0' to stop showing the angles from the accelerometer
+			outputString += "#  ACCX Angle %5.2f ACCY Angle %5.2f  #  " % (AccXangle, AccYangle)
+
+		if 1:                       #Change to '0' to stop  showing the angles from the gyro
+			outputString +="\t# GRYX Angle %5.2f  GYRY Angle %5.2f  GYRZ Angle %5.2f # " % (gyroXangle,gyroYangle,gyroZangle)
+
+		if 1:                       #Change to '0' to stop  showing the angles from the complementary filter
+			outputString +="\t#  CFangleX Angle %5.2f   CFangleY Angle %5.2f  #" % (CFangleX,CFangleY)
+
+		if 1:                       #Change to '0' to stop  showing the heading
+			outputString +="\t# HEADING %5.2f  tiltCompensatedHeading %5.2f #" % (heading,tiltCompensatedHeading)
+
+		if 1:                       #Change to '0' to stop  showing the angles from the Kalman filter
+			outputString +="# kalmanX %5.2f   kalmanY %5.2f #" % (kalmanX,kalmanY)
+
+		print(outputString)
 
 		# print calibrated values (for debug reasons)
 		# print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
@@ -220,9 +353,6 @@ while x < 1200:
 		time.sleep(0.05)
 	if shape_stage > 3:
 		shape_stage = 0
-
-a = np.asarray([x_vals, y_vals, z_vals])
-np.savetxt("calibrated_still.csv", np.transpose(a), delimiter=",")
 
 client.loop_stop()
 client.disconnect()

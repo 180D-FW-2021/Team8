@@ -41,21 +41,6 @@ def on_message(client, userdata, message):
 		data[1] = "True\n"
 		with open(file_path, "w") as file:
 			file.writelines(data)
-	#try:
-	#	if "True" in str(message.payload):
-	#		file = open(file_path, "r")
-	#		data = file.readlines()
-	#		data[1] = "True\n"
-	#		file = open(file_path, "w")
-	#		file.writelines(data)
-	#	elif int(message.payload) in numbers:
-	#		file = open(file_path, "r")
-	#		data = file.readlines()
-	#		data[3] = str(int(message.payload))
-	#		file = open(file_path, "w")
-	#		file.writelines(data)
-	#except (OSError, PermissionError):
-	#	print("Could not open")
 
 	elif int(message.payload) in numbers:
 		with open(file_path, "r") as file:
