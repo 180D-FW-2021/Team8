@@ -206,6 +206,7 @@ client.loop_start()
 
 print("Connected")
 
+a = datetime.datetime.now()
 
 # Cycle
 # one minute: 1200
