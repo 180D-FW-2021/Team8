@@ -7,6 +7,7 @@ public class startGame : MonoBehaviour
 {
     public GameObject ChopPanel;
     public GameObject IngredientPanel;
+    public GameObject ThinkPanel;
 
 
     // Start is called before the first frame update
@@ -14,6 +15,7 @@ public class startGame : MonoBehaviour
     {
         ChopPanel.SetActive(false);
         IngredientPanel.SetActive(false);
+        ThinkPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -40,14 +42,26 @@ public class startGame : MonoBehaviour
         //SceneManager.LoadScene("SpeechTest", LoadSceneMode.Single);
     }
 
+    public void selectThink(){
+        Debug.Log("Memorization minigame description");
+        if(ThinkPanel != null){
+            ThinkPanel.SetActive(true);
+        }
+        
+        //SceneManager.LoadScene("SpeechTest", LoadSceneMode.Single);
+    }
+
     public void ingredientStart(){
         Debug.Log("Ingredient minigame loading");
-        SceneManager.LoadScene("3D_Shelf", LoadSceneMode.Single);
+        SceneManager.LoadScene("PickMeCSV", LoadSceneMode.Single);
         if(IngredientPanel != null){
             IngredientPanel.SetActive(false);
         }
         if(ChopPanel != null){
             ChopPanel.SetActive(false);
+        }
+        if(ThinkPanel != null){
+            ThinkPanel.SetActive(false);
         }
     }
 
@@ -60,6 +74,24 @@ public class startGame : MonoBehaviour
         if(ChopPanel != null){
             ChopPanel.SetActive(false);
         }
+        if(ThinkPanel != null){
+            ThinkPanel.SetActive(false);
+        }
+    }
+
+
+     public void thinkStart(){
+        Debug.Log("Memorization minigame loading");        
+        SceneManager.LoadScene("RecipeMemory", LoadSceneMode.Single);
+        if(ThinkPanel != null){
+            ThinkPanel.SetActive(false);
+        }
+        if(ChopPanel != null){
+            ChopPanel.SetActive(false);
+        }
+        if(IngredientPanel != null){
+            IngredientPanel.SetActive(false);
+        }
     }
 
     public void returnToGameSelection(){
@@ -68,6 +100,9 @@ public class startGame : MonoBehaviour
         }
         if(ChopPanel != null){
             ChopPanel.SetActive(false);
+        }
+        if(ThinkPanel != null){
+            ThinkPanel.SetActive(false);
         }
     }
 }

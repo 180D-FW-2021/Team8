@@ -15,7 +15,7 @@ TODO: filename might need to have "PyOut/" prepended to it. New requirement sinc
 starts in the project root folder (Hands Game). For some reason just prepending doesn't work. Investigate...
 '''
 
-def hands_sequential(filename = 'PyOut/wrist_sequential.csv', show_video = True, show_nodes = True, frame_wait = 10):
+def hands_sequential(filename = 'wrist_sequential.csv', show_video = True, show_nodes = True, frame_wait = 10):
 	'''
 	This function will write the wrist node position on every frame that the node is present.
 	There are no timestamps as of now (but that should be pretty easy to do).
@@ -82,7 +82,7 @@ def hands_sequential(filename = 'PyOut/wrist_sequential.csv', show_video = True,
 					break
 		cap.release()
 		
-def hands_single(filename = 'PyOut/wrist_single.csv', show_video = True, show_nodes = True, frame_wait = 10):
+def hands_single(filename = 'wrist_single.csv', show_video = True, show_nodes = True, frame_wait = 10):
 	'''
 	This function will save only the last detected wrist node position.
 	

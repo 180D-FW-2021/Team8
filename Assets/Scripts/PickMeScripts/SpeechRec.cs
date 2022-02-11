@@ -95,12 +95,12 @@ namespace Speecher
 				remainingTime = 0;
 			}
 
-            if(transcriptRec == "yes")
+            if(transcriptRec.Contains("yes"))
             {
                 include.SetActive(true);
                 noInclude.SetActive(false);
             }
-            if(transcriptRec == "no")
+            if(transcriptRec.Contains("no"))
             {
                 include.SetActive(false);
                 noInclude.SetActive(true);
@@ -128,10 +128,8 @@ namespace Speecher
             {
                 Debug.Log("Touching bread");
 
-                if (transcriptRec == "yes" && breadFound == false)
+                if (transcriptRec.Contains("yes") && breadFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     breadFound = true;
                     counter.UpdateScoreDisplay();
@@ -140,10 +138,8 @@ namespace Speecher
                     Debug.Log("Added bread");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && breadFound == false)
+                else if (transcriptRec.Contains("no") && breadFound == false)
                 {
-                    noInclude.SetActive(true);
-                    include.SetActive(false);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     breadFound = true;
@@ -159,10 +155,8 @@ namespace Speecher
             {
                 Debug.Log("Touching carrot");
 
-                if (transcriptRec == "yes" && carrotFound == false)
+                if (transcriptRec.Contains("yes") && carrotFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     carrotFound = true;
                     counter.UpdateScoreDisplay();
@@ -171,10 +165,8 @@ namespace Speecher
                     Debug.Log("Added carrot");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && carrotFound == false)
+                else if (transcriptRec.Contains("no") && carrotFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     carrotFound = true;
@@ -190,10 +182,8 @@ namespace Speecher
             {
                 Debug.Log("Touching apple");
 
-                if (transcriptRec == "yes" && appleFound == false)
+                if (transcriptRec.Contains("yes") && appleFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(1000);
                     appleFound = true;
                     counter.UpdateScoreDisplay();
@@ -202,10 +192,8 @@ namespace Speecher
                     Debug.Log("Added apple");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && appleFound == false)
+                else if (transcriptRec.Contains("no") && appleFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(-500);
                     counter.UpdateScoreDisplay();
                     appleFound = true;
@@ -221,10 +209,8 @@ namespace Speecher
             {
                 Debug.Log("Touching lemon");
 
-                if (transcriptRec == "yes" && lemonFound == false)
+                if (transcriptRec.Contains("yes") && lemonFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     lemonFound = true;
                     counter.UpdateScoreDisplay();
@@ -233,10 +219,8 @@ namespace Speecher
                     Debug.Log("Added lemon");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && lemonFound == false)
+                else if (transcriptRec.Contains("no") && lemonFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     lemonFound = true;
@@ -252,10 +236,8 @@ namespace Speecher
             {
                 Debug.Log("Touching banana");
 
-                if (transcriptRec == "yes" && bananaFound == false)
+                if (transcriptRec.Contains("yes") && bananaFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(1000);
                     bananaFound = true;
                     counter.UpdateScoreDisplay();
@@ -264,10 +246,8 @@ namespace Speecher
                     Debug.Log("Added banana");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && bananaFound == false)
+                else if (transcriptRec.Contains("no") && bananaFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(-500);
                     counter.UpdateScoreDisplay();
                     bananaFound = true;
@@ -283,10 +263,8 @@ namespace Speecher
             {
                 Debug.Log("Touching tomato");
 
-                if (transcriptRec == "yes" && tomatoFound == false)
+                if (transcriptRec.Contains("yes") && tomatoFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     tomatoFound = true;
                     counter.UpdateScoreDisplay();
@@ -295,10 +273,8 @@ namespace Speecher
                     Debug.Log("Added tomato");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && tomatoFound == false)
+                else if (transcriptRec.Contains("no") && tomatoFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     tomatoFound = true;
@@ -314,10 +290,8 @@ namespace Speecher
             {
                 Debug.Log("Touching watermelon");
 
-                if (transcriptRec == "yes" && watermelonFound == false)
+                if (transcriptRec.Contains("yes") && watermelonFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(1000);
                     watermelonFound = true;
                     counter.UpdateScoreDisplay();
@@ -326,10 +300,8 @@ namespace Speecher
                     Debug.Log("Added watermelon");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && watermelonFound == false)
+                else if (transcriptRec.Contains("no") && watermelonFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(-500);
                     counter.UpdateScoreDisplay();
                     watermelonFound = true;
@@ -345,10 +317,8 @@ namespace Speecher
             {
                 Debug.Log("Touching grape");
 
-                if (transcriptRec == "yes" && grapeFound == false)
+                if (transcriptRec.Contains("yes") && grapeFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     grapeFound = true;
                     counter.UpdateScoreDisplay();
@@ -357,10 +327,8 @@ namespace Speecher
                     Debug.Log("Added grape");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && grapeFound == false)
+                else if (transcriptRec.Contains("no") && grapeFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     grapeFound = true;
@@ -376,10 +344,8 @@ namespace Speecher
             {
                 Debug.Log("Touching mushroom");
 
-                if (transcriptRec == "yes" && mushroomFound == false)
+                if (transcriptRec.Contains("yes") && mushroomFound == false)
                 {
-                    include.SetActive(true);
-                    noInclude.SetActive(false);
                     counter.IncreaseScore(-500);
                     mushroomFound = true;
                     counter.UpdateScoreDisplay();
@@ -388,10 +354,8 @@ namespace Speecher
                     Debug.Log("Added mushroom");
                     numFoods++;
                 }
-                else if (transcriptRec == "no" && mushroomFound == false)
+                else if (transcriptRec.Contains("no") && mushroomFound == false)
                 {
-                    include.SetActive(false);
-                    noInclude.SetActive(true);
                     counter.IncreaseScore(1000);
                     counter.UpdateScoreDisplay();
                     mushroomFound = true;
