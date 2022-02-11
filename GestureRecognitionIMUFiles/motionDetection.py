@@ -332,13 +332,13 @@ while x < 1200:
 
 		# print calibrated values (for debug reasons)
 		# print(str(cal_x) + "\t" + str(cal_y) + "\t" + str(cal_z))
-
+"""
 		# Left right classification
-		if cal_x > x_th_right:
+		if ACCx > x_th_right:
 			print("R")
 			move = "R"
 			time.sleep(cooldown)
-		elif cal_x < x_th_left:
+		elif ACCx < x_th_left:
 			print("L")
 			move = "L"
 			time.sleep(cooldown)
@@ -349,11 +349,11 @@ while x < 1200:
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# Vertical classification (invert up and down)
-		if cal_z > z_th_up:
+		if ACCz > z_th_up:
 			print("D")
 			move = "D"
 			time.sleep(cooldown)
-		elif cal_z < z_th_down:
+		elif ACCz < z_th_down:
 			print("U")
 			move = "U"
 			time.sleep(cooldown)
@@ -362,7 +362,7 @@ while x < 1200:
 			print("Square motion found")
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
-
+"""
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
 	if shape_stage > 3:
