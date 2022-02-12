@@ -108,15 +108,15 @@ z_th_down = -3.7
 x_th_right = 2.8
 x_th_left = -2.8
 
-xa_th_front = 20
-xa_th_back = -20
+xa_th_front = 30
+xa_th_back = -30
 
 # Front back (likely not used)
 y_th_front = 4
 y_th_back = -4
 
-ya_th_right = 20
-ya_th_left = -20
+ya_th_right = 30
+ya_th_left = -30
 
 #Kalman filter variables
 Q_angle = 0.02
@@ -321,12 +321,12 @@ while x < 1200:
 
 		# Left right classification
 		if kalmanX > xa_th_front:
-			print("D")
-			move = "D"
-			time.sleep(cooldown)
-		elif kalmanX < xa_th_back:
 			print("U")
 			move = "U"
+			time.sleep(cooldown)
+		elif kalmanX < xa_th_back:
+			print("D")
+			move = "D"
 			time.sleep(cooldown)
 
 		#if move == pure_square[shape_stage]:
