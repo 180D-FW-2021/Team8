@@ -108,7 +108,7 @@ z_th_down = -3.7
 x_th_right = 2.8
 x_th_left = -2.8
 
-xa_th_front = 30
+xa_th_front = 35
 xa_th_back = -30
 
 # Front back (likely not used)
