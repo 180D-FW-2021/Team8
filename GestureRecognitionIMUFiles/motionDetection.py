@@ -343,7 +343,7 @@ while True:
 			move = "L"
 			time.sleep(cooldown)
 
-		if move == seqeunce[shape_stage]:
+		if move == sequence[shape_stage]:
 			#print("Square motion found")
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
