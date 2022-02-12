@@ -333,6 +333,9 @@ while True:
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
+		if shape_stage > (len(sequence) - 1):
+		shape_stage = 0
+
 		# Vertical classification (invert up and down)
 		if kalmanY > ya_th_right:
 			print("R")
@@ -350,7 +353,7 @@ while True:
 
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
-	if shape_stage > 3:
+	if shape_stage > (len(sequence) - 1):
 		shape_stage = 0
 
 client.loop_stop()

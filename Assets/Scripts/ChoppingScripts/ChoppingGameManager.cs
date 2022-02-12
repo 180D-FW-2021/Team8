@@ -18,6 +18,7 @@ public enum StateType
 public class ChoppingGameManager : MonoBehaviour
 {
     private int timeToComplete = 40;
+    private int x;
 
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
@@ -112,11 +113,15 @@ public class ChoppingGameManager : MonoBehaviour
             }
         }
         Debug.Log("Could not write shape");
+
+        x = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        x++;
+
         switch (gameState)
         {
             case StateType.PLAYING:
@@ -194,61 +199,66 @@ public class ChoppingGameManager : MonoBehaviour
                 remainingTime = 0;
                 gameState = StateType.LOSE;
                 string[] lines = {"N/A", "False", "True", "0"};
+                if (x % 3 == 0)
+                {
+                    try {
+                        using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                            sw.WriteLine(lines[0]);
+                            sw.WriteLine(lines[1]);
+                            sw.WriteLine(lines[2]);
+                            sw.WriteLine(lines[3]);
+                        }
+                    } catch (Exception e) {
+                        Debug.Log(e);
+                    }
+                }
+            }
 
+            if (x % 3 == 0)
+            {
                 try {
-                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
-                        sw.WriteLine(lines[0]);
-                        sw.WriteLine(lines[1]);
-                        sw.WriteLine(lines[2]);
-                        sw.WriteLine(lines[3]);
+                    using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
+                        Debug.Log("Reading from text file");
+                        sr.ReadLine();
+                        string line = sr.ReadLine();
+                        if (line.Contains("True")) {
+                            gameState = StateType.WIN;
+                        }
+                        sr.ReadLine();
+                        line = sr.ReadLine();
+                        if (line.Contains("1")) {
+                            FirstMotion.SetActive(false);
+                            darkFirst.SetActive(false);
+                            darkSecond.SetActive(true);
+                        } else if (line.Contains("2")) {
+                            FirstMotion.SetActive(false);
+                            SecondMotion.SetActive(false);
+                            darkFirst.SetActive(false);
+                            darkSecond.SetActive(false);
+                            darkThird.SetActive(true);
+                        } else if (line.Contains("3")) {
+                            FirstMotion.SetActive(false);
+                            SecondMotion.SetActive(false);
+                            ThirdMotion.SetActive(false);
+                            darkFirst.SetActive(false);
+                            darkSecond.SetActive(false);
+                            darkThird.SetActive(false);
+                            darkFourth.SetActive(true);
+                        } else if (line.Contains("4")) {
+                            FirstMotion.SetActive(false);
+                            SecondMotion.SetActive(false);
+                            ThirdMotion.SetActive(false);
+                            FourthMotion.SetActive(false);
+                            darkFirst.SetActive(false);
+                            darkSecond.SetActive(false);
+                            darkThird.SetActive(false);
+                            darkFourth.SetActive(false);
+                            gameState = StateType.WIN;
+                        }
                     }
                 } catch (Exception e) {
                     Debug.Log(e);
                 }
-            }
-
-            try {
-                using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
-                    Debug.Log("Reading from text file");
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    if (line.Contains("True")) {
-                        gameState = StateType.WIN;
-                    }
-                    sr.ReadLine();
-                    line = sr.ReadLine();
-                    if (line.Contains("1")) {
-                        FirstMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(true);
-                    } else if (line.Contains("2")) {
-                        FirstMotion.SetActive(false);
-                        SecondMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(false);
-                        darkThird.SetActive(true);
-                    } else if (line.Contains("3")) {
-                        FirstMotion.SetActive(false);
-                        SecondMotion.SetActive(false);
-                        ThirdMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(false);
-                        darkThird.SetActive(false);
-                        darkFourth.SetActive(true);
-                    } else if (line.Contains("4")) {
-                        FirstMotion.SetActive(false);
-                        SecondMotion.SetActive(false);
-                        ThirdMotion.SetActive(false);
-                        FourthMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(false);
-                        darkThird.SetActive(false);
-                        darkFourth.SetActive(false);
-                        gameState = StateType.WIN;
-                    }
-                }
-            } catch (Exception e) {
-                Debug.Log(e);
             }
         }
     }
