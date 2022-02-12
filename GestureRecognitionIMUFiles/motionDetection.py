@@ -223,8 +223,7 @@ a = datetime.datetime.now()
 # Cycle
 # one minute: 1200
 x = 0
-while x < 1200:
-	x = x + 1
+while True:
 	
 	#if game_running:
 	if game_running:
