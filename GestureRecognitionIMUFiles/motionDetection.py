@@ -143,7 +143,7 @@ magYmax =  0
 magZmax =  0
 
 # Shape classification
-pure_square = ["L","D","R","U"]
+sequence = ["L","D","R","U"]
 
 motion_detected = False
 cooldown = 0.5
@@ -154,7 +154,7 @@ t = 0
 detect_shape = "square"	 # default
 shape_stage = 0
 
-game_running = True		# False
+game_running = False		# False
 is_calibrating = False
 
 gyroXangle = 0.0
@@ -329,10 +329,10 @@ while x < 1200:
 			move = "D"
 			time.sleep(cooldown)
 
-		#if move == pure_square[shape_stage]:
-		#	print("Square motion found")
-		#	shape_stage = shape_stage + 1
-		#	client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		if move == sequence[shape_stage]:
+			#print("Square motion found")
+			shape_stage = shape_stage + 1
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# Vertical classification (invert up and down)
 		if kalmanY > ya_th_right:
@@ -344,10 +344,10 @@ while x < 1200:
 			move = "L"
 			time.sleep(cooldown)
 
-		#if move == pure_square[shape_stage]:
-		#	print("Square motion found")
-		#	shape_stage = shape_stage + 1
-		#	client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		if move == seqeunce[shape_stage]:
+			#print("Square motion found")
+			shape_stage = shape_stage + 1
+			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
