@@ -329,10 +329,10 @@ while x < 1200:
 			move = "U"
 			time.sleep(cooldown)
 
-		if move == pure_square[shape_stage]:
-			print("Square motion found")
-			shape_stage = shape_stage + 1
-			client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		#if move == pure_square[shape_stage]:
+		#	print("Square motion found")
+		#	shape_stage = shape_stage + 1
+		#	client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# Vertical classification (invert up and down)
 		if kalmanY > ya_th_right:
@@ -344,10 +344,10 @@ while x < 1200:
 			move = "L"
 			time.sleep(cooldown)
 
-		if move == pure_square[shape_stage]:
-			print("Square motion found")
-			shape_stage = shape_stage + 1
-			client.publish('ece180d/team8/imu', shape_stage, qos=1)
+		#if move == pure_square[shape_stage]:
+		#	print("Square motion found")
+		#	shape_stage = shape_stage + 1
+		#	client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
