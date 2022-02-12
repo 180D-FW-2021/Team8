@@ -199,22 +199,19 @@ public class ChoppingGameManager : MonoBehaviour
                 remainingTime = 0;
                 gameState = StateType.LOSE;
                 string[] lines = {"N/A", "False", "True", "0"};
-                if (x % 3 == 0)
-                {
-                    try {
-                        using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
-                            sw.WriteLine(lines[0]);
-                            sw.WriteLine(lines[1]);
-                            sw.WriteLine(lines[2]);
-                            sw.WriteLine(lines[3]);
-                        }
-                    } catch (Exception e) {
-                        Debug.Log(e);
+                try {
+                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
+                        sw.WriteLine(lines[0]);
+                        sw.WriteLine(lines[1]);
+                        sw.WriteLine(lines[2]);
+                        sw.WriteLine(lines[3]);
                     }
+                } catch (Exception e) {
+                    Debug.Log(e);
                 }
             }
 
-            if (x % 3 == 0)
+            if (x % 2 == 0)
             {
                 try {
                     using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
