@@ -37,14 +37,16 @@ public class fs_read_hands_csv : MonoBehaviour
 			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
 						// assuming no other platforms at this time
 			
-			process.StartInfo.Arguments = "";
+			process.StartInfo.Arguments = ""; // might be used later to feed frame delay to python
+			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			if(onWin)
 			{
 				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest.exe";
 			}
 			else
 			{
-				//process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
+				//maybe need to differentiate between M1 and x86 mac?
 			}
 			process.Start();
         }
