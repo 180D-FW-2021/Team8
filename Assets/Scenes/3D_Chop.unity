@@ -1120,10 +1120,10 @@ MonoBehaviour:
   Objective: {fileID: 1734094667}
   MainMenuButton: {fileID: 1262656232}
   timeText: {fileID: 1142001401}
-  FirstMotion: {fileID: 1897301598}
-  SecondMotion: {fileID: 2008213683}
-  ThirdMotion: {fileID: 909143888}
-  FourthMotion: {fileID: 990375038}
+  rightArrow: {fileID: 909143888}
+  leftArrow: {fileID: 1897301598}
+  upArrow: {fileID: 990375038}
+  downArrow: {fileID: 2008213683}
   FullCake: {fileID: 923088712}
   cakeSlice1: {fileID: 187198931}
   cakeSlice2: {fileID: 638061152}

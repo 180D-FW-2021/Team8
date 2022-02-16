@@ -163,7 +163,7 @@ public class ChoppingGameManager : MonoBehaviour
                 cakeSlice3.SetActive(true);
                 cakeSlice4.SetActive(true);
 
-                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                //client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 break;
             case StateType.LOSE:
                 Objective.SetActive(false);
@@ -175,7 +175,7 @@ public class ChoppingGameManager : MonoBehaviour
                 rightArrow.SetActive(false);
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
-                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                //client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 break;
             default:
                 Debug.Log("ERROR: Unknown game state");
@@ -196,6 +196,7 @@ public class ChoppingGameManager : MonoBehaviour
             }
 
             if (step_num > sequence.Length) {
+                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 gameState = StateType.LOSE;
             }
 
@@ -205,6 +206,7 @@ public class ChoppingGameManager : MonoBehaviour
                 leftArrow.SetActive(false);
                 upArrow.SetActive(false);
                 downArrow.SetActive(false);
+                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 gameState = StateType.WIN;
             }
             else {
@@ -229,6 +231,7 @@ public class ChoppingGameManager : MonoBehaviour
                     upArrow.SetActive(false);
                     downArrow.SetActive(true);
                 } else {
+                    client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     gameState = StateType.DEFAULT;
                 }
             }
