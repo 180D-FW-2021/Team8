@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechObj: {fileID: 1791930535}
-  streamRec: {fileID: 1791930536}
+  streamRec: {fileID: 1791930539}
   counter: {fileID: 1691182782}
   timeText: {fileID: 1175988238}
   smoothieRecipe: {fileID: 154237815}
@@ -779,6 +779,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de533b6dd8676b48b54aec69b866230, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  env_name: capstoneenv
+  script_path: Assets/Scripts/ChoppingScripts/IMUComms.py
 --- !u!114 &698746066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1814,7 +1816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1791930538}
   - component: {fileID: 1791930537}
-  - component: {fileID: 1791930536}
+  - component: {fileID: 1791930539}
   m_Layer: 0
   m_Name: SpeechCollection
   m_TagString: Untagged
@@ -1822,35 +1824,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &1791930536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791930535}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f43be3dcef461f9ee3aa85dd4204bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startOnAwake: 1
-  returnInterimResults: 0
-  enableDebugLogging: 1
-  onStartListening:
-    m_PersistentCalls:
-      m_Calls: []
-  onStopListening:
-    m_PersistentCalls:
-      m_Calls: []
-  onFinalResult:
-    m_PersistentCalls:
-      m_Calls: []
-  onInterimResult:
-    m_PersistentCalls:
-      m_Calls: []
-  _microphoneName: Built-in Microphone
-  transcript: 
 --- !u!82 &1791930537
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1961,6 +1934,29 @@ Transform:
   m_Father: {fileID: 404131838}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1791930539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791930535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b44f4ebe20aa4e3389b0cd48c1964cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startOnAwake: 1
+  returnInterimResults: 1
+  enableDebugLogging: 0
+  onStartListening:
+    m_PersistentCalls:
+      m_Calls: []
+  onStopListening:
+    m_PersistentCalls:
+      m_Calls: []
+  _microphoneName: 
+  transcript: 
 --- !u!1 &1823085093
 GameObject:
   m_ObjectHideFlags: 0
