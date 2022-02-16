@@ -1,4 +1,6 @@
-square
+N/A
 False
-False
+True
 0
+
+15
