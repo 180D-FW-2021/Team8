@@ -17,7 +17,7 @@ public class HighScores : MonoBehaviour
         // Adds some test data
         AddNewScore("Megalodon", 10900);
         AddNewScore("Doug", 4900);
-        AddNewScore("Dave", 380);
+        AddNewScore("Dave", 3080);
         AddNewScore("Steve", 6654);
         AddNewScore("Mike", 9021);
         AddNewScore("Teddy", 3252);
