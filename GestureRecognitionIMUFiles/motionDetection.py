@@ -349,5 +349,6 @@ while True:
 		game_running = False
 		client.publish('ece180d/team8/imu', "X", qos=1)
 
+
 client.loop_stop()
 client.disconnect()
