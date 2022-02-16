@@ -1,0 +1,1 @@
+This copy of wrapperTest.exe will only work for 64-bit Windows 10 x86-based PCs. If you have a different Windows configuration, you will need to rebuild the executable using PyInstaller according to the user guide, and then replace these files in csvHandsWin with the contents of dist/wrapperTest (the output of your PyInstaller).

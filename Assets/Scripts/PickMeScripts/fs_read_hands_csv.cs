@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using System.IO;
 using System.Threading;
@@ -21,7 +22,7 @@ public class fs_read_hands_csv : MonoBehaviour
         bool readX, readY, readZ; // used in TryParse().
         bool readSuccess;
         string[] coordString;
-        string filepath = "PyOut/wrist_single.csv";
+        string filepath = "wrist_single.csv";
         int delay_ms = 13; // not exact correspondence between delay and frame rate due to processing time.
                            // i.e. delay less than you think you need for a desired frame rate. (16 ms should be approx. 60 fps but produces lower fps in practice)
                            // there should be some delay to preserve resource use. Noticed less CPU temp increase when delay is used.
@@ -30,7 +31,24 @@ public class fs_read_hands_csv : MonoBehaviour
      
         void Start()
         {
-            Debug.Log("hands read script start");
+            UnityEngine.Debug.Log("hands read script start");
+			
+			using(var process = new Process())
+			{
+				bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
+							// assuming no other platforms at this time
+				
+				process.StartInfo.Arguments = "";
+				if(onWin)
+				{
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest.exe";
+				}
+				else
+				{
+					//process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
+				}
+				process.Start();
+			}
         }
 
         // Update is called once per frame
@@ -72,8 +90,8 @@ public class fs_read_hands_csv : MonoBehaviour
             catch (Exception e)
             {
                 // Let the user know what went wrong.
-                Debug.Log("Exception in asyncCSVRead():");
-                Debug.Log(e.Message);
+                UnityEngine.Debug.Log("Exception in asyncCSVRead():");
+                UnityEngine.Debug.Log(e.Message);
                 readSuccess = false;
             }
             Thread.Sleep(delay_ms);
