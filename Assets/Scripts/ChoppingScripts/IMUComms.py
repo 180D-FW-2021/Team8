@@ -42,6 +42,9 @@ def on_message(client, userdata, message):
 		with open(file_path, "w") as file:
 			file.writelines(data)
 
+	elif message.payload == "X":
+		return
+
 	elif int(message.payload) in numbers:
 		with open(file_path, "r") as file:
 			data = file.readlines()
@@ -64,8 +67,34 @@ client.connect_async('test.mosquitto.org', 1883, 60)
 client.loop_start()
 
 while True:
-	try:
-		file = open(file_path, "r")
+	# try:
+	# 	file = open(file_path, "r")
+	# 	data = file.readlines()
+	# 	print(data)
+
+	# 	if data[0] != "N/A\n" and not shape_written:
+	# 		client.publish("ece180d/team8/unity", data[0], qos=1)
+	# 		shape_written = True
+	# 		game_running = True
+	# 	elif data[0] == "N/A\n":
+	# 		client.publish("ece180d/team8/unity", "stop", qos=1)
+	# 		shape_written = False
+	# 		game_running = False
+
+	# 	if data[2] == "True\n":
+	# 		client.publish("ece180d/team8/unity", "stop", qos=1)
+	# 		game_running = False
+	# 	elif data[2] == "False\n":
+	# 		client.publish("ece180d/team8/unity", "start", qos=1)
+	# 		game_running = True
+
+	# 	file.close()
+
+	# except (OSError, PermissionError):
+	# 	print("Could not open")
+
+
+	with open(file_path, "r") as file:
 		data = file.readlines()
 		print(data)
 
@@ -84,12 +113,6 @@ while True:
 		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
-
-		file.close()
-
-	except (OSError, PermissionError):
-		print("Could not open")
-
 
 	time.sleep(loop_delay)
 

@@ -197,13 +197,12 @@ def on_message(client, userdata, message):
 	# Told to stop or no shape to detect
 	if "stop" in str(message.payload):
 		game_running = False
+		shape_stage = 0
 	elif "start" in str(message.payload):
 		print("Start detected")
 		if game_running is False:
 			shape_stage = 0
 		game_running = True
-	elif "square" in str(message.payload):
-		detect_shape = "square"
 
 print("About to connect...")
 
@@ -328,18 +327,8 @@ while True:
 			move = "D"
 			time.sleep(cooldown)
 
-		if move == sequence[shape_stage]:
-			#print("Square motion found")
-			shape_stage = shape_stage + 1
-			client.publish('ece180d/team8/imu', shape_stage, qos=1)
-
-		if shape_stage > (len(sequence) - 1):
-			shape_stage = 0
-			game_running = False
-			client.publish('ece180d/team8/imu', "X", qos=1)
-
 		# Vertical classification (invert up and down)
-		if kalmanY > ya_th_right:
+		elif kalmanY > ya_th_right:
 			print("R")
 			move = "R"
 			time.sleep(cooldown)
