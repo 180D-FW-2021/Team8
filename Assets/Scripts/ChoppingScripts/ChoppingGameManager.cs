@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
+using System.Text.RegularExpressions
 
 public enum StateType
 {
@@ -24,6 +25,8 @@ public class ChoppingGameManager : MonoBehaviour
     private float remainingTime = 0;
     private string shape = "square";
     private string file_path = "IMUCommsTxt.txt";
+    private string[] sequence = ["L","R","U","L","D","R","U","L","D","R","L","D","U","R","L"];
+    private int step_num = 0;
 
     public GameObject WinScreen;
     public GameObject LoseScreen;
@@ -31,10 +34,10 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject MainMenuButton;
     public Text timeText;
 
-    public GameObject FirstMotion;
-    public GameObject SecondMotion;
-    public GameObject ThirdMotion;
-    public GameObject FourthMotion;
+    public GameObject rightArrow;
+    public GameObject leftArrow;
+    public GameObject upArrow;
+    public GameObject downArrow;
 
     public GameObject FullCake;
     public GameObject cakeSlice1;
@@ -223,6 +226,44 @@ public class ChoppingGameManager : MonoBehaviour
                         }
                         sr.ReadLine();
                         line = sr.ReadLine();
+
+                        step_num = Int32.Parse(Regex.Match(line, @"\d+").Value);
+                        Debug.Log(step_num);
+
+                        if (step_num == sequence.Length) {
+                            rightArrow.SetActive(false);
+                            leftArrow.SetActive(false);
+                            upArrow.SetActive(false);
+                            downArrow.SetActive(false);
+                            gameState = StateType.WIN;
+                        }
+                        else {
+                            if (sequence[step_num] == "R") {
+                                rightArrow.SetActive(true);
+                                leftArrow.SetActive(false);
+                                upArrow.SetActive(false);
+                                downArrow.SetActive(false);
+                            } else if (sequence[step_num] == "L") {
+                                rightArrow.SetActive(false);
+                                leftArrow.SetActive(true);
+                                upArrow.SetActive(false);
+                                downArrow.SetActive(false);
+                            } else if (sequence[step_num] == "U") {
+                                rightArrow.SetActive(false);
+                                leftArrow.SetActive(false);
+                                upArrow.SetActive(true);
+                                downArrow.SetActive(false);
+                            } else if (sequence[step_num] == "D") {
+                                rightArrow.SetActive(false);
+                                leftArrow.SetActive(false);
+                                upArrow.SetActive(false);
+                                downArrow.SetActive(true);
+                            } else {
+                                gameState = StateType.DEFAULT;
+                            }
+                        }
+
+                        /*
                         if (line.Contains("1")) {
                             FirstMotion.SetActive(false);
                             darkFirst.SetActive(false);
@@ -251,7 +292,7 @@ public class ChoppingGameManager : MonoBehaviour
                             darkThird.SetActive(false);
                             darkFourth.SetActive(false);
                             gameState = StateType.WIN;
-                        }
+                        } */
                     }
                 } catch (Exception e) {
                     Debug.Log(e);

@@ -143,7 +143,7 @@ magYmax =  0
 magZmax =  0
 
 # Shape classification
-sequence = ["L","D","R","U"]
+sequence = ["L","R","U","L","D","R","U","L","D","R","L","D","U","R","L"]
 
 motion_detected = False
 cooldown = 0.5
@@ -335,6 +335,7 @@ while True:
 
 		if shape_stage > (len(sequence) - 1):
 			shape_stage = 0
+			client.publish('ece180d/team8/imu', "X", qos=1)
 
 		# Vertical classification (invert up and down)
 		if kalmanY > ya_th_right:
@@ -355,6 +356,7 @@ while True:
 		time.sleep(0.05)
 	if shape_stage > (len(sequence) - 1):
 		shape_stage = 0
+		client.publish('ece180d/team8/imu', "X", qos=1)
 
 client.loop_stop()
 client.disconnect()
