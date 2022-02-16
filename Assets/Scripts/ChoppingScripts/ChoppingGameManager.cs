@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
-using System.Text.RegularExpressions
+using System.Text.RegularExpressions;
 
 public enum StateType
 {
@@ -25,7 +25,7 @@ public class ChoppingGameManager : MonoBehaviour
     private float remainingTime = 0;
     private string shape = "square";
     private string file_path = "IMUCommsTxt.txt";
-    private string[] sequence = ["L","R","U","L","D","R","U","L","D","R","L","D","U","R","L"];
+    private string[] sequence = new string[] {"L","R","U","L","D","R","U","L","D","R","L","D","U","R","L"};
     private int step_num = 0;
 
     public GameObject WinScreen;
@@ -85,7 +85,7 @@ public class ChoppingGameManager : MonoBehaviour
         cakeSlice3.SetActive(false);
         cakeSlice4.SetActive(false);
 
-        darkFirst.SetActive(true);
+        darkFirst.SetActive(false);
         darkSecond.SetActive(false);;
         darkThird.SetActive(false);;
         darkFourth.SetActive(false);;
@@ -93,10 +93,10 @@ public class ChoppingGameManager : MonoBehaviour
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
 
-        FirstMotion.SetActive(true);
-        SecondMotion.SetActive(true);
-        ThirdMotion.SetActive(true);
-        FourthMotion.SetActive(true);
+        //FirstMotion.SetActive(true);
+        //SecondMotion.SetActive(true);
+        //ThirdMotion.SetActive(true);
+        //FourthMotion.SetActive(true);
         MainMenuButton.SetActive(false);
         // Setting up text file
         shape = "square";
@@ -180,10 +180,10 @@ public class ChoppingGameManager : MonoBehaviour
                 Objective.SetActive(false);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(true);
-                FirstMotion.SetActive(false);
-                SecondMotion.SetActive(false);
-                ThirdMotion.SetActive(false);
-                FourthMotion.SetActive(false);
+                downArrow.SetActive(false);
+                upArrow.SetActive(false);
+                leftArrow.SetActive(false);
+                rightArrow.SetActive(false);
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 break;
