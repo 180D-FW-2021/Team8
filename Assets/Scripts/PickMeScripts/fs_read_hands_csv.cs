@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 
 
 // TODO: reader will need to retrieve the name of the python output .csv somehow. In the actual game, we might just make the name consistent.
-namespace CursorObject {
+namespace CursorObject 
+{
 public class fs_read_hands_csv : MonoBehaviour
     {
         public Transform Cursor;
@@ -27,28 +28,25 @@ public class fs_read_hands_csv : MonoBehaviour
                            // i.e. delay less than you think you need for a desired frame rate. (16 ms should be approx. 60 fps but produces lower fps in practice)
                            // there should be some delay to preserve resource use. Noticed less CPU temp increase when delay is used.
                            // Start is called before the first frame update
-        
+        Process process = new Process();
      
         void Start()
         {
             UnityEngine.Debug.Log("hands read script start");
 			
-			using(var process = new Process())
+			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
+						// assuming no other platforms at this time
+			
+			process.StartInfo.Arguments = "";
+			if(onWin)
 			{
-				bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
-							// assuming no other platforms at this time
-				
-				process.StartInfo.Arguments = "";
-				if(onWin)
-				{
-					process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest.exe";
-				}
-				else
-				{
-					//process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
-				}
-				process.Start();
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest.exe";
 			}
+			else
+			{
+				//process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
+			}
+			process.Start();
         }
 
         // Update is called once per frame
@@ -108,5 +106,11 @@ public class fs_read_hands_csv : MonoBehaviour
             //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset);
         }
 
+		void OnDestroy()
+		{
+			process.CloseMainWindow();
+			process.Close();
+			process.Dispose();
+		}
     }
 }
