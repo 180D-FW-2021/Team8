@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -611,10 +611,19 @@ MonoBehaviour:
   Objective: {fileID: 1123254057}
   MainMenuButton: {fileID: 2050753583}
   timeText: {fileID: 1137684393}
-  FirstMotion: {fileID: 1290283438}
-  SecondMotion: {fileID: 1039548219}
-  ThirdMotion: {fileID: 1950373784}
-  FourthMotion: {fileID: 312363581}
+  rightArrow: {fileID: 0}
+  leftArrow: {fileID: 0}
+  upArrow: {fileID: 0}
+  downArrow: {fileID: 0}
+  FullCake: {fileID: 0}
+  cakeSlice1: {fileID: 0}
+  cakeSlice2: {fileID: 0}
+  cakeSlice3: {fileID: 0}
+  cakeSlice4: {fileID: 0}
+  darkFirst: {fileID: 0}
+  darkSecond: {fileID: 0}
+  darkThird: {fileID: 0}
+  darkFourth: {fileID: 0}
 --- !u!4 &713354971
 Transform:
   m_ObjectHideFlags: 0
