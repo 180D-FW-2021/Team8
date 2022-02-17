@@ -56,7 +56,6 @@ namespace GoogleCloudStreamingSpeechToText {
         private int _isFinalEndTime = 0;
         private int _finalRequestEndTime = 0;
         private double _bridgingOffset = 0;
-        public string transcript;
 
         private const string CredentialFileName = "gcp_credentials.json";
         private const double NormalizedFloatTo16BitConversionFactor = 0x7FFF + 0.4999999999999999;
@@ -240,7 +239,7 @@ namespace GoogleCloudStreamingSpeechToText {
 
                 _resultEndTime = (int)((result.ResultEndTime.Seconds * 1000) + (result.ResultEndTime.Nanos / 1000000));
 
-                transcript = result.Alternatives[0].Transcript.Trim();
+                string transcript = result.Alternatives[0].Transcript.Trim();
 
                 if (result.IsFinal) {
                     if (enableDebugLogging) {
