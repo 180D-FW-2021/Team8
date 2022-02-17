@@ -41,16 +41,16 @@ public class fs_read_hands_csv : MonoBehaviour
 			if(onWin)
 			{
 				// works for Win10 and Win11
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest";
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsWin10\wrapperTest";
 			}
 			else if(onMac)
 			{
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsMac\wrapperTest"; // TODO: test and implement and upload mac solution
 				//maybe need to differentiate between M1 and x86 mac?
 			}
 			else // user-generated
 			{
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsUser\\wrapperTest";
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsUser\wrapperTest";
 			}
 			process.Start();
         }
