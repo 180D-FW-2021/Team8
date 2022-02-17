@@ -215,7 +215,6 @@ client.on_message = on_message
 client.connect_async('test.mosquitto.org', 1883, 60)
 client.loop_start()
 
-print("Connected")
 
 a = datetime.datetime.now()
 
