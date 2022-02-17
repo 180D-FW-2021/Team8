@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -199,6 +199,49 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 63402828}
   m_CullTransparentMesh: 0
+--- !u!1 &142819409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 142819411}
+  - component: {fileID: 142819410}
+  m_Layer: 0
+  m_Name: Alan Made me
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &142819410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142819409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cd31852e259a7c4fbc4c2c9f8874f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &142819411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142819409}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.074104, y: 7.3557, z: 3.695611}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &169019049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,10 +1105,10 @@ MonoBehaviour:
   Objective: {fileID: 1734094667}
   MainMenuButton: {fileID: 1262656232}
   timeText: {fileID: 1142001401}
-  FirstMotion: {fileID: 1897301598}
-  SecondMotion: {fileID: 2008213683}
-  ThirdMotion: {fileID: 909143888}
-  FourthMotion: {fileID: 990375038}
+  rightArrow: {fileID: 909143888}
+  leftArrow: {fileID: 1897301598}
+  upArrow: {fileID: 990375038}
+  downArrow: {fileID: 2008213683}
   FullCake: {fileID: 923088712}
   cakeSlice1: {fileID: 187198931}
   cakeSlice2: {fileID: 638061152}

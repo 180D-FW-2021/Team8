@@ -5,7 +5,7 @@ import paho.mqtt.client as mqtt
 import time
 
 
-numbers = [0,1,2,3,4,5]
+numbers = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]
 
 game_running = False
 shape_written = False
@@ -41,21 +41,9 @@ def on_message(client, userdata, message):
 		data[1] = "True\n"
 		with open(file_path, "w") as file:
 			file.writelines(data)
-	#try:
-	#	if "True" in str(message.payload):
-	#		file = open(file_path, "r")
-	#		data = file.readlines()
-	#		data[1] = "True\n"
-	#		file = open(file_path, "w")
-	#		file.writelines(data)
-	#	elif int(message.payload) in numbers:
-	#		file = open(file_path, "r")
-	#		data = file.readlines()
-	#		data[3] = str(int(message.payload))
-	#		file = open(file_path, "w")
-	#		file.writelines(data)
-	#except (OSError, PermissionError):
-	#	print("Could not open")
+
+	elif message.payload == "X":
+		return
 
 	elif int(message.payload) in numbers:
 		with open(file_path, "r") as file:
@@ -64,7 +52,7 @@ def on_message(client, userdata, message):
 		with open(file_path, "w") as file:
 			file.writelines(data)
 
-client = mqtt.Client("computer", True, None, mqtt.MQTTv31)
+client = mqtt.Client("", True, None, mqtt.MQTTv31)
 #client = mqtt.Client()
 
 client.on_connect = on_connect
@@ -79,8 +67,34 @@ client.connect_async('test.mosquitto.org', 1883, 60)
 client.loop_start()
 
 while True:
-	try:
-		file = open(file_path, "r")
+	# try:
+	# 	file = open(file_path, "r")
+	# 	data = file.readlines()
+	# 	print(data)
+
+	# 	if data[0] != "N/A\n" and not shape_written:
+	# 		client.publish("ece180d/team8/unity", data[0], qos=1)
+	# 		shape_written = True
+	# 		game_running = True
+	# 	elif data[0] == "N/A\n":
+	# 		client.publish("ece180d/team8/unity", "stop", qos=1)
+	# 		shape_written = False
+	# 		game_running = False
+
+	# 	if data[2] == "True\n":
+	# 		client.publish("ece180d/team8/unity", "stop", qos=1)
+	# 		game_running = False
+	# 	elif data[2] == "False\n":
+	# 		client.publish("ece180d/team8/unity", "start", qos=1)
+	# 		game_running = True
+
+	# 	file.close()
+
+	# except (OSError, PermissionError):
+	# 	print("Could not open")
+
+
+	with open(file_path, "r") as file:
 		data = file.readlines()
 		print(data)
 
@@ -99,12 +113,6 @@ while True:
 		elif data[2] == "False\n":
 			client.publish("ece180d/team8/unity", "start", qos=1)
 			game_running = True
-
-		file.close()
-
-	except (OSError, PermissionError):
-		print("Could not open")
-
 
 	time.sleep(loop_delay)
 

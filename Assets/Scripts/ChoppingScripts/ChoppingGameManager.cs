@@ -5,6 +5,10 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
+using System.Text.RegularExpressions;
+using uPLibrary.Networking.M2Mqtt;
+using uPLibrary.Networking.M2Mqtt.Messages;
+using System.Text;
 
 public enum StateType
 {
@@ -23,6 +27,8 @@ public class ChoppingGameManager : MonoBehaviour
     private float remainingTime = 0;
     private string shape = "square";
     private string file_path = "IMUCommsTxt.txt";
+    private string[] sequence = new string[] {"L","R","U","L","D","R","U","L","D","R","L","D","U","R","L"};
+    private int step_num = 0;
 
     public GameObject WinScreen;
     public GameObject LoseScreen;
@@ -30,10 +36,10 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject MainMenuButton;
     public Text timeText;
 
-    public GameObject FirstMotion;
-    public GameObject SecondMotion;
-    public GameObject ThirdMotion;
-    public GameObject FourthMotion;
+    public GameObject rightArrow;
+    public GameObject leftArrow;
+    public GameObject upArrow;
+    public GameObject downArrow;
 
     public GameObject FullCake;
     public GameObject cakeSlice1;
@@ -50,6 +56,9 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject darkSecond;
     public GameObject darkThird;
     public GameObject darkFourth;
+
+    private MqttClient client;
+    private string username = "com";
 
     public void Pause(bool paused)
     {
@@ -81,7 +90,7 @@ public class ChoppingGameManager : MonoBehaviour
         cakeSlice3.SetActive(false);
         cakeSlice4.SetActive(false);
 
-        darkFirst.SetActive(true);
+        darkFirst.SetActive(false);
         darkSecond.SetActive(false);;
         darkThird.SetActive(false);;
         darkFourth.SetActive(false);;
@@ -89,29 +98,27 @@ public class ChoppingGameManager : MonoBehaviour
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
 
-        FirstMotion.SetActive(true);
-        SecondMotion.SetActive(true);
-        ThirdMotion.SetActive(true);
-        FourthMotion.SetActive(true);
         MainMenuButton.SetActive(false);
+
         // Setting up text file
         shape = "square";
         string[] lines = {shape, "False", "False", "0"};
-        for (int i = 0; i < 100; i++) {
-            try {
-                using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
-                    sw.WriteLine(lines[0]);
-                    sw.WriteLine(lines[1]);
-                    sw.WriteLine(lines[2]);
-                    sw.WriteLine(lines[3]);
-                }
-                return;
-            } catch (Exception e) {
-                Debug.Log(e);
-                System.Threading.Thread.Sleep(250);
-            }
-        }
-        Debug.Log("Could not write shape");
+
+        username = PlayerPrefs.GetString("Username");
+        Debug.Log("mqtt " + username);
+
+        client = new MqttClient("test.mosquitto.org");
+        client.MqttMsgPublished += client_MqttMsgPublished;
+        client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
+
+        string clientId = Guid.NewGuid().ToString();
+
+        client.Connect(clientId);
+        client.Subscribe(new string[] { "ece180d/team8/imu" + username },
+            new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
+
+        client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("start"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+
     }
 
     // Update is called once per frame
@@ -156,28 +163,19 @@ public class ChoppingGameManager : MonoBehaviour
                 cakeSlice3.SetActive(true);
                 cakeSlice4.SetActive(true);
 
-
-                try {
-                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
-                        sw.WriteLine(lines[0]);
-                        sw.WriteLine(lines[1]);
-                        sw.WriteLine(lines[2]);
-                        sw.WriteLine(lines[3]);
-                    }
-                } catch (Exception e) {
-                    Debug.Log(e);
-                }
+                //client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 break;
             case StateType.LOSE:
                 Objective.SetActive(false);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(true);
-                FirstMotion.SetActive(false);
-                SecondMotion.SetActive(false);
-                ThirdMotion.SetActive(false);
-                FourthMotion.SetActive(false);
+                downArrow.SetActive(false);
+                upArrow.SetActive(false);
+                leftArrow.SetActive(false);
+                rightArrow.SetActive(false);
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
+                //client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 break;
             default:
                 Debug.Log("ERROR: Unknown game state");
@@ -193,62 +191,79 @@ public class ChoppingGameManager : MonoBehaviour
             else if (remainingTime <= 0 && getState() != StateType.LOSE) {
                 remainingTime = 0;
                 gameState = StateType.LOSE;
-                string[] lines = {"N/A", "False", "True", "0"};
 
-                try {
-                    using (StreamWriter sw = new StreamWriter(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Write))) {
-                        sw.WriteLine(lines[0]);
-                        sw.WriteLine(lines[1]);
-                        sw.WriteLine(lines[2]);
-                        sw.WriteLine(lines[3]);
-                    }
-                } catch (Exception e) {
-                    Debug.Log(e);
-                }
+                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
             }
 
-            try {
-                using (StreamReader sr = new StreamReader(new FileStream("Assets/" + file_path, FileMode.OpenOrCreate, FileAccess.Read))) {
-                    Debug.Log("Reading from text file");
-                    sr.ReadLine();
-                    string line = sr.ReadLine();
-                    if (line.Contains("True")) {
-                        gameState = StateType.WIN;
-                    }
-                    sr.ReadLine();
-                    line = sr.ReadLine();
-                    if (line.Contains("1")) {
-                        FirstMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(true);
-                    } else if (line.Contains("2")) {
-                        FirstMotion.SetActive(false);
-                        SecondMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(false);
-                        darkThird.SetActive(true);
-                    } else if (line.Contains("3")) {
-                        FirstMotion.SetActive(false);
-                        SecondMotion.SetActive(false);
-                        ThirdMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(false);
-                        darkThird.SetActive(false);
-                        darkFourth.SetActive(true);
-                    } else if (line.Contains("4")) {
-                        FirstMotion.SetActive(false);
-                        SecondMotion.SetActive(false);
-                        ThirdMotion.SetActive(false);
-                        FourthMotion.SetActive(false);
-                        darkFirst.SetActive(false);
-                        darkSecond.SetActive(false);
-                        darkThird.SetActive(false);
-                        darkFourth.SetActive(false);
-                        gameState = StateType.WIN;
-                    }
+            if (step_num > sequence.Length) {
+                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                gameState = StateType.LOSE;
+            }
+
+
+            if (step_num == sequence.Length) {
+                rightArrow.SetActive(false);
+                leftArrow.SetActive(false);
+                upArrow.SetActive(false);
+                downArrow.SetActive(false);
+                client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                gameState = StateType.WIN;
+            }
+            else {
+                if (sequence[step_num] == "R") {
+                    rightArrow.SetActive(true);
+                    leftArrow.SetActive(false);
+                    upArrow.SetActive(false);
+                    downArrow.SetActive(false);
+                } else if (sequence[step_num] == "L") {
+                    rightArrow.SetActive(false);
+                    leftArrow.SetActive(true);
+                    upArrow.SetActive(false);
+                    downArrow.SetActive(false);
+                } else if (sequence[step_num] == "U") {
+                    rightArrow.SetActive(false);
+                    leftArrow.SetActive(false);
+                    upArrow.SetActive(true);
+                    downArrow.SetActive(false);
+                } else if (sequence[step_num] == "D") {
+                    rightArrow.SetActive(false);
+                    leftArrow.SetActive(false);
+                    upArrow.SetActive(false);
+                    downArrow.SetActive(true);
+                } else {
+                    client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    gameState = StateType.DEFAULT;
                 }
-            } catch (Exception e) {
-                Debug.Log(e);
+            }
+        }
+    }
+
+    void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
+    {
+        Debug.Log("Subscribed for id = " + e.MessageId);
+    }
+
+    void client_MqttMsgPublished(object sender, MqttMsgPublishedEventArgs e)
+    {
+        Debug.Log("inside client_MqttMsgPublished");
+        Debug.Log("MessageId = " + e.MessageId + " Published = " + e.IsPublished);
+        Debug.Log("MessageId = " + e.MessageId);
+    }
+
+    void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
+    {
+        //this function is called everytime you receive message
+        //e.Message is a byte[]
+        var str = System.Text.Encoding.UTF8.GetString(e.Message);
+
+        Debug.Log("received a message");
+
+        if (String.Equals(e.Topic, "ece180d/team8/imu" + username))
+        {
+            if (str == "X"){
+                gameState = StateType.WIN;
+            } else {
+                step_num = Convert.ToInt32(str);
             }
         }
     }

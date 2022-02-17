@@ -14,7 +14,5 @@ https://docs.google.com/document/d/1yIKNc6TBcnJRwfBVIDO89yNEvk-Xk_T7ceKAHC5MhDE/
 The Raspberry Pi should have the following packages installed:
 - paho-mqtt
 - smbus2
-- scipy
-- numpy
 
 Details on how to install these packages can be found in the User Guide under the Gesture Recognition section.

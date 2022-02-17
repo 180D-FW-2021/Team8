@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
-using GoogleCloudStreamingSpeechToText;
+//using GoogleCloudStreamingSpeechToText;
 
 public class MemoryRead : MonoBehaviour
 {
