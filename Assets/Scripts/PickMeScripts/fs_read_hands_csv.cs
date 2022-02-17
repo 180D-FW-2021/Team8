@@ -50,7 +50,7 @@ public class fs_read_hands_csv : MonoBehaviour
 			}
 			else // user-generated
 			{
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsUser\\wrapperTest"
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsUser\\wrapperTest";
 			}
 			// TODO: how will system know to use the right USER-GENERATED executable? Might just have user delete contents of csvHandsMac\\wrapperTest.
 			process.Start();
