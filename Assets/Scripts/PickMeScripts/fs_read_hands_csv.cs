@@ -34,20 +34,25 @@ public class fs_read_hands_csv : MonoBehaviour
         {
             UnityEngine.Debug.Log("hands read script start");
 			
-			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows, 0 if using Mac
-						// assuming no other platforms at this time
-			
+			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows
+			bool onMac = Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor; // 1 if using Mac
 			process.StartInfo.Arguments = ""; // might be used later to feed frame delay to python
 			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			if(onWin)
 			{
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest.exe";
+				// works for Win10 and Win11
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsWin10\\wrapperTest";
 			}
-			else
+			else if(onMac)
 			{
 				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsMac\\wrapperTest"; // TODO: test and implement and upload mac solution
 				//maybe need to differentiate between M1 and x86 mac?
 			}
+			else // user-generated
+			{
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + "\\csvHandsUser\\wrapperTest"
+			}
+			// TODO: how will system know to use the right USER-GENERATED executable? Might just have user delete contents of csvHandsMac\\wrapperTest.
 			process.Start();
         }
 
