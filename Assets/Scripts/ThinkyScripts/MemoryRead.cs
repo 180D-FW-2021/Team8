@@ -24,18 +24,18 @@ public class MemoryRead : MonoBehaviour
 
     public Text timeText;
     public GameObject smoothieRecipe;
-    public GameObject apple;
-    public GameObject banana;
-    public GameObject icecream;
-    public GameObject yogurt;
+    public GameObject food1;
+    public GameObject food2;
+    public GameObject food3;
+    public GameObject food4;
     public GameObject gameOver;
     public GameObject winner;
     public GameObject loser;
 
-    bool applePicked = false;
-    bool bananaPicked = false;
-    bool icecreamPicked = false;
-    bool yogurtPicked = false;
+    bool food1Picked = false;
+    bool food2Picked = false;
+    bool food3Picked = false;
+    bool food4Picked = false;
     bool timeUp = false;
     string transcriptRecOld = "";
     bool gameStarted = false;
@@ -103,47 +103,47 @@ public class MemoryRead : MonoBehaviour
             speechObj.SetActive(true);
             transcriptRec = streamRec.transcript;
             smoothieRecipe.SetActive(false);
-            if(applePicked == false)
-                apple.SetActive(false);
-            if(bananaPicked == false)
-                banana.SetActive(false);
-            if(yogurtPicked == false)
-                yogurt.SetActive(false);
-            if(icecreamPicked == false)
-                icecream.SetActive(false);
-            if ((transcriptRec.Contains("Apple") || transcriptRec.Contains("apple")) && applePicked == false)
+            if(food1Picked == false)
+                food1.SetActive(false);
+            if(food2Picked == false)
+                food2.SetActive(false);
+            if(food4Picked == false)
+                food4.SetActive(false);
+            if(food3Picked == false)
+                food3.SetActive(false);
+            if ((transcriptRec.Contains("Apple") || transcriptRec.Contains("apple")) && food1Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
-                applePicked = true;
-                apple.SetActive(true);
+                food1Picked = true;
+                food1.SetActive(true);
                 numPicked++;
             }
 
-            if ((transcriptRec.Contains("Banana") || transcriptRec.Contains("banana")) && bananaPicked == false)
+            if ((transcriptRec.Contains("Banana") || transcriptRec.Contains("banana")) && food2Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
-                bananaPicked = true;
-                banana.SetActive(true);
+                food2Picked = true;
+                food2.SetActive(true);
                 numPicked++;
             }
 
-            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && yogurtPicked == false)
+            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && food4Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
-                yogurtPicked = true;
-                yogurt.SetActive(true);
+                food4Picked = true;
+                food4.SetActive(true);
                 numPicked++;
             }
 
-            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && icecreamPicked == false)
+            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && food3Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
-                icecreamPicked = true;
-                icecream.SetActive(true);
+                food3Picked = true;
+                food3.SetActive(true);
                 numPicked++;
             }
         }
@@ -175,7 +175,7 @@ public class MemoryRead : MonoBehaviour
                 banana.SetActive(true);
             }
 
-            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && bananaPicked == false)
+            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && food2Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
@@ -183,7 +183,7 @@ public class MemoryRead : MonoBehaviour
                 yogurt.SetActive(true);
             }
 
-            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && bananaPicked == false)
+            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && food2Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
@@ -195,29 +195,29 @@ public class MemoryRead : MonoBehaviour
         //}
         if (remainingTime <= 0 && gameStarted == true)
         {
-            if (applePicked == false) // transcriptRec != ""
+            if (food1Picked == false) // transcriptRec != ""
             {
                 counter.IncreaseScore(-200);
-                apple.SetActive(true);
-                applePicked = true;
+                food1.SetActive(true);
+                food1Picked = true;
             }
-            if (bananaPicked == false)
+            if (food2Picked == false)
             {
                 counter.IncreaseScore(-200);
-                banana.SetActive(true);
-                bananaPicked = true;
+                food2.SetActive(true);
+                food2Picked = true;
             }
-            if (yogurtPicked == false)
+            if (food4Picked == false)
             {
                 counter.IncreaseScore(-200);
-                yogurt.SetActive(true);
-                yogurtPicked = true;
+                food4.SetActive(true);
+                food4Picked = true;
             }
-            if (icecreamPicked == false)
+            if (food3Picked == false)
             {
                 counter.IncreaseScore(-200);
-                icecream.SetActive(true);
-                icecreamPicked = true;
+                food3.SetActive(true);
+                food3Picked = true;
             }
         }
     }
