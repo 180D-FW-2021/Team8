@@ -9,7 +9,7 @@ using System;
 
 public class MemoryRead : MonoBehaviour
 {
-    private int timeToComplete = 10;
+    private int timeToComplete = 11;
     private float remainingTime = 0;
 
     string transcriptRec;
@@ -78,8 +78,8 @@ public class MemoryRead : MonoBehaviour
         {
             if (gameStarted == false)
             {
-                remainingTime = 30;
-                timeToComplete = 30;
+                remainingTime = 31;
+                timeToComplete = 31;
                 gameStarted = true;
             }
             else

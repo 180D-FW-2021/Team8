@@ -8,7 +8,7 @@ using System;
 
 public class ThinkyData2 : MonoBehaviour
 {
-    private int timeToComplete = 10;
+    private int timeToComplete = 11;
     private float remainingTime = 0;
 
     string transcriptRec;
@@ -79,8 +79,8 @@ public class ThinkyData2 : MonoBehaviour
         {
             if (gameStarted == false)
             {
-                remainingTime = 30;
-                timeToComplete = 30;
+                remainingTime = 26;
+                timeToComplete = 26;
                 gameStarted = true;
             }
             else
