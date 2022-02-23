@@ -30,7 +30,7 @@ public class fs_read_hands_csv : MonoBehaviour
                            // Start is called before the first frame update
         Process process = new Process();
      
-        void Start()
+        void Start() //maybe move startup to game startup time?
         {
             UnityEngine.Debug.Log("hands read script start");
 			
@@ -38,25 +38,28 @@ public class fs_read_hands_csv : MonoBehaviour
 			bool onMac = Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor; // 1 if using Mac
 			process.StartInfo.Arguments = ""; // might be used later to feed frame delay to python
 			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
-			if(onWin)
+			try
 			{
-				// works for Win10 and Win11
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsWin10\wrapperTest";
-				// filepath = @"csvHandsWin10\" + filepath; // probably unnecessary unless unity base filepath changes across os
-				UnityEngine.Debug.Log("Using Win");
+				if(onWin)
+				{
+					// works for Win10 and Win11
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsWin10\wrapperTest";
+					// filepath = @"csvHandsWin10\" + filepath; // probably unnecessary unless unity base filepath changes across os
+					UnityEngine.Debug.Log("Premade Win executable");
+				}
+				else if(onMac)
+				{
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsMac\wrapperTest"; // TODO: test and implement and upload mac solution
+					//maybe need to differentiate between M1 and x86 mac?
+					// filepath = @"csvHandsMac\" + filepath; // probably unnecessary unless unity base filepath changes across os
+					UnityEngine.Debug.Log("Premade Mac executable");
+				}
 			}
-			else if(onMac)
-			{
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsMac\wrapperTest"; // TODO: test and implement and upload mac solution
-				//maybe need to differentiate between M1 and x86 mac?
-				// filepath = @"csvHandsMac\" + filepath; // probably unnecessary unless unity base filepath changes across os
-				UnityEngine.Debug.Log("Using Mac");
-			}
-			else // user-generated
+			catch(System.ComponentModel.Win32Exception e) // user-generated
 			{
 				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsUser\wrapperTest";
 				// filepath = @"csvHandsUser\" + filepath; // probably unnecessary unless unity base filepath changes across os
-				UnityEngine.Debug.Log("Unknown OS");
+				UnityEngine.Debug.Log("User-generated executable");
 			}
 			process.StartInfo.UseShellExecute = false;
 			process.StartInfo.CreateNoWindow = false;
@@ -123,7 +126,7 @@ public class fs_read_hands_csv : MonoBehaviour
 
 		void OnDestroy()
 		{
-			process.CloseMainWindow();
+			process.CloseMainWindow(); // why doesn't this work?
 			//process.Kill()
 			//process.WaitForExit();
 			process.Dispose();
