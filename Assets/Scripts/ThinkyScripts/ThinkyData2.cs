@@ -164,6 +164,8 @@ public class ThinkyData2 : MonoBehaviour
         {
             gameOver.SetActive(true);
             winner.SetActive(true);
+            timeText.enabled = false;
+            recipe.SetActive(true);
         }
         if (remainingTime <= 0 && gameStarted == true)
         {

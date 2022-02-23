@@ -1617,7 +1617,7 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Game Over
@@ -1825,7 +1825,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8db774d63ffa4304fb8dddd6116ead54, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -505.75992
+      value: -504.45
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8db774d63ffa4304fb8dddd6116ead54, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2448,10 +2448,10 @@ MonoBehaviour:
   counter: {fileID: 1776458625}
   timeText: {fileID: 1101000581}
   smoothieRecipe: {fileID: 1553000932}
-  apple: {fileID: 737868879}
-  banana: {fileID: 1938767069}
-  icecream: {fileID: 1489146703}
-  yogurt: {fileID: 1975720602}
+  food1: {fileID: 737868879}
+  food2: {fileID: 1938767069}
+  food3: {fileID: 1489146703}
+  food4: {fileID: 1975720602}
   gameOver: {fileID: 552408276}
   winner: {fileID: 1984598558}
   loser: {fileID: 1390355502}
