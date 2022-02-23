@@ -59,7 +59,8 @@ public class fs_read_hands_csv : MonoBehaviour
 				UnityEngine.Debug.Log("Unknown OS");
 			}
 			process.StartInfo.UseShellExecute = false;
-			process.StartInfo.CreateNoWindow = true;
+			process.StartInfo.CreateNoWindow = false;
+			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			process.Start();
         }
 
