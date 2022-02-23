@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657838, g: 0.49641234, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2447,7 +2447,7 @@ MonoBehaviour:
   streamRec: {fileID: 19696457}
   counter: {fileID: 1776458625}
   timeText: {fileID: 1101000581}
-  smoothieRecipe: {fileID: 426663529}
+  smoothieRecipe: {fileID: 1553000932}
   apple: {fileID: 737868879}
   banana: {fileID: 1938767069}
   icecream: {fileID: 1489146703}
@@ -3113,7 +3113,7 @@ GameObject:
   - component: {fileID: 1553000935}
   - component: {fileID: 1553000934}
   m_Layer: 5
-  m_Name: Text
+  m_Name: IngredientText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
