@@ -802,64 +802,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215458993}
   m_CullTransparentMesh: 0
---- !u!1 &261500190
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 261500191}
-  - component: {fileID: 261500193}
-  - component: {fileID: 261500192}
-  m_Layer: 0
-  m_Name: ProcessStartObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &261500191
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261500190}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1037971406}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &261500192
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261500190}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4de533b6dd8676b48b54aec69b866230, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  env_name: capstoneenv
-  script_path: Assets/Scripts/ChoppingScripts/IMUComms.py
---- !u!114 &261500193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 261500190}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1b290dc6787c3e41addbfde3b53450f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &284971094 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 7b5ec5c57af98c349b22ae545a4a9fcd,
@@ -1018,7 +960,6 @@ GameObject:
   - component: {fileID: 331643190}
   - component: {fileID: 331643189}
   - component: {fileID: 331643188}
-  - component: {fileID: 331643187}
   - component: {fileID: 331643191}
   m_Layer: 0
   m_Name: DataCollect
@@ -1041,38 +982,6 @@ Transform:
   m_Father: {fileID: 1631251315}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &331643187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 331643185}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8f0b1923467c4ae1b5247026217a94e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positioner: 0
-  cursor: {fileID: 1037971400}
-  speechObj: {fileID: 1058714748}
-  streamRec: {fileID: 0}
-  handReader: {fileID: 0}
-  bread: {fileID: 0}
-  carrot: {fileID: 0}
-  apple: {fileID: 0}
-  lemon: {fileID: 0}
-  banana: {fileID: 0}
-  tomato: {fileID: 0}
-  watermelon: {fileID: 0}
-  grape: {fileID: 0}
-  mushroom: {fileID: 0}
-  include: {fileID: 347314378}
-  noInclude: {fileID: 1635362503}
-  scoreboard: {fileID: 904188710}
-  counter: {fileID: 2093973375}
-  leaderboard: {fileID: 904188709}
-  timeText: {fileID: 430167701}
 --- !u!65 &331643188
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1147,7 +1056,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   positioner: 0
   cursor: {fileID: 1037971400}
-  handReader: {fileID: 0}
+  handReader: {fileID: 1037971401}
   bread: {fileID: 1467061776}
   carrot: {fileID: 992674636}
   apple: {fileID: 574507997}
@@ -2975,8 +2884,7 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 20.61058, y: 11.034668, z: -11.742766}
   m_LocalScale: {x: 2, y: 2, z: 2}
-  m_Children:
-  - {fileID: 261500191}
+  m_Children: []
   m_Father: {fileID: 1631251315}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
