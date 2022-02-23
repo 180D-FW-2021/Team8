@@ -79,8 +79,8 @@ public class ThinkyData2 : MonoBehaviour
         {
             if (gameStarted == false)
             {
-                remainingTime = 26;
-                timeToComplete = 26;
+                remainingTime = 21;
+                timeToComplete = 21;
                 gameStarted = true;
             }
             else
@@ -112,7 +112,9 @@ public class ThinkyData2 : MonoBehaviour
                 food4.SetActive(false);
             if (food3Picked == false)
                 food3.SetActive(false);
-            if ((transcriptRec.Contains("Ham") || transcriptRec.Contains("ham")) && food1Picked == false)
+            if (food5Picked == false)
+                food5.SetActive(false);
+            if ((transcriptRec.Contains("Ham") || transcriptRec.Contains("ham") || transcriptRec.Contains("him") || transcriptRec.Contains("Jim")) && food1Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
@@ -130,7 +132,7 @@ public class ThinkyData2 : MonoBehaviour
                 numPicked++;
             }
 
-            if ((transcriptRec.Contains("Pea") || transcriptRec.Contains("pea") || transcriptRec.Contains("Peas")  || transcriptRec.Contains("peas")) && food4Picked == false)
+            if ((transcriptRec.Contains("Pea") || transcriptRec.Contains("pea") || transcriptRec.Contains("Peas")  || transcriptRec.Contains("peas") || transcriptRec.Contains("please") || transcriptRec.Contains("cheese") || transcriptRec.Contains("p") || transcriptRec.Contains("peace")) && food4Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
@@ -163,46 +165,6 @@ public class ThinkyData2 : MonoBehaviour
             gameOver.SetActive(true);
             winner.SetActive(true);
         }
-
-        /*
-        if (remainingTime < timeToComplete - 5)
-        {
-            // if (remainingTime < timeToComplete - 20)
-            //{
-            if ((transcriptRec.Contains("Apple") || transcriptRec.Contains("apple")) && applePicked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                applePicked = true;
-                apple.SetActive(true);
-            }
-
-            if ((transcriptRec.Contains("Banana") || transcriptRec.Contains("banana")) && bananaPicked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                bananaPicked = true;
-                banana.SetActive(true);
-            }
-
-            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && food2Picked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                yogurtPicked = true;
-                yogurt.SetActive(true);
-            }
-
-            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && food2Picked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                icecreamPicked = true;
-                icecream.SetActive(true);
-            }
-        }
-        */
-        //}
         if (remainingTime <= 0 && gameStarted == true)
         {
             if (food1Picked == false) // transcriptRec != ""

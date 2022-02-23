@@ -2440,8 +2440,8 @@ MonoBehaviour:
   recipe: {fileID: 999929509}
   food1: {fileID: 211559762}
   food2: {fileID: 16971724}
-  food3: {fileID: 595958978}
-  food4: {fileID: 811056395}
+  food3: {fileID: 811056395}
+  food4: {fileID: 595958978}
   food5: {fileID: 677370438}
   gameOver: {fileID: 2009339283}
   winner: {fileID: 614942854}
@@ -4021,7 +4021,7 @@ MonoBehaviour:
     m_Alignment: 1
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
+    m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Game Over
