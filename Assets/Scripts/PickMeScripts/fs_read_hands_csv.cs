@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using System.IO;
 using System.Threading;
@@ -8,7 +9,8 @@ using System.Threading.Tasks;
 
 
 // TODO: reader will need to retrieve the name of the python output .csv somehow. In the actual game, we might just make the name consistent.
-namespace CursorObject {
+namespace CursorObject 
+{
 public class fs_read_hands_csv : MonoBehaviour
     {
         public Transform Cursor;
@@ -21,16 +23,44 @@ public class fs_read_hands_csv : MonoBehaviour
         bool readX, readY, readZ; // used in TryParse().
         bool readSuccess;
         string[] coordString;
-        string filepath = "PyOut/wrist_single.csv";
+        string filepath = "wrist_single.csv";
         int delay_ms = 13; // not exact correspondence between delay and frame rate due to processing time.
                            // i.e. delay less than you think you need for a desired frame rate. (16 ms should be approx. 60 fps but produces lower fps in practice)
                            // there should be some delay to preserve resource use. Noticed less CPU temp increase when delay is used.
                            // Start is called before the first frame update
-        
+        Process process = new Process();
      
         void Start()
         {
-            Debug.Log("hands read script start");
+            UnityEngine.Debug.Log("hands read script start");
+			
+			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows
+			bool onMac = Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor; // 1 if using Mac
+			process.StartInfo.Arguments = ""; // might be used later to feed frame delay to python
+			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
+			if(onWin)
+			{
+				// works for Win10 and Win11
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsWin10\wrapperTest";
+				// filepath = @"csvHandsWin10\" + filepath; // probably unnecessary unless unity base filepath changes across os
+				UnityEngine.Debug.Log("Using Win");
+			}
+			else if(onMac)
+			{
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsMac\wrapperTest"; // TODO: test and implement and upload mac solution
+				//maybe need to differentiate between M1 and x86 mac?
+				// filepath = @"csvHandsMac\" + filepath; // probably unnecessary unless unity base filepath changes across os
+				UnityEngine.Debug.Log("Using Mac");
+			}
+			else // user-generated
+			{
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsUser\wrapperTest";
+				// filepath = @"csvHandsUser\" + filepath; // probably unnecessary unless unity base filepath changes across os
+				UnityEngine.Debug.Log("Unknown OS");
+			}
+			process.StartInfo.UseShellExecute = false;
+			process.StartInfo.CreateNoWindow = true;
+			process.Start();
         }
 
         // Update is called once per frame
@@ -72,8 +102,8 @@ public class fs_read_hands_csv : MonoBehaviour
             catch (Exception e)
             {
                 // Let the user know what went wrong.
-                Debug.Log("Exception in asyncCSVRead():");
-                Debug.Log(e.Message);
+                UnityEngine.Debug.Log("Exception in asyncCSVRead():");
+                UnityEngine.Debug.Log(e.Message);
                 readSuccess = false;
             }
             Thread.Sleep(delay_ms);
@@ -90,5 +120,12 @@ public class fs_read_hands_csv : MonoBehaviour
             //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset);
         }
 
+		void OnDestroy()
+		{
+			process.CloseMainWindow();
+			//process.Kill()
+			//process.WaitForExit();
+			process.Dispose();
+		}
     }
 }
