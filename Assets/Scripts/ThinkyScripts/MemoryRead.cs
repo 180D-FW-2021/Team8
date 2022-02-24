@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
+using PlayFab;
+using PlayFab.ClientModels;
 //using GoogleCloudStreamingSpeechToText;
 
 public class MemoryRead : MonoBehaviour
@@ -31,6 +33,8 @@ public class MemoryRead : MonoBehaviour
     public GameObject gameOver;
     public GameObject winner;
     public GameObject loser;
+
+    public PlayFabManager1 playfabManager;
 
     bool food1Picked = false;
     bool food2Picked = false;
@@ -154,47 +158,8 @@ public class MemoryRead : MonoBehaviour
             winner.SetActive(true);
             timeText.enabled = false;
             smoothieRecipe.SetActive(true);
+            playfabManager.SendLeaderboard(counter.score);
         }
-
-        /*
-        if (remainingTime < timeToComplete - 5)
-        {
-            // if (remainingTime < timeToComplete - 20)
-            //{
-            if ((transcriptRec.Contains("Apple") || transcriptRec.Contains("apple")) && applePicked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                applePicked = true;
-                apple.SetActive(true);
-            }
-
-            if ((transcriptRec.Contains("Banana") || transcriptRec.Contains("banana")) && bananaPicked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                bananaPicked = true;
-                banana.SetActive(true);
-            }
-
-            if ((transcriptRec.Contains("Yogurt") || transcriptRec.Contains("yogurt")) && food2Picked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                yogurtPicked = true;
-                yogurt.SetActive(true);
-            }
-
-            if ((transcriptRec.Contains("ice cream") || transcriptRec.Contains("Ice cream")) && food2Picked == false)
-            {
-                counter.IncreaseScore(500);
-                // Debug.Log(transcriptRec);
-                icecreamPicked = true;
-                icecream.SetActive(true);
-            }
-        }
-        */
-        //}
         if (remainingTime <= 0 && gameStarted == true)
         {
             timeText.enabled = false;
@@ -222,6 +187,7 @@ public class MemoryRead : MonoBehaviour
                 food3.SetActive(true);
                 food3Picked = true;
             }
+            playfabManager.SendLeaderboard(counter.score);
         }
     }
 

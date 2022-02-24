@@ -168,6 +168,7 @@ public class ThinkyData2_2 : MonoBehaviour
             timeText.enabled = false;
             recipe.SetActive(true);
             eatIt.SetActive(true);
+            //playfabManager.SendLeaderboard(counter.score);
 
         }
         if (remainingTime <= 0 && gameStarted == true)
