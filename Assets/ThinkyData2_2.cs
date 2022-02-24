@@ -173,7 +173,6 @@ public class ThinkyData2_2 : MonoBehaviour
         if (remainingTime <= 0 && gameStarted == true)
         {
             recipe.SetActive(true);
-            eatIt.SetActive(true);
             timeText.enabled = false;
             if (task1Picked == false) // transcriptRec != ""
             {
