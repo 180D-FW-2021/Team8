@@ -82,7 +82,7 @@ def hands_sequential(filename = 'wrist_sequential.csv', show_video = True, show_
 					break
 		cap.release()
 		
-def hands_single(filename = 'wrist_single.csv', show_video = True, show_nodes = True, frame_wait = 10):
+def hands_single(filename = 'wrist_single.csv', exitFlag = 'exit.txt', show_video = True, show_nodes = True, frame_wait = 10):
 	'''
 	This function will save only the last detected wrist node position.
 	
@@ -93,6 +93,13 @@ def hands_single(filename = 'wrist_single.csv', show_video = True, show_nodes = 
 	frame_wait: Sets the delay (in ms) between loop iterations. This is simply the time passed to waitKey() to wait for the esc key and to preserve resources.
 	Higher values result in speedup at the cost of detection speed.
 	'''
+	exitCheckGap = 10 # check the exit flag every 10 loops
+	exitCheck = 0
+	# overwrite the previous Unity exit signal
+	exitwrite = open(exitFlag, 'w', newline='')
+	exitwrite.write('s')
+	exitwrite.close()
+	
 	mp_drawing = mp.solutions.drawing_utils
 	mp_drawing_styles = mp.solutions.drawing_styles
 	mp_hands = mp.solutions.hands
@@ -107,6 +114,7 @@ def hands_single(filename = 'wrist_single.csv', show_video = True, show_nodes = 
 		min_detection_confidence=0.5,
 		min_tracking_confidence=0.5) as hands:
 		while cap.isOpened():
+			exitCheck += 1
 			success, image = cap.read()
 			if not success:
 			  print("Ignoring empty camera frame.")
@@ -144,9 +152,15 @@ def hands_single(filename = 'wrist_single.csv', show_video = True, show_nodes = 
 			if(show_video):
 			# Flip the image horizontally for a selfie-view display.
 				cv2.imshow('MediaPipe Hands', cv2.flip(image, 1))
+			# check if Unity has sent an exit signal.
 			if cv2.waitKey(frame_wait) & 0xFF == 27:
 			# press esc (ASCII 27) to stop
 				break
+			if exitCheck >= exitCheckGap:
+				exitread = open(exitFlag, 'r', newline='')
+				flag = exitread.read(1) # only read 1st byte for security
+				if flag == 'f':
+					break # leave the write operation to next startup of HandsWrapper
 	cap.release()
 	
 def hands_tcp(port = 13000, host_ip = '127.0.0.1', show_video = True, show_nodes = True, frame_wait = 10):

@@ -24,6 +24,7 @@ public class fs_read_hands_csv : MonoBehaviour
         bool readSuccess;
         string[] coordString;
         string filepath = "wrist_single.csv";
+		string exitFlag = "exit.txt";
         int delay_ms = 13; // not exact correspondence between delay and frame rate due to processing time.
                            // i.e. delay less than you think you need for a desired frame rate. (16 ms should be approx. 60 fps but produces lower fps in practice)
                            // there should be some delay to preserve resource use. Noticed less CPU temp increase when delay is used.
@@ -130,6 +131,15 @@ public class fs_read_hands_csv : MonoBehaviour
 			//process.Kill()
 			//process.WaitForExit();
 			process.Dispose();
+			// write to file to tell python to close
+			// python will rewrite it on startup.
+			using(FileStream exitwrite = new FileStream(
+					exitFlag, FileMode.OpenOrCreate,
+					FileAccess.ReadWrite, FileShare.ReadWrite))
+			{
+				exitwrite.WriteByte((byte) 'f');
+			}
+			
 		}
     }
 }
