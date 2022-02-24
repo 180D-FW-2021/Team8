@@ -78,8 +78,8 @@ public class MemoryRead : MonoBehaviour
         {
             if (gameStarted == false)
             {
-                remainingTime = 31;
-                timeToComplete = 31;
+                remainingTime = 21;
+                timeToComplete = 21;
                 gameStarted = true;
             }
             else
@@ -152,6 +152,8 @@ public class MemoryRead : MonoBehaviour
         {
             gameOver.SetActive(true);
             winner.SetActive(true);
+            timeText.enabled = false;
+            smoothieRecipe.SetActive(true);
         }
 
         /*
@@ -195,6 +197,7 @@ public class MemoryRead : MonoBehaviour
         //}
         if (remainingTime <= 0 && gameStarted == true)
         {
+            timeText.enabled = false;
             if (food1Picked == false) // transcriptRec != ""
             {
                 counter.IncreaseScore(-200);
