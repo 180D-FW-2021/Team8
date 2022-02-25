@@ -21,7 +21,12 @@ ModelImporter:
   - first:
       95: 9500000
     second: //RootNode
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #2215
+    second: {fileID: 2100000, guid: cbaf29cd220a6ac4b8541cffd4bce6c3, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
