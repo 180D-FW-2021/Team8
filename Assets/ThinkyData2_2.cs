@@ -168,12 +168,12 @@ public class ThinkyData2_2 : MonoBehaviour
             timeText.enabled = false;
             recipe.SetActive(true);
             eatIt.SetActive(true);
+            //playfabManager.SendLeaderboard(counter.score);
 
         }
         if (remainingTime <= 0 && gameStarted == true)
         {
             recipe.SetActive(true);
-            eatIt.SetActive(true);
             timeText.enabled = false;
             if (task1Picked == false) // transcriptRec != ""
             {
