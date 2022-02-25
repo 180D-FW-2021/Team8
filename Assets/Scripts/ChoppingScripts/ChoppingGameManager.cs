@@ -63,7 +63,7 @@ public class ChoppingGameManager : MonoBehaviour
     Rigidbody c3_Rigidbody;
     Rigidbody c4_Rigidbody;
 
-    //private Random rnd = new Random();
+    private System.Random rnd;
     private MqttClient client;
     private string username = "com";
 
@@ -85,6 +85,8 @@ public class ChoppingGameManager : MonoBehaviour
 
         MainMenuButton.SetActive(false);
 
+        rnd = new System.Random();
+
         // Setting up text file
         shape = "square";
         string[] lines = {shape, "False", "False", "0"};
@@ -103,7 +105,7 @@ public class ChoppingGameManager : MonoBehaviour
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
 
-        //randomizeFakeArrowSequence();
+        randomizeFakeArrowSequence();
         client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("start"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
     }
@@ -137,6 +139,11 @@ public class ChoppingGameManager : MonoBehaviour
                 cakeSlice2.SetActive(true);
                 cakeSlice3.SetActive(true);
                 cakeSlice4.SetActive(true);
+
+                fakeRight.SetActive(false);
+                fakeUp.SetActive(false);
+                fakeLeft.SetActive(false);
+                fakeDown.SetActive(false);
 
                 c1_Rigidbody = cakeSlice1.GetComponent<Rigidbody>();
                 c2_Rigidbody = cakeSlice2.GetComponent<Rigidbody>();
@@ -205,6 +212,7 @@ public class ChoppingGameManager : MonoBehaviour
                 gameState = StateType.WIN;
             }
             else {
+                // Display the correct arrow
                 if (sequence[step_num] == "R") {
                     rightArrow.SetActive(true);
                     leftArrow.SetActive(false);
@@ -225,6 +233,32 @@ public class ChoppingGameManager : MonoBehaviour
                     leftArrow.SetActive(false);
                     upArrow.SetActive(false);
                     downArrow.SetActive(true);
+                } else {
+                    client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                    gameState = StateType.DEFAULT;
+                }
+
+                // Display the dummy arrow
+                if (fakeSequence[step_num] == "R") {
+                    fakeRight.SetActive(true);
+                    fakeLeft.SetActive(false);
+                    fakeUp.SetActive(false);
+                    fakeDown.SetActive(false);
+                } else if (fakeSequence[step_num] == "L") {
+                    fakeRight.SetActive(false);
+                    fakeLeft.SetActive(true);
+                    fakeUp.SetActive(false);
+                    fakeDown.SetActive(false);
+                } else if (fakeSequence[step_num] == "U") {
+                    fakeRight.SetActive(false);
+                    fakeLeft.SetActive(false);
+                    fakeUp.SetActive(true);
+                    fakeDown.SetActive(false);
+                } else if (fakeSequence[step_num] == "D") {
+                    fakeRight.SetActive(false);
+                    fakeLeft.SetActive(false);
+                    fakeUp.SetActive(false);
+                    fakeDown.SetActive(true);
                 } else {
                     client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     gameState = StateType.DEFAULT;
@@ -253,7 +287,9 @@ public class ChoppingGameManager : MonoBehaviour
         string[] directions = {"U","L","D","R"};
         for(int i = 0; i < sequence.Length; i++)
         {
-
+            do {
+                fakeSequence[i] = directions[rnd.Next(0,3)];
+            } while(fakeSequence[i] == sequence[i]);
         }
     }
 

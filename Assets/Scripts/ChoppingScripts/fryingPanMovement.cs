@@ -36,7 +36,10 @@ public class fryingPanMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(xTilt,yTilt,0.0f,Space.World);
+        //this.transform.Rotate(xTilt,yTilt,0.0f);
+        this.transform.rotation = Quaternion.Euler(-xTilt, 0.0f, -yTilt);
+
+        for(int i = 0; i < 3; i++) {}
     }
 
     void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
