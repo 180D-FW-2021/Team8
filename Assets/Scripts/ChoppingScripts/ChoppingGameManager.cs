@@ -28,6 +28,7 @@ public class ChoppingGameManager : MonoBehaviour
     private string shape = "square";
     private string file_path = "IMUCommsTxt.txt";
     private string[] sequence = new string[] {"L","R","U","L","D","R","U","L","D","R","L","D","U","R","L"};
+    private string[] fakeSequence = new string[] {"U","U","U","U","U","U","U","U","U","U","U","U","U","U","U"};
     private int step_num = 0;
 
     public GameObject WinScreen;
@@ -41,6 +42,16 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject upArrow;
     public GameObject downArrow;
 
+    public GameObject fakeRight;
+    public GameObject fakeLeft;
+    public GameObject fakeUp;
+    public GameObject fakeDown;
+
+    public GameObject upText;
+    public GameObject downText;
+    public GameObject leftText;
+    public GameObject rightText;
+
     public GameObject FullCake;
     public GameObject cakeSlice1;
     public GameObject cakeSlice2;
@@ -52,35 +63,9 @@ public class ChoppingGameManager : MonoBehaviour
     Rigidbody c3_Rigidbody;
     Rigidbody c4_Rigidbody;
 
-    public GameObject darkFirst;
-    public GameObject darkSecond;
-    public GameObject darkThird;
-    public GameObject darkFourth;
-
+    //private Random rnd = new Random();
     private MqttClient client;
     private string username = "com";
-
-    public void Pause(bool paused)
-    {
-        if(paused) {
-            gameState = StateType.PAUSING;
-        } else {
-            gameState = StateType.PLAYING;
-        }
-    }
-
-    public StateType getState()
-    {
-        return gameState;
-    }
-
-    void DisplayTime(float timeToDisplay)
-    {
-        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
-
-        timeText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -90,10 +75,10 @@ public class ChoppingGameManager : MonoBehaviour
         cakeSlice3.SetActive(false);
         cakeSlice4.SetActive(false);
 
-        darkFirst.SetActive(false);
-        darkSecond.SetActive(false);;
-        darkThird.SetActive(false);;
-        darkFourth.SetActive(false);;
+        fakeRight.SetActive(false);
+        fakeUp.SetActive(false);
+        fakeLeft.SetActive(false);
+        fakeDown.SetActive(false);
 
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
@@ -117,6 +102,8 @@ public class ChoppingGameManager : MonoBehaviour
         client.Subscribe(new string[] { "ece180d/team8/imu" + username },
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
+
+        //randomizeFakeArrowSequence();
         client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("start"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
     }
@@ -132,8 +119,10 @@ public class ChoppingGameManager : MonoBehaviour
                 LoseScreen.SetActive(false);
                 timeText.enabled = true;
                 break;
+                
             case StateType.PAUSING:
                 break;
+
             case StateType.WIN:
                 Objective.SetActive(false);
                 WinScreen.SetActive(true);
@@ -162,21 +151,27 @@ public class ChoppingGameManager : MonoBehaviour
                 cakeSlice2.SetActive(true);
                 cakeSlice3.SetActive(true);
                 cakeSlice4.SetActive(true);
-
-                //client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 break;
+
             case StateType.LOSE:
                 Objective.SetActive(false);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(true);
+
                 downArrow.SetActive(false);
                 upArrow.SetActive(false);
                 leftArrow.SetActive(false);
                 rightArrow.SetActive(false);
+
+                fakeRight.SetActive(false);
+                fakeUp.SetActive(false);
+                fakeLeft.SetActive(false);
+                fakeDown.SetActive(false);
+
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
-                //client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 break;
+
             default:
                 Debug.Log("ERROR: Unknown game state");
                 break;
@@ -238,6 +233,33 @@ public class ChoppingGameManager : MonoBehaviour
         }
     }
 
+    // Helper Functions
+
+    public StateType getState()
+    {
+        return gameState;
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {
+        float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+        float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+
+        timeText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    void randomizeFakeArrowSequence()
+    {
+        string[] directions = {"U","L","D","R"};
+        for(int i = 0; i < sequence.Length; i++)
+        {
+
+        }
+    }
+
+
+    // MQTT Functions
+
     void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
     {
         Debug.Log("Subscribed for id = " + e.MessageId);
@@ -256,7 +278,7 @@ public class ChoppingGameManager : MonoBehaviour
         //e.Message is a byte[]
         var str = System.Text.Encoding.UTF8.GetString(e.Message);
 
-        Debug.Log("received a message");
+        //Debug.Log("received a message");
 
         if (String.Equals(e.Topic, "ece180d/team8/imu" + username))
         {

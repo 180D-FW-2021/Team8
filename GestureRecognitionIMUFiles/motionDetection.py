@@ -341,6 +341,14 @@ while True:
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
+		xtilt = str(kalmanX)
+		ytilt = str(kalmanY)
+
+		tilts = xtilt[:6] + ytilt[:6]
+		print(tilts)
+
+		client.publish('ece180d/team8/movements', tilts, qos=1)
+
 		# slow program down a bit, makes the output more readable
 		time.sleep(0.05)
 	if shape_stage > (len(sequence) - 1):
