@@ -345,7 +345,6 @@ while True:
 		ytilt = str(kalmanY)
 
 		tilts = xtilt[:6] + ytilt[:6]
-		print(tilts)
 
 		client.publish('ece180d/team8/movements', tilts, qos=1)
 

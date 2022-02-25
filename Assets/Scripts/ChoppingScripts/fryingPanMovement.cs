@@ -66,6 +66,7 @@ public class fryingPanMovement : MonoBehaviour
 
             xTilt = float.Parse(xt);
             yTilt = float.Parse(yt);
+
         }
     }
 }
