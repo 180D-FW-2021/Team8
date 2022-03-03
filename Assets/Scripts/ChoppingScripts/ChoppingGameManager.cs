@@ -301,4 +301,9 @@ public class ChoppingGameManager : MonoBehaviour
             }
         }
     }
+
+    void OnDestroy()
+    {
+        client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+    }
 }
