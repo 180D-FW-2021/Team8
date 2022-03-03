@@ -39,9 +39,9 @@ public class fryingPanMovement : MonoBehaviour
     void Update()
     {
         //this.transform.Rotate(xTilt,yTilt,0.0f);
-        this.transform.rotation = Quaternion.Euler(-xTilt * tiltScale, 0.0f, -yTilt * tiltScale);
+        this.transform.rotation = Quaternion.Euler(xTilt * tiltScale, 0.0f, yTilt * tiltScale);
 
-        for(int i = 0; i < 3; i++) {}
+        for(int i = 0; i < 10; i++) {}
     }
 
     void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
