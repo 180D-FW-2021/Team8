@@ -15,6 +15,8 @@ public class fryingPanMovement : MonoBehaviour
     private float xTilt;
     private float yTilt;
 
+    private float tiltScale = 0.9f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +38,10 @@ public class fryingPanMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.Rotate(xTilt,yTilt,0.0f,Space.World);
+        //this.transform.Rotate(xTilt,yTilt,0.0f);
+        this.transform.rotation = Quaternion.Euler(-xTilt * tiltScale, 0.0f, -yTilt * tiltScale);
+
+        for(int i = 0; i < 3; i++) {}
     }
 
     void client_MqttMsgSubscribed(object sender, MqttMsgSubscribedEventArgs e)
