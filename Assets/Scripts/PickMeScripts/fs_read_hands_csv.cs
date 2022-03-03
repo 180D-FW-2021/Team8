@@ -41,24 +41,34 @@ public class fs_read_hands_csv : MonoBehaviour
 			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			try
 			{
-				if(onWin)
+				if(Application.platform == RuntimePlatform.WindowsPlayer)
 				{
 					// works for Win10 and Win11
-					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsWin10\wrapperTest";
-					// filepath = @"csvHandsWin10\" + filepath; // probably unnecessary unless unity base filepath changes across os
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\.." + @"\csvHandsWin10\wrapperTest";
 					UnityEngine.Debug.Log("Premade Win executable");
 				}
-				else if(onMac)
+				else if(Application.platform == RuntimePlatform.OSXPlayer)
 				{
-					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsMac\wrapperTest"; // TODO: test and implement and upload mac solution
-					//maybe need to differentiate between M1 and x86 mac?
-					// filepath = @"csvHandsMac\" + filepath; // probably unnecessary unless unity base filepath changes across os
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\.." + @"\csvHandsMac\wrapperTest";
+					//user differentiates between M1 and x86 mac
 					UnityEngine.Debug.Log("Premade Mac executable");
 				}
+				else if(Application.platform == RuntimePlatform.OSXEditor)
+				{
+					// editor path is different
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsMac\wrapperTest";
+					UnityEngine.Debug.Log("Mac editor");
+				}
+				else if(Application.platform == RuntimePlatform.WindowsEditor)
+				{
+					// editor path is different
+					process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsWin10\wrapperTest";
+					UnityEngine.Debug.Log("Win editor");
+				}
 			}
-			catch(System.ComponentModel.Win32Exception e) // user-generated
+			catch(System.ComponentModel.Win32Exception e) // I don't think this handler even works
 			{
-				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\csvHandsUser\wrapperTest";
+				process.StartInfo.FileName = Directory.GetCurrentDirectory() + @"\.." + @"\csvHandsUser\wrapperTest";
 				// filepath = @"csvHandsUser\" + filepath; // probably unnecessary unless unity base filepath changes across os
 				UnityEngine.Debug.Log("User-generated executable");
 			}
