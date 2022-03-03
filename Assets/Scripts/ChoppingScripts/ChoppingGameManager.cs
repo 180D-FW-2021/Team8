@@ -36,6 +36,7 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject Objective;
     public GameObject MainMenuButton;
     public Text timeText;
+    public Text scoreText;
 
     public GameObject rightArrow;
     public GameObject leftArrow;
@@ -47,14 +48,10 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject fakeUp;
     public GameObject fakeDown;
 
-    /*public GameObject upText;
-    public GameObject downText;
-    public GameObject leftText;
-    public GameObject rightText;*/
-
     private System.Random rnd;
     private MqttClient client;
     private string username = "com";
+    private int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +102,7 @@ public class ChoppingGameManager : MonoBehaviour
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(false);
                 timeText.enabled = true;
+                scoreText.enabled = false;
                 break;
                 
             case StateType.PAUSING:
@@ -124,7 +122,11 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeUp.SetActive(false);
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
-                
+
+                score = (int) (remainingTime * 150f + 5f * 15f);
+                scoreText.enabled = true;
+                scoreText.text = "Score: " + score;
+
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 string[] lines = {"N/A", "False", "True", "0"};
@@ -144,6 +146,10 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeUp.SetActive(false);
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
+
+                score = (sequence.Length - step_num) * 5;
+                scoreText.enabled = true;
+                scoreText.text = "Score: " + score;
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
@@ -294,5 +300,10 @@ public class ChoppingGameManager : MonoBehaviour
                 step_num = Convert.ToInt32(str);
             }
         }
+    }
+
+    void OnDestroy()
+    {
+        client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
     }
 }
