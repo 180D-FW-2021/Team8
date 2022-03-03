@@ -23,6 +23,6 @@ public class ScoreCounter : MonoBehaviour
 
     public void UpdateScoreDisplay()
     {
-        scoreText.text = string.Format("Score: {0:00000}", displayScore);
+        scoreText.text = string.Format("score: {0:00000}", displayScore);
     }
 }

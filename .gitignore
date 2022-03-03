@@ -331,3 +331,4 @@ gcp_credentials.json.meta
 Library/PackageCache/com.oshoham.unity-google-cloud-streaming-speech-to-text@0.1.8/Runtime/StreamingRecognizer.cs
 *.exe
 csvHandsMac/wrapperTest
+wrist_single.csv
