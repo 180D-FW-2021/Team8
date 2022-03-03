@@ -17,6 +17,7 @@ public class CameraPan : MonoBehaviour
 
     float smooth = 1f;
     float tiltAngle = 50f;
+    bool dirLeft = true;
 
     // Update is called once per frame
     void Update()
@@ -26,14 +27,26 @@ public class CameraPan : MonoBehaviour
         //rot *= Time.deltaTime;
         //transform.Rotate(0, rot, 0);
 
+        //bool dirLeft = true;
         float yAxis = transform.eulerAngles.y;
-        //Debug.Log(yAxis);
+        Debug.Log(yAxis);
         
-        if(yAxis < 309){
-            transform.Rotate(new Vector3(0, 1f, 0)* Time.deltaTime);
+        
+        if(yAxis > 357){
+            dirLeft = true;
+            //transform.Rotate(new Vector3(0, -1f, 0)* Time.deltaTime);
         }
-        else if(yAxis > 354){
+        if(yAxis < 309){
+            dirLeft = false;
+            //transform.Rotate(new Vector3(0, 1f, 0)* Time.deltaTime);
+        }
+
+
+       if(dirLeft){
             transform.Rotate(new Vector3(0, -1f, 0)* Time.deltaTime);
+        }
+        if(!dirLeft){
+            transform.Rotate(new Vector3(0, 1f, 0)* Time.deltaTime);
         }
         //160.43
 
