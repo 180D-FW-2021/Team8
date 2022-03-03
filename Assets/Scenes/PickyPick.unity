@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18339474, g: 0.22899616, b: 0.3060511, a: 1}
+  m_IndirectSpecularColor: {r: 0.18339516, g: 0.22899665, b: 0.3060517, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -241,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3882ee1bc1bdf284b8872917c3979145, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.871
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 3882ee1bc1bdf284b8872917c3979145, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3968,8 +3968,6 @@ MonoBehaviour:
   watermelon: {fileID: 2040489515}
   grape: {fileID: 1284936113}
   mushroom: {fileID: 1692340994}
-  include: {fileID: 1782378404}
-  noInclude: {fileID: 2046335035}
   scoreboard: {fileID: 1557931990}
   counter: {fileID: 1392529517}
   leaderboard: {fileID: 1557931989}
@@ -6535,7 +6533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -238, y: -183}
+  m_AnchoredPosition: {x: -500, y: -183}
   m_SizeDelta: {x: 97.98541, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1392529515
@@ -7091,7 +7089,7 @@ MonoBehaviour:
   onInterimResult:
     m_PersistentCalls:
       m_Calls: []
-  _microphoneName: Built-in Microphone
+  _microphoneName: Microphone Array (Realtek High Definition Audio)
 --- !u!82 &1557474803
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7716,7 +7714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -234, y: -102}
+  m_AnchoredPosition: {x: -500, y: -102}
   m_SizeDelta: {x: 91.1456, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1649984693

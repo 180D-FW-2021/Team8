@@ -32,8 +32,8 @@ public class PickMe : MonoBehaviour
     public GameObject watermelon;
     public GameObject grape;
     public GameObject mushroom;
-    public GameObject include;
-    public GameObject noInclude;
+    //public GameObject include;
+    //public GameObject noInclude;
 
     public HighScores scoreboard;
 
@@ -115,11 +115,12 @@ public class PickMe : MonoBehaviour
             timeBonus = timeBonus * 100;
             counter.IncreaseScore(timeBonus);
 
-            scoreboard.AddNewScore("Player1", counter.score);
+            //scoreboard.AddNewScore("Player1", counter.score);
 
             Debug.Log("Added all food");
+			cursor.SetActive(false);
             //entry1.SetActive(true);
-            leaderboard.SetActive(true);
+            //leaderboard.SetActive(true);
             timeText.enabled = false;
 
         }
@@ -130,7 +131,7 @@ public class PickMe : MonoBehaviour
 			if(breadFound == false)
 			{
 				Debug.Log("Touching bread");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && breadFound == false)
 				//{
 				counter.IncreaseScore(-500);
@@ -161,7 +162,7 @@ public class PickMe : MonoBehaviour
 			if(carrotFound == false)
 			{
 				Debug.Log("Touching carrot");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && carrotFound == false)
 				//{
 				counter.IncreaseScore(-500);
@@ -192,7 +193,7 @@ public class PickMe : MonoBehaviour
 			if(appleFound == false)
 			{
 				Debug.Log("Touching apple");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && appleFound == false)
 				//{
 				counter.IncreaseScore(1000);
@@ -223,7 +224,7 @@ public class PickMe : MonoBehaviour
 			if(lemonFound == false)
 			{
 				Debug.Log("Touching lemon");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && lemonFound == false)
 				//{
 				counter.IncreaseScore(-500);
@@ -254,7 +255,7 @@ public class PickMe : MonoBehaviour
 			if(bananaFound == false)
 			{
 				Debug.Log("Touching banana");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && bananaFound == false)
 				//{
 				counter.IncreaseScore(1000);
@@ -285,7 +286,7 @@ public class PickMe : MonoBehaviour
 			if(tomatoFound == false)
 			{
 				Debug.Log("Touching tomato");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && tomatoFound == false)
 				//{
 				counter.IncreaseScore(-500);
@@ -315,7 +316,7 @@ public class PickMe : MonoBehaviour
 			if(watermelonFound == false)
 			{
 				Debug.Log("Touching watermelon");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && watermelonFound == false)
 				//{
 				counter.IncreaseScore(1000);
@@ -345,7 +346,7 @@ public class PickMe : MonoBehaviour
         {
 			if(grapeFound == false) {
             Debug.Log("Touching grape");
-            include.SetActive(true);
+            //include.SetActive(true);
             //if (transcriptRec.Contains("yes") && grapeFound == false)
             //{
             counter.IncreaseScore(-500);
@@ -374,7 +375,7 @@ public class PickMe : MonoBehaviour
 			if(mushroomFound == false)
 			{
 				Debug.Log("Touching mushroom");
-				include.SetActive(true);
+				//include.SetActive(true);
 				//if (transcriptRec.Contains("yes") && mushroomFound == false)
 				//{
 				counter.IncreaseScore(-500);
