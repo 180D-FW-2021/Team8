@@ -67,6 +67,8 @@ public class ChoppingGameManager : MonoBehaviour
 
         MainMenuButton.SetActive(false);
 
+        step_num = 0;
+
         rnd = new System.Random();
 
         // Setting up text file
@@ -147,7 +149,7 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
 
-                score = (sequence.Length - step_num) * 5;
+                score = step_num * 5;
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
 
