@@ -341,7 +341,7 @@ while True:
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
-		if x % 5 == 0:
+		if x % 3 == 0:
 			xtilt = str(kalmanX)
 			ytilt = str(kalmanY)
 
