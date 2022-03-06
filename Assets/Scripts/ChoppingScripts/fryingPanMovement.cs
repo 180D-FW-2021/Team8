@@ -41,6 +41,7 @@ public class fryingPanMovement : MonoBehaviour
         //this.transform.Rotate(xTilt,yTilt,0.0f);
         this.transform.rotation = Quaternion.Euler(xTilt * tiltScale, 0.0f, yTilt * tiltScale);
 
+        // A for loop as a delay to space out the tilting updates to not crash Unity
         for(int i = 0; i < 10; i++) {}
     }
 
