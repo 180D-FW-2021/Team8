@@ -56,27 +56,25 @@ public class ChoppingGameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        // Ensuring the proper assets are hidden
         fakeRight.SetActive(false);
         fakeUp.SetActive(false);
         fakeLeft.SetActive(false);
         fakeDown.SetActive(false);
 
+        MainMenuButton.SetActive(false);
+
+        // Initialize the game to be PLAYING
         gameState = StateType.PLAYING;
         remainingTime = timeToComplete;
-
-        MainMenuButton.SetActive(false);
 
         step_num = 0;
 
         rnd = new System.Random();
 
-        // Setting up text file
-        shape = "square";
-        string[] lines = {shape, "False", "False", "0"};
-
+        // Initializing MQTT
         username = PlayerPrefs.GetString("Username");
-        Debug.Log("mqtt " + username);
+        // Debug.Log("mqtt " + username);
 
         client = new MqttClient("test.mosquitto.org");
         client.MqttMsgPublished += client_MqttMsgPublished;
@@ -88,7 +86,7 @@ public class ChoppingGameManager : MonoBehaviour
         client.Subscribe(new string[] { "ece180d/team8/imu" + username },
             new byte[] { MqttMsgBase.QOS_LEVEL_AT_MOST_ONCE });
 
-
+        // Randomizing the fake arrow sequence and sending a message to the Raspberry Pi to begin recording motions
         randomizeFakeArrowSequence();
         client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("start"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
 
@@ -97,6 +95,7 @@ public class ChoppingGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Check game state and update Game Objects accordingly
         switch (gameState)
         {
             case StateType.PLAYING:
@@ -125,6 +124,7 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
 
+                // Calculate the score based on the remaining time * 150 + 75 points as a base value for finishing all the motions
                 score = (int) (remainingTime * 150f + 5f * 15f);
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
@@ -149,6 +149,8 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
 
+                // Calculate the score based on how many motions they completed:
+                // score = steps completed * 5
                 score = step_num * 5;
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
@@ -164,33 +166,31 @@ public class ChoppingGameManager : MonoBehaviour
 
         if (getState() == StateType.PLAYING)
         {
+            // If there is remaining time in the timer, continue to count down
             if (remainingTime > 0 && getState() != StateType.PAUSING) {
                 remainingTime -= Time.deltaTime;
                 DisplayTime(remainingTime);
             }
+            // If there is no more time left, change the game state to LOSE
             else if (remainingTime <= 0 && getState() != StateType.LOSE) {
                 remainingTime = 0;
                 gameState = StateType.LOSE;
-
                 client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
             }
 
+            // If the game enters undefined behavior and counts steps above the sequence length, consider it the player losing
             if (step_num > sequence.Length) {
                 client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 gameState = StateType.LOSE;
             }
 
-
+            // If the step number is equal to the number of total steps, change the game state to WIN
             if (step_num == sequence.Length) {
-                rightArrow.SetActive(false);
-                leftArrow.SetActive(false);
-                upArrow.SetActive(false);
-                downArrow.SetActive(false);
                 client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 gameState = StateType.WIN;
             }
             else {
-                // Display the correct arrow
+                // Display the correct sequence arrow
                 if (sequence[step_num] == "R") {
                     rightArrow.SetActive(true);
                     leftArrow.SetActive(false);
@@ -212,6 +212,7 @@ public class ChoppingGameManager : MonoBehaviour
                     upArrow.SetActive(false);
                     downArrow.SetActive(true);
                 } else {
+                    // If the sequence contains a letter that isn't a direction, undefined behavior and set to DEFAULT game state
                     client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     gameState = StateType.DEFAULT;
                 }
@@ -238,6 +239,7 @@ public class ChoppingGameManager : MonoBehaviour
                     fakeUp.SetActive(false);
                     fakeDown.SetActive(true);
                 } else {
+                    // If the sequence contains a letter that isn't a direction, undefined behavior and set to DEFAULT game state
                     client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                     gameState = StateType.DEFAULT;
                 }
@@ -265,6 +267,7 @@ public class ChoppingGameManager : MonoBehaviour
         string[] directions = {"U","L","D","R"};
         for(int i = 0; i < sequence.Length; i++)
         {
+            // Ensure that the fake arrow is not the same as the true sequence arrow
             do {
                 fakeSequence[i] = directions[rnd.Next(0,3)];
             } while(fakeSequence[i] == sequence[i]);
@@ -304,6 +307,7 @@ public class ChoppingGameManager : MonoBehaviour
         }
     }
 
+    // On scene destroy, send a message to the raspberry pi to ensure that the motion detection script stops
     void OnDestroy()
     {
         client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
