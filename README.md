@@ -1,7 +1,7 @@
 # Cooking Bruin - Team 8
 Alan Dihn, Isabel Dominik, Megan Gronstad, Karalyn Sawchuk
 
-Cooking Bruin is a cooking themed video game made up of two minigames Chop Chop and Pick Me!
+Cooking Bruin is a cooking themed video game made up of three minigames Fry Fry, Thinky Think, and Pick Me! Complete these minigames as quickly as you can to earn the most points.
 
 Required Hardware:
 - Raspberry Pi
