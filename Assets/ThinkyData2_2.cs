@@ -33,6 +33,11 @@ public class ThinkyData2_2 : MonoBehaviour
     public GameObject loser;
     public GameObject eatIt;
 
+    public GameObject knife;
+    public GameObject roll;
+    public GameObject pan;
+    public GameObject cutter;
+
     bool task1Picked = false;
     bool task2Picked = false;
     bool task3Picked = false;
@@ -122,33 +127,40 @@ public class ThinkyData2_2 : MonoBehaviour
                 task1Picked = true;
                 task1.SetActive(true);
                 numPicked++;
+                knife.SetActive(true);
             }
 
             if ((transcriptRec.Contains("roll dough") || transcriptRec.Contains("rolled up") || transcriptRec.Contains("roll the") || transcriptRec.Contains("Waldo")) && task2Picked == false && task1Picked == true)
             {
+                knife.SetActive(false);
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
                 task2Picked = true;
                 task2.SetActive(true);
                 numPicked++;
+                roll.SetActive(true);
             }
 
             if ((transcriptRec.Contains("combine") || transcriptRec.Contains("come") || transcriptRec.Contains("come by")) && task4Picked == false && task1Picked == true && task2Picked == true)
             {
+                roll.SetActive(false);
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
                 task4Picked = true;
                 task4.SetActive(true);
                 numPicked++;
+                pan.SetActive(true);
             }
 
-            if ((transcriptRec.Contains("baked") || transcriptRec.Contains("fake") || transcriptRec.Contains("bake") || transcriptRec.Contains("make")) && task3Picked == false && task1Picked == true && task2Picked == true && task4Picked == true)
+            if ((transcriptRec.Contains("baked") || transcriptRec.Contains("fake") || transcriptRec.Contains("bake") || transcriptRec.Contains("make") || transcriptRec.Contains("faked")) && task3Picked == false && task1Picked == true && task2Picked == true && task4Picked == true)
             {
+                pan.SetActive(false);
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
                 task3Picked = true;
                 task3.SetActive(true);
                 numPicked++;
+                cutter.SetActive(true);
             }
             /*
             if ((transcriptRec.Contains("Tomato") || transcriptRec.Contains("tomato")) && food5Picked == false)
