@@ -12,7 +12,7 @@ public class PlayFabManager1 : MonoBehaviour
         Login();
     }
 
-    // Update is called once per frame
+    // USER LOGIN LEADERBOARD SEND IDK
     void Login()
     {
         var request = new LoginWithCustomIDRequest {
@@ -62,4 +62,33 @@ public class PlayFabManager1 : MonoBehaviour
             Debug.Log(item.Position + " " + item.PlayFabId + " " + item.StatValue);
         }
     }
+
+
+    // User Registration
+    public Text messageText;
+    public InputField emailInput;
+    public InputField passwordInput;
+
+    public void RegisterButton(){
+        var request = new RegisterPlayFabUserRequest{
+            Email = emailInput.text, 
+            Password = passwordInput.text,
+            RequireBothUsernameAndEmail = false
+        };
+        PlayFabClientAPI.RegisterPlayFabUser(request, OnRegisterSuccess, OnError);
+    }
+
+    void OnRegisterSuccess(RegisterPlayFabUserResult result){
+        messageText.text = "registered and logged in";
+    }
+
+    public void LoginButton(){
+
+    }
+
+    public void ResetPasswordButton(){
+
+    }
+    //void OnPasswordReset()
 }
+
