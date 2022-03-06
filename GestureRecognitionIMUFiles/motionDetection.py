@@ -349,7 +349,7 @@ while True:
 		client.publish('ece180d/team8/movements', tilts, qos=1)
 
 		# slow program down a bit, makes the output more readable
-		time.sleep(0.05)
+		time.sleep(0.1)
 	if shape_stage > (len(sequence) - 1):
 		shape_stage = 0
 		game_running = False
