@@ -67,7 +67,7 @@ public class startGame : MonoBehaviour
 
     public void chopStart(){
         Debug.Log("Chopping minigame loading");        
-        SceneManager.LoadScene("FryFry", LoadSceneMode.Single);
+        SceneManager.LoadScene("Fry Fry", LoadSceneMode.Single);
         if(IngredientPanel != null){
             IngredientPanel.SetActive(false);
         }
