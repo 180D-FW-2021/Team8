@@ -200,8 +200,7 @@ def on_message(client, userdata, message):
 		shape_stage = 0
 	elif "start" in str(message.payload):
 		print("Start detected")
-		if game_running is False:
-			shape_stage = 0
+		shape_stage = 0
 		game_running = True
 
 print("About to connect...")

@@ -58,6 +58,7 @@ public class MemoryRead : MonoBehaviour
     {
         remainingTime = timeToComplete;
         transcriptRec = "";
+        //playfabManager.SetActive(false);
     }
 
     // Update is called once per frame
@@ -158,7 +159,12 @@ public class MemoryRead : MonoBehaviour
             winner.SetActive(true);
             timeText.enabled = false;
             smoothieRecipe.SetActive(true);
+            //playfabManager.SetActive(true);
             playfabManager.SendLeaderboard(counter.score);
+
+            //playfabManager.SendLeaderboard(counter.score);
+            playfabManager.GetLeaderboard();
+            //playfabManager.displayScores();
         }
         if (remainingTime <= 0 && gameStarted == true)
         {
@@ -187,7 +193,7 @@ public class MemoryRead : MonoBehaviour
                 food3.SetActive(true);
                 food3Picked = true;
             }
-            playfabManager.SendLeaderboard(counter.score);
+           
         }
     }
 

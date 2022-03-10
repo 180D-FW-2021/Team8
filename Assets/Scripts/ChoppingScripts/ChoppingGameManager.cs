@@ -13,8 +13,7 @@ using System.Text;
 public enum StateType
 {
     DEFAULT,    // Fall-back state, should never happen
-    PLAYING,    // Player actively tracing shape
-    PAUSING,    // Player pausing game
+    PLAYING,    // Player actively tilting controller
     WIN,        // Player has won the game
     LOSE        // Player has lost the game
 }
@@ -105,9 +104,6 @@ public class ChoppingGameManager : MonoBehaviour
                 timeText.enabled = true;
                 scoreText.enabled = false;
                 break;
-                
-            case StateType.PAUSING:
-                break;
 
             case StateType.WIN:
                 Objective.SetActive(false);
@@ -131,7 +127,6 @@ public class ChoppingGameManager : MonoBehaviour
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
-                string[] lines = {"N/A", "False", "True", "0"};
                 break;
 
             case StateType.LOSE:
@@ -167,7 +162,7 @@ public class ChoppingGameManager : MonoBehaviour
         if (getState() == StateType.PLAYING)
         {
             // If there is remaining time in the timer, continue to count down
-            if (remainingTime > 0 && getState() != StateType.PAUSING) {
+            if (remainingTime > 0) {
                 remainingTime -= Time.deltaTime;
                 DisplayTime(remainingTime);
             }
