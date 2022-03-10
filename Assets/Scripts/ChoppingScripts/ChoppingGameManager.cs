@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using System.Text;
+using TMPro;
 
 public enum StateType
 {
@@ -30,12 +31,10 @@ public class ChoppingGameManager : MonoBehaviour
     private string[] fakeSequence = new string[] {"U","U","U","U","U","U","U","U","U","U","U","U","U","U","U"};
     private int step_num = 0;
 
-    public GameObject WinScreen;
-    public GameObject LoseScreen;
     public GameObject Objective;
     public GameObject MainMenuButton;
     public Text timeText;
-    public Text scoreText;
+    public TMP_Text scoreText;
 
     public GameObject rightArrow;
     public GameObject leftArrow;
@@ -104,8 +103,7 @@ public class ChoppingGameManager : MonoBehaviour
             case StateType.PLAYING:
                 leaderboard.SetActive(false);
                 Objective.SetActive(true);
-                WinScreen.SetActive(false);
-                LoseScreen.SetActive(false);
+
                 timeText.enabled = true;
                 scoreText.enabled = false;
                 break;
@@ -113,8 +111,6 @@ public class ChoppingGameManager : MonoBehaviour
             case StateType.WIN:
                 leaderboard.SetActive(true);
                 Objective.SetActive(false);
-                WinScreen.SetActive(true);
-                LoseScreen.SetActive(false);
 
                 downArrow.SetActive(false);
                 upArrow.SetActive(false);
@@ -133,8 +129,6 @@ public class ChoppingGameManager : MonoBehaviour
             case StateType.LOSE:
                 leaderboard.SetActive(true);
                 Objective.SetActive(false);
-                WinScreen.SetActive(false);
-                LoseScreen.SetActive(true);
 
                 downArrow.SetActive(false);
                 upArrow.SetActive(false);
@@ -312,7 +306,7 @@ public class ChoppingGameManager : MonoBehaviour
         // Calculate the score based on the remaining time * 150 + 75 points as a base value for finishing all the motions
         score = (int) (remainingTime * 150f + 5f * 15f);
         scoreText.enabled = true;
-        scoreText.text = "Score: " + score;
+        scoreText.text = Convert.ToString(score);
         playFab.SendLeaderboard(score);
         playFab.GetLeaderboard();
     }
@@ -323,7 +317,7 @@ public class ChoppingGameManager : MonoBehaviour
         // score = steps completed * 5
         score = step_num * 5;
         scoreText.enabled = true;
-        scoreText.text = "Score: " + score;
+        scoreText.text = Convert.ToString(score);
         playFab.SendLeaderboard(score);
         playFab.GetLeaderboard();
     }

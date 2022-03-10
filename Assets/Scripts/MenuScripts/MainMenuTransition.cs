@@ -49,4 +49,22 @@ public class MainMenuTransition : MonoBehaviour
         Debug.Log("Fry Fry loading");
         SceneManager.LoadScene("Fry Fry", LoadSceneMode.Single);
     }
+
+    public void loadThinky1()
+    {
+        Debug.Log("Thinky 1 loading");
+        SceneManager.LoadScene("Thinky1", LoadSceneMode.Single);
+    }
+
+    public void loadThink2()
+    {
+        Debug.Log("Thinky 2 loading");
+        SceneManager.LoadScene("Thinky2", LoadSceneMode.Single);
+    }
+
+    public void loadThinky22()
+    {
+        Debug.Log("Thinky 2.2 loading");
+        SceneManager.LoadScene("Thinky2.2", LoadSceneMode.Single);
+    }
 }
