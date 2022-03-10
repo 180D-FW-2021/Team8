@@ -106,7 +106,7 @@ public class PickMe : MonoBehaviour
 
             //scoreboard.AddNewScore("Player1", counter.score);
 
-            Debug.Log("Added all food");
+            Debug.Log("Game over, added all food");
             cursor.SetActive(false);
             //entry1.SetActive(true);
             //leaderboard.SetActive(true);
@@ -130,6 +130,7 @@ public class PickMe : MonoBehaviour
             {
                 remainingTime = 0;
                 gameOver = true;
+				Debug.Log("Game over, no time");
 				leaderboard.SetActive(true);
 				yourScore.text = Convert.ToString(counter.score);
 				pfManager.SendLeaderboard(counter.score);
