@@ -29,7 +29,7 @@ public class CameraPan : MonoBehaviour
 
         //bool dirLeft = true;
         float yAxis = transform.eulerAngles.y;
-        Debug.Log(yAxis);
+        //Debug.Log(yAxis);
         
         
         if(yAxis > 357){
