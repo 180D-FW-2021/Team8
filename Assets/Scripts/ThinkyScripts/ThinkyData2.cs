@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
+using TMPro;
 
 public class ThinkyData2 : MonoBehaviour
 {
@@ -41,6 +42,12 @@ public class ThinkyData2 : MonoBehaviour
     string transcriptRecOld = "";
     bool gameStarted = false;
     int numPicked = 0;
+
+    public GameObject leaderboard;
+    public PlayFabManager1 scoreScript;
+    public TMP_Text score_text;
+
+    bool finished = false;
 
     void DisplayTime(float timeToDisplay)
     {
@@ -160,15 +167,24 @@ public class ThinkyData2 : MonoBehaviour
             }
         }
 
-        if (numPicked == 5)
+        if (numPicked == 5 && finished == false)
         {
             gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
             recipe.SetActive(true);
+
+            leaderboard.SetActive(true);
+            score_text.text = Convert.ToString(counter.score);
+            scoreScript.SendLeaderboard(counter.score);
+            System.Threading.Thread.Sleep(2000);
+            scoreScript.GetLeaderboard();
+            finished = true;
         }
-        if (remainingTime <= 0 && gameStarted == true)
+        if (remainingTime <= 0 && gameStarted == true && finished == false)
         {
+            recipe.SetActive(true);
+            timeText.enabled = false;
             if (food1Picked == false) // transcriptRec != ""
             {
                 counter.IncreaseScore(-200);
@@ -199,6 +215,12 @@ public class ThinkyData2 : MonoBehaviour
                 food5.SetActive(true);
                 food5Picked = true;
             }
+            leaderboard.SetActive(true);
+            score_text.text = Convert.ToString(counter.score);
+            scoreScript.SendLeaderboard(counter.score);
+            System.Threading.Thread.Sleep(2000);
+            scoreScript.GetLeaderboard();
+            finished = true;
         }
     }
 }
