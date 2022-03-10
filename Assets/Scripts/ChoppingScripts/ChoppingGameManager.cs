@@ -131,6 +131,7 @@ public class ChoppingGameManager : MonoBehaviour
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
                 playFab.SendLeaderboard(score);
+                playFab.GetLeaderboard();
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
@@ -158,6 +159,7 @@ public class ChoppingGameManager : MonoBehaviour
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
                 playFab.SendLeaderboard(score);
+                playFab.GetLeaderboard();
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
