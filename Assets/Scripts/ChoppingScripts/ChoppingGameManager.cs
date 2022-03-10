@@ -47,6 +47,9 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject fakeUp;
     public GameObject fakeDown;
 
+    public GameObject leaderboard;
+    public PlayFabManager1 playFab;
+
     private System.Random rnd;
     private MqttClient client;
     private string username = "com";
@@ -56,6 +59,7 @@ public class ChoppingGameManager : MonoBehaviour
     void Start()
     {
         // Ensuring the proper assets are hidden
+        leaderboard.SetActive(false);
         fakeRight.SetActive(false);
         fakeUp.SetActive(false);
         fakeLeft.SetActive(false);
@@ -98,6 +102,7 @@ public class ChoppingGameManager : MonoBehaviour
         switch (gameState)
         {
             case StateType.PLAYING:
+                leaderboard.SetActive(false);
                 Objective.SetActive(true);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(false);
@@ -106,6 +111,7 @@ public class ChoppingGameManager : MonoBehaviour
                 break;
 
             case StateType.WIN:
+                leaderboard.SetActive(true);
                 Objective.SetActive(false);
                 WinScreen.SetActive(true);
                 LoseScreen.SetActive(false);
@@ -124,12 +130,14 @@ public class ChoppingGameManager : MonoBehaviour
                 score = (int) (remainingTime * 150f + 5f * 15f);
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
+                playFab.SendLeaderboard(score);
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 break;
 
             case StateType.LOSE:
+                leaderboard.SetActive(true);
                 Objective.SetActive(false);
                 WinScreen.SetActive(false);
                 LoseScreen.SetActive(true);
@@ -149,6 +157,7 @@ public class ChoppingGameManager : MonoBehaviour
                 score = step_num * 5;
                 scoreText.enabled = true;
                 scoreText.text = "Score: " + score;
+                playFab.SendLeaderboard(score);
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
