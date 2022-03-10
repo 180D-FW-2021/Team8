@@ -99,7 +99,7 @@ public class ThinkyData2_2 : MonoBehaviour
             else
             {
                 remainingTime = 0;
-                gameOver.SetActive(true);
+                //gameOver.SetActive(true);
                 if (numPicked == 4)
                 {
                     winner.SetActive(true);
@@ -182,7 +182,7 @@ public class ThinkyData2_2 : MonoBehaviour
 
         if (numPicked == 4 && finished == false)
         {
-            gameOver.SetActive(true);
+            //gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
             recipe.SetActive(true);
