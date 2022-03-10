@@ -48,6 +48,9 @@ public class ThinkyData2_2 : MonoBehaviour
     bool gameStarted = false;
     int numPicked = 0;
 
+    public GameObject leaderboard;
+    public PlayFabManager1 scoreScript;
+
     void DisplayTime(float timeToDisplay)
     {
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
@@ -97,10 +100,17 @@ public class ThinkyData2_2 : MonoBehaviour
                 if (numPicked == 4)
                 {
                     winner.SetActive(true);
+                    scoreScript.SendLeaderboard(counter.score);
+                    leaderboard.SetActive(true);
+                    scoreScript.GetLeaderboard();
+                    //scoreScript.Sen
                 }
                 else
                 {
                     loser.SetActive(true);
+                    scoreScript.SendLeaderboard(counter.score);
+                    leaderboard.SetActive(true);
+                    scoreScript.GetLeaderboard();
                 }
             }
         }
@@ -172,6 +182,7 @@ public class ThinkyData2_2 : MonoBehaviour
                 numPicked++;
             }*/
         }
+
 
         if (numPicked == 4)
         {

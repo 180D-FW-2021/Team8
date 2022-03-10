@@ -4874,6 +4874,7 @@ MonoBehaviour:
   - {fileID: 85225964}
   - {fileID: 438841407}
   username: {fileID: 0}
+  leaderboardName: PickLeaderboard
   nameWindow: {fileID: 0}
   leaderboardWindow: {fileID: 0}
   nameError: {fileID: 0}
