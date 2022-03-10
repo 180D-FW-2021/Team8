@@ -67,4 +67,10 @@ public class MainMenuTransition : MonoBehaviour
         Debug.Log("Thinky 2.2 loading");
         SceneManager.LoadScene("Thinky2.2", LoadSceneMode.Single);
     }
+
+    public void loadPickMe()
+    {
+        Debug.Log("PickyPick loading");
+        SceneManager.LoadScene("PickyPick", LoadSceneMode.Single);
+    }
 }
