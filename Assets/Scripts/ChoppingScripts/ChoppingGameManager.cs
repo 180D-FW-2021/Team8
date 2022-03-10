@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using uPLibrary.Networking.M2Mqtt;
 using uPLibrary.Networking.M2Mqtt.Messages;
 using System.Text;
+using TMPro;
 
 public enum StateType
 {
@@ -30,12 +31,10 @@ public class ChoppingGameManager : MonoBehaviour
     private string[] fakeSequence = new string[] {"U","U","U","U","U","U","U","U","U","U","U","U","U","U","U"};
     private int step_num = 0;
 
-    public GameObject WinScreen;
-    public GameObject LoseScreen;
     public GameObject Objective;
     public GameObject MainMenuButton;
     public Text timeText;
-    public Text scoreText;
+    public TMP_Text scoreText;
 
     public GameObject rightArrow;
     public GameObject leftArrow;
@@ -47,6 +46,9 @@ public class ChoppingGameManager : MonoBehaviour
     public GameObject fakeUp;
     public GameObject fakeDown;
 
+    public GameObject leaderboard;
+    public PlayFabManager1 playFab;
+
     private System.Random rnd;
     private MqttClient client;
     private string username = "com";
@@ -56,6 +58,7 @@ public class ChoppingGameManager : MonoBehaviour
     void Start()
     {
         // Ensuring the proper assets are hidden
+        leaderboard.SetActive(false);
         fakeRight.SetActive(false);
         fakeUp.SetActive(false);
         fakeLeft.SetActive(false);
@@ -98,17 +101,16 @@ public class ChoppingGameManager : MonoBehaviour
         switch (gameState)
         {
             case StateType.PLAYING:
+                leaderboard.SetActive(false);
                 Objective.SetActive(true);
-                WinScreen.SetActive(false);
-                LoseScreen.SetActive(false);
+
                 timeText.enabled = true;
                 scoreText.enabled = false;
                 break;
 
             case StateType.WIN:
+                leaderboard.SetActive(true);
                 Objective.SetActive(false);
-                WinScreen.SetActive(true);
-                LoseScreen.SetActive(false);
 
                 downArrow.SetActive(false);
                 upArrow.SetActive(false);
@@ -119,20 +121,14 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeUp.SetActive(false);
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
-
-                // Calculate the score based on the remaining time * 150 + 75 points as a base value for finishing all the motions
-                score = (int) (remainingTime * 150f + 5f * 15f);
-                scoreText.enabled = true;
-                scoreText.text = "Score: " + score;
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 break;
 
             case StateType.LOSE:
+                leaderboard.SetActive(true);
                 Objective.SetActive(false);
-                WinScreen.SetActive(false);
-                LoseScreen.SetActive(true);
 
                 downArrow.SetActive(false);
                 upArrow.SetActive(false);
@@ -143,12 +139,6 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeUp.SetActive(false);
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
-
-                // Calculate the score based on how many motions they completed:
-                // score = steps completed * 5
-                score = step_num * 5;
-                scoreText.enabled = true;
-                scoreText.text = "Score: " + score;
 
                 MainMenuButton.SetActive(true);
                 timeText.enabled = false;
@@ -171,18 +161,21 @@ public class ChoppingGameManager : MonoBehaviour
                 remainingTime = 0;
                 gameState = StateType.LOSE;
                 client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+                scoreLoss();
             }
 
             // If the game enters undefined behavior and counts steps above the sequence length, consider it the player losing
             if (step_num > sequence.Length) {
                 client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 gameState = StateType.LOSE;
+                scoreLoss();
             }
 
             // If the step number is equal to the number of total steps, change the game state to WIN
             if (step_num == sequence.Length) {
                 client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
                 gameState = StateType.WIN;
+                scoreWin();
             }
             else {
                 // Display the correct sequence arrow
@@ -306,5 +299,26 @@ public class ChoppingGameManager : MonoBehaviour
     void OnDestroy()
     {
         client.Publish("ece180d/team8/unity", Encoding.UTF8.GetBytes("stop"), MqttMsgBase.QOS_LEVEL_AT_LEAST_ONCE, true);
+    }
+
+    private void scoreWin()
+    {
+        // Calculate the score based on the remaining time * 150 + 75 points as a base value for finishing all the motions
+        score = (int) (remainingTime * 150f + 5f * 15f);
+        scoreText.enabled = true;
+        scoreText.text = Convert.ToString(score);
+        playFab.SendLeaderboard(score);
+        playFab.GetLeaderboard();
+    }
+
+    private void scoreLoss()
+    {
+        // Calculate the score based on how many motions they completed:
+        // score = steps completed * 5
+        score = step_num * 5;
+        scoreText.enabled = true;
+        scoreText.text = Convert.ToString(score);
+        playFab.SendLeaderboard(score);
+        playFab.GetLeaderboard();
     }
 }

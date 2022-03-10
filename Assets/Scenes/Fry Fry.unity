@@ -1601,12 +1601,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9a86b435e15e34da39aead85d8d01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WinScreen: {fileID: 1150110334}
-  LoseScreen: {fileID: 1548603353}
   Objective: {fileID: 433641527}
   MainMenuButton: {fileID: 495828572}
   timeText: {fileID: 1630406221}
-  scoreText: {fileID: 574243928}
+  scoreText: {fileID: 906304282}
   rightArrow: {fileID: 1836490526}
   leftArrow: {fileID: 955295851}
   upArrow: {fileID: 207934622}
@@ -1615,6 +1613,8 @@ MonoBehaviour:
   fakeLeft: {fileID: 1570614198}
   fakeUp: {fileID: 45714051}
   fakeDown: {fileID: 1706185306}
+  leaderboard: {fileID: 1683013808}
+  playFab: {fileID: 1683013809}
 --- !u!4 &406550265 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2d34d4f41c7ec41bfa181d7018f459ca,
@@ -1655,7 +1655,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.135529, y: 145.88948}
+  m_AnchoredPosition: {x: -25.13556, y: 145.88948}
   m_SizeDelta: {x: -642.1111, y: -364.77896}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &433641529
@@ -1837,7 +1837,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &495828573
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2448,7 +2448,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &574243927
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3027,7 +3027,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 722660014}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 957351586}
+        m_MethodName: gameSelectionScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &722660014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3830,7 +3841,7 @@ GameObject:
   - component: {fileID: 906304283}
   - component: {fileID: 906304282}
   m_Layer: 5
-  m_Name: Yourname (1)
+  m_Name: Score number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4957,7 +4968,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1150110335
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4974,7 +4985,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.135529, y: 122}
+  m_AnchoredPosition: {x: -25.13556, y: 122}
   m_SizeDelta: {x: -642.1111, y: -412.55792}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1150110336
@@ -5421,7 +5432,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1318773328}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 957351586}
+        m_MethodName: loadFryFry
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1318773328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6269,7 +6291,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1548603354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6286,7 +6308,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.135529, y: 122}
+  m_AnchoredPosition: {x: -25.13556, y: 122}
   m_SizeDelta: {x: -642.1111, y: -412.55792}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1548603355
@@ -6776,7 +6798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1683013809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8331,7 +8353,7 @@ GameObject:
   - component: {fileID: 1870183149}
   - component: {fileID: 1870183148}
   m_Layer: 5
-  m_Name: Yourname
+  m_Name: Score label
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9212,7 +9234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2103992338
 MonoBehaviour:
   m_ObjectHideFlags: 0

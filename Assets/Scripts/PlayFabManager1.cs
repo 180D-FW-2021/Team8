@@ -119,7 +119,7 @@ public class PlayFabManager1 : MonoBehaviour
 
     public void GetLeaderboard(){
         var request = new GetLeaderboardRequest{
-            StatisticName = "TiltLeaderboard",
+            StatisticName = leaderboardName,
             StartPosition = 0,
             MaxResultsCount = 5
         };
