@@ -8,6 +8,7 @@ using System;
 using PlayFab;
 using PlayFab.ClientModels;
 //using GoogleCloudStreamingSpeechToText;
+using TMPro;
 
 public class MemoryRead : MonoBehaviour
 {
@@ -34,7 +35,7 @@ public class MemoryRead : MonoBehaviour
     public GameObject winner;
     public GameObject loser;
 
-    public PlayFabManager1 playfabManager;
+    //public PlayFabManager1 playfabManager;
 
     bool food1Picked = false;
     bool food2Picked = false;
@@ -44,6 +45,12 @@ public class MemoryRead : MonoBehaviour
     string transcriptRecOld = "";
     bool gameStarted = false;
     int numPicked = 0;
+
+    public GameObject leaderboard;
+    public PlayFabManager1 scoreScript;
+    public TMP_Text score_text;
+
+    bool finished = false;
 
     void DisplayTime(float timeToDisplay)
     {
@@ -153,20 +160,26 @@ public class MemoryRead : MonoBehaviour
             }
         }
 
-        if (numPicked == 4)
+        if (numPicked == 4 && finished == false)
         {
             gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
             smoothieRecipe.SetActive(true);
+            leaderboard.SetActive(true);
+            score_text.text = Convert.ToString(counter.score);
+            scoreScript.SendLeaderboard(counter.score);
+            System.Threading.Thread.Sleep(2000);
+            scoreScript.GetLeaderboard();
+            finished = true;
             //playfabManager.SetActive(true);
-            playfabManager.SendLeaderboard(counter.score);
+            //playfabManager.SendLeaderboard(counter.score);
 
             //playfabManager.SendLeaderboard(counter.score);
-            playfabManager.GetLeaderboard();
+            //playfabManager.GetLeaderboard();
             //playfabManager.displayScores();
         }
-        if (remainingTime <= 0 && gameStarted == true)
+        if (remainingTime <= 0 && gameStarted == true && finished == false)
         {
             timeText.enabled = false;
             if (food1Picked == false) // transcriptRec != ""
@@ -193,7 +206,12 @@ public class MemoryRead : MonoBehaviour
                 food3.SetActive(true);
                 food3Picked = true;
             }
-           
+            leaderboard.SetActive(true);
+            score_text.text = Convert.ToString(counter.score);
+            scoreScript.SendLeaderboard(counter.score);
+            System.Threading.Thread.Sleep(2000);
+            scoreScript.GetLeaderboard();
+            finished = true;
         }
     }
 

@@ -99,23 +99,14 @@ public class ThinkyData2_2 : MonoBehaviour
             else
             {
                 remainingTime = 0;
-                // smoothieRecipe.SetActive(true);
                 gameOver.SetActive(true);
                 if (numPicked == 4)
                 {
                     winner.SetActive(true);
-                    //scoreScript.SendLeaderboard(counter.score);
-                    //leaderboard.SetActive(true);
-                    //scoreScript.GetLeaderboard();
-                    //finished = true;
                 }
-                else// if (finished == false)
+                else
                 {
                     loser.SetActive(true);
-                    //scoreScript.SendLeaderboard(counter.score);
-                    //leaderboard.SetActive(true);
-                    //scoreScript.GetLeaderboard();
-                    //finished = true;
                 }
             }
         }
@@ -189,13 +180,20 @@ public class ThinkyData2_2 : MonoBehaviour
         }
 
 
-        if (numPicked == 4)
+        if (numPicked == 4 && finished == false)
         {
             gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
             recipe.SetActive(true);
             eatIt.SetActive(true);
+
+            leaderboard.SetActive(true);
+            score_text.text = Convert.ToString(counter.score);
+            scoreScript.SendLeaderboard(counter.score);
+            System.Threading.Thread.Sleep(2000);
+            scoreScript.GetLeaderboard();
+            finished = true;
             //playfabManager.SendLeaderboard(counter.score);
 
         }
@@ -231,6 +229,7 @@ public class ThinkyData2_2 : MonoBehaviour
             leaderboard.SetActive(true);
             score_text.text = Convert.ToString(counter.score);
             scoreScript.SendLeaderboard(counter.score);
+            System.Threading.Thread.Sleep(2000);
             scoreScript.GetLeaderboard();
             finished = true;
             /*if (food5Picked == false)
