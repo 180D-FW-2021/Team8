@@ -7,6 +7,7 @@ public class MainMenuTransition : MonoBehaviour
 {
 
     public GameObject Panel;
+	public csvReaderStart pyKiller; // here to properly close python
 
     // Start is called before the first frame update
     void Start()
@@ -30,10 +31,12 @@ public class MainMenuTransition : MonoBehaviour
 
     public void exitGame()
     {
+		// note: pyKiller's OnApplicationQuit() callback closes Python.
+		// But it only autocloses if user closes/quits from main menu.
         Application.Quit();
     }
 
-     public void testScoreScreen()
+    public void testScoreScreen()
     {
         if(Panel != null){
             Panel.SetActive(true);

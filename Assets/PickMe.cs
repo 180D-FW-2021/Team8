@@ -55,8 +55,6 @@ public class PickMe : MonoBehaviour
     bool gameOver = false;
 
     int numFoods = 0;
-    public GameObject done;
-    public GameObject over;
 
     void DisplayTime(float timeToDisplay)
     {
@@ -81,7 +79,7 @@ public class PickMe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        done.SetActive(true);
+        //done.SetActive(true);
         timeText.enabled = true;
         Transform cursy = handReader.Cursor;
 
@@ -91,10 +89,10 @@ public class PickMe : MonoBehaviour
 
         // TODO: NEED A WAY TO SAY THAT YOU ARE INCLUDING FOOD FROM RECIPE
 
-        if (((cursy.position.x < done.transform.position.x + 1) && (cursy.position.x > done.transform.position.x - 1)) && gameOver == false)
-        //if (numFoods == 3 && gameOver == false)
+        //if (((cursy.position.x < done.transform.position.x + 1) && (cursy.position.x > done.transform.position.x - 1)) && gameOver == false)
+        if (numFoods == 3 && gameOver == false)
         {
-            over.SetActive(true);
+            //over.SetActive(true);
             Debug.Log("Done");
             // Send to high score
             // Make final score big on the screen or something
