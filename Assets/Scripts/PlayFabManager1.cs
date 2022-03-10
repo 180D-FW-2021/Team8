@@ -71,8 +71,8 @@ public class PlayFabManager1 : MonoBehaviour
             nameWindow.SetActive(true);
         }
         else{
-            leaderboardWindow.SetActive(true);
-            GetLeaderboard();
+            //leaderboardWindow.SetActive(true);
+            //GetLeaderboard();
         }
         
     }
