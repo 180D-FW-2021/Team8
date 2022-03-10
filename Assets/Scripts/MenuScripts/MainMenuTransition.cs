@@ -43,4 +43,10 @@ public class MainMenuTransition : MonoBehaviour
         }
         
     }
+
+    public void loadFryFry()
+    {
+        Debug.Log("Fry Fry loading");
+        SceneManager.LoadScene("Fry Fry", LoadSceneMode.Single);
+    }
 }
