@@ -9095,7 +9095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1766221916
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9277,7 +9277,9 @@ MonoBehaviour:
   hsDisplayArray:
   - {fileID: 569925431}
   - {fileID: 608240807}
+  - {fileID: 1238336885}
   username: {fileID: 1177268464}
+  leaderboardName: PickLeaderboard
   nameWindow: {fileID: 1766221915}
   leaderboardWindow: {fileID: 80362694}
   nameError: {fileID: 0}
