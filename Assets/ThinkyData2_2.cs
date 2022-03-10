@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
+using TMPro;
 
 public class ThinkyData2_2 : MonoBehaviour
 {
@@ -50,6 +51,9 @@ public class ThinkyData2_2 : MonoBehaviour
 
     public GameObject leaderboard;
     public PlayFabManager1 scoreScript;
+    public TMP_Text score_text;
+
+    bool finished = false;
 
     void DisplayTime(float timeToDisplay)
     {
@@ -100,17 +104,18 @@ public class ThinkyData2_2 : MonoBehaviour
                 if (numPicked == 4)
                 {
                     winner.SetActive(true);
-                    scoreScript.SendLeaderboard(counter.score);
-                    leaderboard.SetActive(true);
-                    scoreScript.GetLeaderboard();
-                    //scoreScript.Sen
+                    //scoreScript.SendLeaderboard(counter.score);
+                    //leaderboard.SetActive(true);
+                    //scoreScript.GetLeaderboard();
+                    //finished = true;
                 }
-                else
+                else// if (finished == false)
                 {
                     loser.SetActive(true);
-                    scoreScript.SendLeaderboard(counter.score);
-                    leaderboard.SetActive(true);
-                    scoreScript.GetLeaderboard();
+                    //scoreScript.SendLeaderboard(counter.score);
+                    //leaderboard.SetActive(true);
+                    //scoreScript.GetLeaderboard();
+                    //finished = true;
                 }
             }
         }
@@ -194,8 +199,9 @@ public class ThinkyData2_2 : MonoBehaviour
             //playfabManager.SendLeaderboard(counter.score);
 
         }
-        if (remainingTime <= 0 && gameStarted == true)
+        if (remainingTime <= 0 && gameStarted == true && finished == false)
         {
+
             recipe.SetActive(true);
             timeText.enabled = false;
             if (task1Picked == false) // transcriptRec != ""
@@ -222,6 +228,11 @@ public class ThinkyData2_2 : MonoBehaviour
                 task3.SetActive(true);
                 task3Picked = true;
             }
+            leaderboard.SetActive(true);
+            score_text.text = Convert.ToString(counter.score);
+            scoreScript.SendLeaderboard(counter.score);
+            scoreScript.GetLeaderboard();
+            finished = true;
             /*if (food5Picked == false)
             {
                 counter.IncreaseScore(-200);
