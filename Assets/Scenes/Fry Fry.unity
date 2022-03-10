@@ -1613,7 +1613,7 @@ MonoBehaviour:
   fakeLeft: {fileID: 1570614198}
   fakeUp: {fileID: 45714051}
   fakeDown: {fileID: 1706185306}
-  leaderboard: {fileID: 1683013808}
+  leaderboard: {fileID: 2103992337}
   playFab: {fileID: 1683013809}
 --- !u!4 &406550265 stripped
 Transform:
@@ -6798,7 +6798,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1683013809
 MonoBehaviour:
   m_ObjectHideFlags: 0
