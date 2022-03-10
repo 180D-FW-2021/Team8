@@ -17,6 +17,8 @@ public class PlayFabManager1 : MonoBehaviour
     //public InputField nameInput;
     public Text username;
 
+    public string leaderboardName = "PickLeaderboard";
+
     [Header("Windows")]
     public GameObject nameWindow;
     public GameObject leaderboardWindow;
@@ -102,7 +104,7 @@ public class PlayFabManager1 : MonoBehaviour
         var request = new UpdatePlayerStatisticsRequest {
             Statistics = new List<StatisticUpdate> {
                 new StatisticUpdate {
-                    StatisticName = "TiltLeaderboard",
+                    StatisticName = leaderboardName,
                     Value = score
                 }
             }
