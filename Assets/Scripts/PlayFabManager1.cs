@@ -71,8 +71,8 @@ public class PlayFabManager1 : MonoBehaviour
             nameWindow.SetActive(true);
         }
         else{
-            leaderboardWindow.SetActive(true);
-            GetLeaderboard();
+            //leaderboardWindow.SetActive(true);
+            //GetLeaderboard();
         }
         
     }
@@ -132,6 +132,10 @@ public class PlayFabManager1 : MonoBehaviour
             //AddScore(item.PlayFabId, item.StatValue);
             hsDisplayArray[i].DisplayHS(item.DisplayName, item.StatValue);
             i++;
+            if (i >= hsDisplayArray.Length)
+            {
+                break;
+            }
             //player1.text = item.PlayFabId;
             //score1.text =
         }

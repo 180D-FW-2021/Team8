@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Linq;
 using System;
+using TMPro;
 //using GoogleCloudStreamingSpeechToText;
 //using GoogleCloudStreamingSpeechToText;
 using CursorObject;
@@ -39,8 +40,8 @@ public class PickMe : MonoBehaviour
 
     public ScoreCounter counter;
 
-    public GameObject leaderboard;
-
+	public TMP_Text yourScore;
+	
     bool breadFound = false;
     bool carrotFound = false;
     bool appleFound = false;
@@ -55,6 +56,8 @@ public class PickMe : MonoBehaviour
     bool gameOver = false;
 
     int numFoods = 0;
+	public GameObject leaderboard; // the visual leaderboard to show or hide
+	public PlayFabManager1 pfManager; // the playfab interface
 
     void DisplayTime(float timeToDisplay)
     {
@@ -73,7 +76,7 @@ public class PickMe : MonoBehaviour
         //counter.UpdateScoreDisplay();
         //counter.IncreaseScore(5000);
         //entry1.SetActive(true);
-        //leaderboard.SetActive(true);
+        leaderboard.SetActive(false);
     }
 
     // Update is called once per frame
@@ -82,6 +85,7 @@ public class PickMe : MonoBehaviour
         //done.SetActive(true);
         timeText.enabled = true;
         Transform cursy = handReader.Cursor;
+
 
         //transcriptRec = streamRec.transcript;
         //Debug.Log(transcriptRec);
@@ -102,14 +106,18 @@ public class PickMe : MonoBehaviour
 
             //scoreboard.AddNewScore("Player1", counter.score);
 
-            Debug.Log("Added all food");
+            Debug.Log("Game over, added all food");
             cursor.SetActive(false);
             //entry1.SetActive(true);
             //leaderboard.SetActive(true);
             timeText.enabled = false;
             gameOver = true;
             remainingTime = 0;
-
+			leaderboard.SetActive(true);
+			yourScore.text = Convert.ToString(counter.score);
+			pfManager.SendLeaderboard(counter.score);
+			System.Threading.Thread.Sleep(2000);
+			pfManager.GetLeaderboard();
         }
         if(gameOver == false)
         {
@@ -122,6 +130,12 @@ public class PickMe : MonoBehaviour
             {
                 remainingTime = 0;
                 gameOver = true;
+				Debug.Log("Game over, no time");
+				leaderboard.SetActive(true);
+				yourScore.text = Convert.ToString(counter.score);
+				pfManager.SendLeaderboard(counter.score);
+				System.Threading.Thread.Sleep(2000);
+				pfManager.GetLeaderboard();
             }
 
             if (((cursy.position.x < bread.transform.position.x + 1) && (cursy.position.x > bread.transform.position.x - 1))
