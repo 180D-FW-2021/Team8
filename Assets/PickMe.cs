@@ -52,7 +52,11 @@ public class PickMe : MonoBehaviour
     bool mushroomFound = false;
     public Text timeText;
 
+    bool gameOver = false;
+
     int numFoods = 0;
+    public GameObject done;
+    public GameObject over;
 
     void DisplayTime(float timeToDisplay)
     {
@@ -77,38 +81,21 @@ public class PickMe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        done.SetActive(true);
         timeText.enabled = true;
         Transform cursy = handReader.Cursor;
 
         //transcriptRec = streamRec.transcript;
         //Debug.Log(transcriptRec);
 
-        if (remainingTime > 0)
-        {
-            remainingTime -= Time.deltaTime;
-            DisplayTime(remainingTime);
-        }
-        else if (remainingTime <= 0)
-        {
-            remainingTime = 0;
-        }
 
         // TODO: NEED A WAY TO SAY THAT YOU ARE INCLUDING FOOD FROM RECIPE
 
-        /*
-        if (transcriptRec.Contains("yes"))
+        if (((cursy.position.x < done.transform.position.x + 1) && (cursy.position.x > done.transform.position.x - 1)) && gameOver == false)
+        //if (numFoods == 3 && gameOver == false)
         {
-            include.SetActive(true);
-            noInclude.SetActive(false);
-        }
-        if (transcriptRec.Contains("no"))
-        {
-            include.SetActive(false);
-            noInclude.SetActive(true);
-        }*/
-
-        if (numFoods == 3)
-        {
+            over.SetActive(true);
+            Debug.Log("Done");
             // Send to high score
             // Make final score big on the screen or something
             int timeBonus = (int)Math.Round(remainingTime);
@@ -118,285 +105,300 @@ public class PickMe : MonoBehaviour
             //scoreboard.AddNewScore("Player1", counter.score);
 
             Debug.Log("Added all food");
-			cursor.SetActive(false);
+            cursor.SetActive(false);
             //entry1.SetActive(true);
             //leaderboard.SetActive(true);
             timeText.enabled = false;
+            gameOver = true;
+            remainingTime = 0;
 
         }
-
-        if (((cursy.position.x < bread.transform.position.x + 1) && (cursy.position.x > bread.transform.position.x - 1))
-               && ((cursy.position.y < bread.transform.position.y + 1) && (cursy.position.y > bread.transform.position.y - 1)))
+        if(gameOver == false)
         {
-			if(breadFound == false)
-			{
-				Debug.Log("Touching bread");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && breadFound == false)
-				//{
-				counter.IncreaseScore(-500);
-				breadFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				bread.SetActive(false);
-				Debug.Log("Added bread");
-				numFoods++;
-			}
-			//}
-            /*
-            else if (transcriptRec.Contains("no") && breadFound == false)
+            if (remainingTime > 0)
             {
-                counter.IncreaseScore(1000);
-                counter.UpdateScoreDisplay();
-                breadFound = true;
-                Debug.Log(counter.score);
-                bread.SetActive(false);
-                Debug.Log("Did not add bread");
-                numFoods++;
-            }*/
-        }
+                remainingTime -= Time.deltaTime;
+                DisplayTime(remainingTime);
+            }
+            else if (remainingTime <= 0)
+            {
+                remainingTime = 0;
+                gameOver = true;
+            }
 
-        if (((cursy.position.x < carrot.transform.position.x + 1) && (cursy.position.x > carrot.transform.position.x - 1))
-               && ((cursy.position.y < carrot.transform.position.y + 1) && (cursy.position.y > carrot.transform.position.y - 1)))
-        {
-			if(carrotFound == false)
-			{
-				Debug.Log("Touching carrot");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && carrotFound == false)
-				//{
-				counter.IncreaseScore(-500);
-				carrotFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				carrot.SetActive(false);
-				Debug.Log("Added carrot");
-				numFoods++;
-			}
-            
-            //}
-            /*else if (transcriptRec.Contains("no") && carrotFound == false)
+            if (((cursy.position.x < bread.transform.position.x + 1) && (cursy.position.x > bread.transform.position.x - 1))
+                   && ((cursy.position.y < bread.transform.position.y + 1) && (cursy.position.y > bread.transform.position.y - 1)))
             {
-                counter.IncreaseScore(1000);
-                counter.UpdateScoreDisplay();
-                carrotFound = true;
-                Debug.Log(counter.score);
-                carrot.SetActive(false);
-                Debug.Log("Did not add carrot");
-                numFoods++;
-            }*/
-        }
+                if (breadFound == false)
+                {
+                    Debug.Log("Touching bread");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && breadFound == false)
+                    //{
+                    counter.IncreaseScore(-500);
+                    breadFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    bread.SetActive(false);
+                    Debug.Log("Added bread");
+                    numFoods++;
+                }
+                //}
+                /*
+                else if (transcriptRec.Contains("no") && breadFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    breadFound = true;
+                    Debug.Log(counter.score);
+                    bread.SetActive(false);
+                    Debug.Log("Did not add bread");
+                    numFoods++;
+                }*/
+            }
 
-        if (((cursy.position.x < apple.transform.position.x + 1) && (cursy.position.x > apple.transform.position.x - 1))
-               && ((cursy.position.y < apple.transform.position.y + 1) && (cursy.position.y > apple.transform.position.y - 1)))
-        {
-			if(appleFound == false)
-			{
-				Debug.Log("Touching apple");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && appleFound == false)
-				//{
-				counter.IncreaseScore(1000);
-				appleFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				apple.SetActive(false);
-				Debug.Log("Added apple");
-				numFoods++;
-			}
-            
-            //}
-            /*else if (transcriptRec.Contains("no") && appleFound == false)
+            if (((cursy.position.x < carrot.transform.position.x + 1) && (cursy.position.x > carrot.transform.position.x - 1))
+                   && ((cursy.position.y < carrot.transform.position.y + 1) && (cursy.position.y > carrot.transform.position.y - 1)))
             {
-                counter.IncreaseScore(-500);
-                counter.UpdateScoreDisplay();
-                appleFound = true;
-                Debug.Log(counter.score);
-                apple.SetActive(false);
-                Debug.Log("Did not add apple");
-                numFoods++;
-            }*/
-        }
+                if (carrotFound == false)
+                {
+                    Debug.Log("Touching carrot");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && carrotFound == false)
+                    //{
+                    counter.IncreaseScore(-500);
+                    carrotFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    carrot.SetActive(false);
+                    Debug.Log("Added carrot");
+                    numFoods++;
+                }
 
-        if (((cursy.position.x < lemon.transform.position.x + 1) && (cursy.position.x > lemon.transform.position.x - 1))
-               && ((cursy.position.y < lemon.transform.position.y + 1) && (cursy.position.y > lemon.transform.position.y - 1)))
-        {
-			if(lemonFound == false)
-			{
-				Debug.Log("Touching lemon");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && lemonFound == false)
-				//{
-				counter.IncreaseScore(-500);
-				lemonFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				lemon.SetActive(false);
-				Debug.Log("Added lemon");
-				numFoods++;
-			}
-            
-            //
-            /*else if (transcriptRec.Contains("no") && lemonFound == false)
-            {
-                counter.IncreaseScore(1000);
-                counter.UpdateScoreDisplay();
-                lemonFound = true;
-                Debug.Log(counter.score);
-                lemon.SetActive(false);
-                Debug.Log("Did not add lemon");
-                numFoods++;
-            }*/
-        }
+                //}
+                /*else if (transcriptRec.Contains("no") && carrotFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    carrotFound = true;
+                    Debug.Log(counter.score);
+                    carrot.SetActive(false);
+                    Debug.Log("Did not add carrot");
+                    numFoods++;
+                }*/
+            }
 
-        if (((cursy.position.x < banana.transform.position.x + 1) && (cursy.position.x > banana.transform.position.x - 1))
-               && ((cursy.position.y < banana.transform.position.y + 1) && (cursy.position.y > banana.transform.position.y - 1)))
-        {
-			if(bananaFound == false)
-			{
-				Debug.Log("Touching banana");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && bananaFound == false)
-				//{
-				counter.IncreaseScore(1000);
-				bananaFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				banana.SetActive(false);
-				Debug.Log("Added banana");
-				numFoods++;
-			}
-            
-            //}
-            /*else if (transcriptRec.Contains("no") && bananaFound == false)
+            if (((cursy.position.x < apple.transform.position.x + 1) && (cursy.position.x > apple.transform.position.x - 1))
+                   && ((cursy.position.y < apple.transform.position.y + 1) && (cursy.position.y > apple.transform.position.y - 1)))
             {
-                counter.IncreaseScore(-500);
-                counter.UpdateScoreDisplay();
-                bananaFound = true;
-                Debug.Log(counter.score);
-                banana.SetActive(false);
-                Debug.Log("Did not add banana");
-                numFoods++;
-            }*/
-        }
+                if (appleFound == false)
+                {
+                    Debug.Log("Touching apple");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && appleFound == false)
+                    //{
+                    counter.IncreaseScore(1000);
+                    appleFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    apple.SetActive(false);
+                    Debug.Log("Added apple");
+                    numFoods++;
+                }
 
-        if (((cursy.position.x < tomato.transform.position.x + 1) && (cursy.position.x > tomato.transform.position.x - 1))
-               && ((cursy.position.y < tomato.transform.position.y + 1) && (cursy.position.y > tomato.transform.position.y - 1)))
-        {
-			if(tomatoFound == false)
-			{
-				Debug.Log("Touching tomato");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && tomatoFound == false)
-				//{
-				counter.IncreaseScore(-500);
-				tomatoFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				tomato.SetActive(false);
-				Debug.Log("Added tomato");
-				numFoods++;
-			}
-			//}
-            /*else if (transcriptRec.Contains("no") && tomatoFound == false)
-            {
-                counter.IncreaseScore(1000);
-                counter.UpdateScoreDisplay();
-                tomatoFound = true;
-                Debug.Log(counter.score);
-                tomato.SetActive(false);
-                Debug.Log("Did not add tomato");
-                numFoods++;
-            }*/
-        }
+                //}
+                /*else if (transcriptRec.Contains("no") && appleFound == false)
+                {
+                    counter.IncreaseScore(-500);
+                    counter.UpdateScoreDisplay();
+                    appleFound = true;
+                    Debug.Log(counter.score);
+                    apple.SetActive(false);
+                    Debug.Log("Did not add apple");
+                    numFoods++;
+                }*/
+            }
 
-        if (((cursy.position.x < watermelon.transform.position.x + 1) && (cursy.position.x > watermelon.transform.position.x - 1))
-               && ((cursy.position.y < watermelon.transform.position.y + 1) && (cursy.position.y > watermelon.transform.position.y - 1)))
-        {
-			if(watermelonFound == false)
-			{
-				Debug.Log("Touching watermelon");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && watermelonFound == false)
-				//{
-				counter.IncreaseScore(1000);
-				watermelonFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				watermelon.SetActive(false);
-				Debug.Log("Added watermelon");
-				numFoods++;
-			}
-            
-            //}
-            /*else if (transcriptRec.Contains("no") && watermelonFound == false)
+            if (((cursy.position.x < lemon.transform.position.x + 1) && (cursy.position.x > lemon.transform.position.x - 1))
+                   && ((cursy.position.y < lemon.transform.position.y + 1) && (cursy.position.y > lemon.transform.position.y - 1)))
             {
-                counter.IncreaseScore(-500);
-                counter.UpdateScoreDisplay();
-                watermelonFound = true;
-                Debug.Log(counter.score);
-                watermelon.SetActive(false);
-                Debug.Log("Did not add watermelon");
-                numFoods++;
-            }*/
-        }
+                if (lemonFound == false)
+                {
+                    Debug.Log("Touching lemon");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && lemonFound == false)
+                    //{
+                    counter.IncreaseScore(-500);
+                    lemonFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    lemon.SetActive(false);
+                    Debug.Log("Added lemon");
+                    numFoods++;
+                }
 
-        if (((cursy.position.x < grape.transform.position.x + 1) && (cursy.position.x > grape.transform.position.x - 1))
-               && ((cursy.position.y < grape.transform.position.y + 1) && (cursy.position.y > grape.transform.position.y - 1)))
-        {
-			if(grapeFound == false) {
-            Debug.Log("Touching grape");
-            //include.SetActive(true);
-            //if (transcriptRec.Contains("yes") && grapeFound == false)
-            //{
-            counter.IncreaseScore(-500);
-            grapeFound = true;
-            counter.UpdateScoreDisplay();
-            Debug.Log(counter.score);
-            grape.SetActive(false);
-            Debug.Log("Added grape");
-            numFoods++;}
-            //}
-            /*else if (transcriptRec.Contains("no") && grapeFound == false)
-            {
-                counter.IncreaseScore(1000);
-                counter.UpdateScoreDisplay();
-                grapeFound = true;
-                Debug.Log(counter.score);
-                grape.SetActive(false);
-                Debug.Log("Did not add grape");
-                numFoods++;
-            }*/
-        }
+                //
+                /*else if (transcriptRec.Contains("no") && lemonFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    lemonFound = true;
+                    Debug.Log(counter.score);
+                    lemon.SetActive(false);
+                    Debug.Log("Did not add lemon");
+                    numFoods++;
+                }*/
+            }
 
-        if (((cursy.position.x < mushroom.transform.position.x + 1) && (cursy.position.x > mushroom.transform.position.x - 1))
-               && ((cursy.position.y < mushroom.transform.position.y + 1) && (cursy.position.y > mushroom.transform.position.y - 1)))
-        {
-			if(mushroomFound == false)
-			{
-				Debug.Log("Touching mushroom");
-				//include.SetActive(true);
-				//if (transcriptRec.Contains("yes") && mushroomFound == false)
-				//{
-				counter.IncreaseScore(-500);
-				mushroomFound = true;
-				counter.UpdateScoreDisplay();
-				Debug.Log(counter.score);
-				mushroom.SetActive(false);
-				Debug.Log("Added mushroom");
-				numFoods++;
-			}
-            //}
-            /*else if (transcriptRec.Contains("no") && mushroomFound == false)
+            if (((cursy.position.x < banana.transform.position.x + 1) && (cursy.position.x > banana.transform.position.x - 1))
+                   && ((cursy.position.y < banana.transform.position.y + 1) && (cursy.position.y > banana.transform.position.y - 1)))
             {
-                counter.IncreaseScore(1000);
-                counter.UpdateScoreDisplay();
-                mushroomFound = true;
-                Debug.Log(counter.score);
-                mushroom.SetActive(false);
-                Debug.Log("Did not add mushroom");
-                numFoods++;
-            }*/
+                if (bananaFound == false)
+                {
+                    Debug.Log("Touching banana");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && bananaFound == false)
+                    //{
+                    counter.IncreaseScore(1000);
+                    bananaFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    banana.SetActive(false);
+                    Debug.Log("Added banana");
+                    numFoods++;
+                }
+
+                //}
+                /*else if (transcriptRec.Contains("no") && bananaFound == false)
+                {
+                    counter.IncreaseScore(-500);
+                    counter.UpdateScoreDisplay();
+                    bananaFound = true;
+                    Debug.Log(counter.score);
+                    banana.SetActive(false);
+                    Debug.Log("Did not add banana");
+                    numFoods++;
+                }*/
+            }
+
+            if (((cursy.position.x < tomato.transform.position.x + 1) && (cursy.position.x > tomato.transform.position.x - 1))
+                   && ((cursy.position.y < tomato.transform.position.y + 1) && (cursy.position.y > tomato.transform.position.y - 1)))
+            {
+                if (tomatoFound == false)
+                {
+                    Debug.Log("Touching tomato");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && tomatoFound == false)
+                    //{
+                    counter.IncreaseScore(-500);
+                    tomatoFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    tomato.SetActive(false);
+                    Debug.Log("Added tomato");
+                    numFoods++;
+                }
+                //}
+                /*else if (transcriptRec.Contains("no") && tomatoFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    tomatoFound = true;
+                    Debug.Log(counter.score);
+                    tomato.SetActive(false);
+                    Debug.Log("Did not add tomato");
+                    numFoods++;
+                }*/
+            }
+
+            if (((cursy.position.x < watermelon.transform.position.x + 1) && (cursy.position.x > watermelon.transform.position.x - 1))
+                   && ((cursy.position.y < watermelon.transform.position.y + 1) && (cursy.position.y > watermelon.transform.position.y - 1)))
+            {
+                if (watermelonFound == false)
+                {
+                    Debug.Log("Touching watermelon");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && watermelonFound == false)
+                    //{
+                    counter.IncreaseScore(1000);
+                    watermelonFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    watermelon.SetActive(false);
+                    Debug.Log("Added watermelon");
+                    numFoods++;
+                }
+
+                //}
+                /*else if (transcriptRec.Contains("no") && watermelonFound == false)
+                {
+                    counter.IncreaseScore(-500);
+                    counter.UpdateScoreDisplay();
+                    watermelonFound = true;
+                    Debug.Log(counter.score);
+                    watermelon.SetActive(false);
+                    Debug.Log("Did not add watermelon");
+                    numFoods++;
+                }*/
+            }
+
+            if (((cursy.position.x < grape.transform.position.x + 1) && (cursy.position.x > grape.transform.position.x - 1))
+                   && ((cursy.position.y < grape.transform.position.y + 1) && (cursy.position.y > grape.transform.position.y - 1)))
+            {
+                if (grapeFound == false) {
+                    Debug.Log("Touching grape");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && grapeFound == false)
+                    //{
+                    counter.IncreaseScore(-500);
+                    grapeFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    grape.SetActive(false);
+                    Debug.Log("Added grape");
+                    numFoods++; }
+                //}
+                /*else if (transcriptRec.Contains("no") && grapeFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    grapeFound = true;
+                    Debug.Log(counter.score);
+                    grape.SetActive(false);
+                    Debug.Log("Did not add grape");
+                    numFoods++;
+                }*/
+            }
+
+            if (((cursy.position.x < mushroom.transform.position.x + 1) && (cursy.position.x > mushroom.transform.position.x - 1))
+                   && ((cursy.position.y < mushroom.transform.position.y + 1) && (cursy.position.y > mushroom.transform.position.y - 1)))
+            {
+                if (mushroomFound == false)
+                {
+                    Debug.Log("Touching mushroom");
+                    //include.SetActive(true);
+                    //if (transcriptRec.Contains("yes") && mushroomFound == false)
+                    //{
+                    counter.IncreaseScore(-500);
+                    mushroomFound = true;
+                    counter.UpdateScoreDisplay();
+                    Debug.Log(counter.score);
+                    mushroom.SetActive(false);
+                    Debug.Log("Added mushroom");
+                    numFoods++;
+                }
+                //}
+                /*else if (transcriptRec.Contains("no") && mushroomFound == false)
+                {
+                    counter.IncreaseScore(1000);
+                    counter.UpdateScoreDisplay();
+                    mushroomFound = true;
+                    Debug.Log(counter.score);
+                    mushroom.SetActive(false);
+                    Debug.Log("Did not add mushroom");
+                    numFoods++;
+                }*/
+            }
         }
     }
 }

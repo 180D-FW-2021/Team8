@@ -200,8 +200,7 @@ def on_message(client, userdata, message):
 		shape_stage = 0
 	elif "start" in str(message.payload):
 		print("Start detected")
-		if game_running is False:
-			shape_stage = 0
+		shape_stage = 0
 		game_running = True
 
 print("About to connect...")
@@ -341,19 +340,23 @@ while True:
 			shape_stage = shape_stage + 1
 			client.publish('ece180d/team8/imu', shape_stage, qos=1)
 
-		xtilt = str(kalmanX)
-		ytilt = str(kalmanY)
+		if x % 3 == 0:
+			xtilt = str(kalmanX)
+			ytilt = str(kalmanY)
 
-		tilts = xtilt[:6] + ytilt[:6]
+			tilts = xtilt[:6] + ytilt[:6]
 
-		client.publish('ece180d/team8/movements', tilts, qos=1)
+			client.publish('ece180d/team8/movements', tilts, qos=1)
 
 		# slow program down a bit, makes the output more readable
-		time.sleep(0.05)
+		time.sleep(0.1)
+
 	if shape_stage > (len(sequence) - 1):
 		shape_stage = 0
 		game_running = False
 		client.publish('ece180d/team8/imu', "X", qos=1)
+
+	x = x + 1
 
 
 client.loop_stop()

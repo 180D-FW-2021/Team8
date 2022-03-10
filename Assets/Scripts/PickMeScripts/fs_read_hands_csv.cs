@@ -149,7 +149,11 @@ public class fs_read_hands_csv : MonoBehaviour
 			{
 				exitwrite.WriteByte((byte) 'f');
 			}
-			
+			Thread.Sleep(1000); // give python time to stop
+			using(StreamWriter cursorreset = new StreamWriter(new FileStream(filepath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite)))
+			{
+				cursorreset.WriteLine("0,0,0"); // why doesn't this consistently write?
+			}
 		}
     }
 }

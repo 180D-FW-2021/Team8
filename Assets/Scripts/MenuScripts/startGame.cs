@@ -53,7 +53,7 @@ public class startGame : MonoBehaviour
 
     public void ingredientStart(){
         Debug.Log("Ingredient minigame loading");
-        SceneManager.LoadScene("PickMeCSV", LoadSceneMode.Single);
+        SceneManager.LoadScene("PickyPick", LoadSceneMode.Single);
         if(IngredientPanel != null){
             IngredientPanel.SetActive(false);
         }
@@ -67,7 +67,7 @@ public class startGame : MonoBehaviour
 
     public void chopStart(){
         Debug.Log("Chopping minigame loading");        
-        SceneManager.LoadScene("3D_Chop", LoadSceneMode.Single);
+        SceneManager.LoadScene("Fry Fry", LoadSceneMode.Single);
         if(IngredientPanel != null){
             IngredientPanel.SetActive(false);
         }
@@ -82,7 +82,7 @@ public class startGame : MonoBehaviour
 
      public void thinkStart(){
         Debug.Log("Memorization minigame loading");        
-        SceneManager.LoadScene("RecipeMemory", LoadSceneMode.Single);
+        SceneManager.LoadScene("Thinky1", LoadSceneMode.Single);
         if(ThinkPanel != null){
             ThinkPanel.SetActive(false);
         }

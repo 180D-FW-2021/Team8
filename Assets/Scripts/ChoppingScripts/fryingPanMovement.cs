@@ -20,9 +20,12 @@ public class fryingPanMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Initialize frying pan object
         this.transform.Rotate(0.0f,0.0f,0.0f);
+
+        // Initialize MQTT connection
         username = PlayerPrefs.GetString("Username");
-        Debug.Log("mqtt " + username);
+        // Debug.Log("mqtt " + username);
 
         client = new MqttClient("test.mosquitto.org");
         client.MqttMsgPublished += client_MqttMsgPublished;
@@ -38,9 +41,10 @@ public class fryingPanMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //this.transform.Rotate(xTilt,yTilt,0.0f);
+        // Rotate the frying pan movements based on the recorded IMU values
         this.transform.rotation = Quaternion.Euler(xTilt * tiltScale, 0.0f, yTilt * tiltScale);
 
+        // A for loop as a delay to space out the tilting updates to not crash Unity
         for(int i = 0; i < 10; i++) {}
     }
 
@@ -62,16 +66,14 @@ public class fryingPanMovement : MonoBehaviour
         //e.Message is a byte[]
         var str = System.Text.Encoding.UTF8.GetString(e.Message);
 
-        //Debug.Log("received a message");
-
         if (String.Equals(e.Topic, "ece180d/team8/movements" + username))
         {
+            // Cut out each of the tilt values and separate into x and y direction
             string xt = str.Substring(0,6);
             string yt = str.Substring(6,6);
 
             xTilt = float.Parse(xt);
             yTilt = float.Parse(yt);
-
         }
     }
 }
