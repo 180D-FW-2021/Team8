@@ -24,19 +24,16 @@ public class fs_read_hands_csv : MonoBehaviour
         bool readSuccess;
         string[] coordString;
         string filepath = "wrist_single.csv";
-		string exitFlag = "exit.txt";
+		//string exitFlag = "exit.txt";
         int delay_ms = 13; // not exact correspondence between delay and frame rate due to processing time.
                            // i.e. delay less than you think you need for a desired frame rate. (16 ms should be approx. 60 fps but produces lower fps in practice)
                            // there should be some delay to preserve resource use. Noticed less CPU temp increase when delay is used.
                            // Start is called before the first frame update
         Process process = new Process();
-     
+        /*
         void Start() //maybe move startup to game startup time?
         {
             UnityEngine.Debug.Log("hands read script start");
-			
-			bool onWin = Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.WindowsEditor; // 1 if using Windows
-			bool onMac = Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.OSXEditor; // 1 if using Mac
 			process.StartInfo.Arguments = ""; // might be used later to feed frame delay to python
 			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			try
@@ -77,6 +74,7 @@ public class fs_read_hands_csv : MonoBehaviour
 			process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 			process.Start();
         }
+		*/
 
         // Update is called once per frame
         void Update()
@@ -135,6 +133,7 @@ public class fs_read_hands_csv : MonoBehaviour
             //Cursor.position = new Vector3(-scalex * x - xOffset, 0, -scaley * y - yOffset);
         }
 
+		/* needs to be moved to code before Application.Quit
 		void OnDestroy()
 		{
 			process.CloseMainWindow(); // why doesn't this work?
@@ -155,5 +154,6 @@ public class fs_read_hands_csv : MonoBehaviour
 				cursorreset.WriteLine("0,0,0"); // why doesn't this consistently write?
 			}
 		}
+		*/
     }
 }
