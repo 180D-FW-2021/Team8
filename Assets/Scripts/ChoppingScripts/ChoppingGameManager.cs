@@ -308,6 +308,7 @@ public class ChoppingGameManager : MonoBehaviour
         scoreText.enabled = true;
         scoreText.text = Convert.ToString(score);
         playFab.SendLeaderboard(score);
+        System.Threading.Thread.Sleep(1500);
         playFab.GetLeaderboard();
     }
 
@@ -319,6 +320,7 @@ public class ChoppingGameManager : MonoBehaviour
         scoreText.enabled = true;
         scoreText.text = Convert.ToString(score);
         playFab.SendLeaderboard(score);
+        System.Threading.Thread.Sleep(1500);
         playFab.GetLeaderboard();
     }
 }

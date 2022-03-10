@@ -2780,7 +2780,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 903202891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.25}
+  m_LocalPosition: {x: 0, y: 0, z: -0.21}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 328375707}
@@ -2788,7 +2788,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.3, y: -2.33}
+  m_AnchoredPosition: {x: 0.3, y: -2.44}
   m_SizeDelta: {x: 937.21204, y: 762.27783}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &903202893
@@ -2991,7 +2991,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 943765687}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1112865953}
+        m_MethodName: gameSelectionScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &943765687
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3116,7 +3127,7 @@ GameObject:
   - component: {fileID: 981035600}
   - component: {fileID: 981035599}
   m_Layer: 5
-  m_Name: Yourname
+  m_Name: Score Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3374,7 +3385,7 @@ GameObject:
   - component: {fileID: 996793508}
   - component: {fileID: 996793507}
   m_Layer: 0
-  m_Name: ButtomEventManager
+  m_Name: ButtonEventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3433,7 +3444,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1040373027}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.25}
+  m_LocalPosition: {x: 0, y: 0, z: -0.26}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children: []
   m_Father: {fileID: 328375707}
@@ -3441,7 +3452,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.3, y: 0.48}
+  m_AnchoredPosition: {x: 0.3, y: 0.52}
   m_SizeDelta: {x: 937.21204, y: 762.27783}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1040373029
@@ -4002,6 +4013,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 236021b123b564e7f9e47bb032ab3b37, type: 3}
+--- !u!1 &1112865952
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1112865954}
+  - component: {fileID: 1112865953}
+  m_Layer: 0
+  m_Name: ButtonManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1112865953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112865952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16cd7054f92324cf39104dd1d06ef98a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Panel: {fileID: 0}
+  pyKiller: {fileID: 0}
+--- !u!4 &1112865954
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1112865952}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -11.829638, y: -0.8668761, z: 6.959947}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1126719889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6369,6 +6425,7 @@ MonoBehaviour:
   cutter: {fileID: 491748183}
   leaderboard: {fileID: 1964196967}
   scoreScript: {fileID: 1205162488}
+  score_text: {fileID: 2028001416}
 --- !u!1 &1831153642
 GameObject:
   m_ObjectHideFlags: 0
@@ -7208,7 +7265,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1923779718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1112865953}
+        m_MethodName: loadThinky22
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1923779718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7805,7 +7873,7 @@ GameObject:
   - component: {fileID: 2028001417}
   - component: {fileID: 2028001416}
   m_Layer: 5
-  m_Name: Yourname (1)
+  m_Name: Score Number
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
