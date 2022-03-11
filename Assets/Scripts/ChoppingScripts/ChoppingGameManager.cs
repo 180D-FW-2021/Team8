@@ -32,7 +32,6 @@ public class ChoppingGameManager : MonoBehaviour
     private int step_num = 0;
 
     public GameObject Objective;
-    public GameObject MainMenuButton;
     public Text timeText;
     public TMP_Text scoreText;
 
@@ -63,8 +62,6 @@ public class ChoppingGameManager : MonoBehaviour
         fakeUp.SetActive(false);
         fakeLeft.SetActive(false);
         fakeDown.SetActive(false);
-
-        MainMenuButton.SetActive(false);
 
         // Initialize the game to be PLAYING
         gameState = StateType.PLAYING;
@@ -122,7 +119,6 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
 
-                MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 break;
 
@@ -140,7 +136,6 @@ public class ChoppingGameManager : MonoBehaviour
                 fakeLeft.SetActive(false);
                 fakeDown.SetActive(false);
 
-                MainMenuButton.SetActive(true);
                 timeText.enabled = false;
                 break;
 

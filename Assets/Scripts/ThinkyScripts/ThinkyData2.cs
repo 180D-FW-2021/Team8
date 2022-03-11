@@ -121,7 +121,7 @@ public class ThinkyData2 : MonoBehaviour
                 food3.SetActive(false);
             if (food5Picked == false)
                 food5.SetActive(false);
-            if ((transcriptRec.Contains("Ham") || transcriptRec.Contains("ham") || transcriptRec.Contains("him") || transcriptRec.Contains("Jim")) && food1Picked == false)
+            if ((transcriptRec.Contains("Ham") || transcriptRec.Contains("ham") || transcriptRec.Contains("him") || transcriptRec.Contains("Jim") || transcriptRec.Contains("camp")) && food1Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
@@ -169,10 +169,14 @@ public class ThinkyData2 : MonoBehaviour
 
         if (numPicked == 5 && finished == false)
         {
-            gameOver.SetActive(true);
+            //gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
             recipe.SetActive(true);
+
+            int timeBonus = (int)Math.Round(remainingTime);
+            timeBonus = timeBonus * 100;
+            counter.IncreaseScore(timeBonus);
 
             leaderboard.SetActive(true);
             score_text.text = Convert.ToString(counter.score);
