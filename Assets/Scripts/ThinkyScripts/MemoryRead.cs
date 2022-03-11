@@ -162,10 +162,16 @@ public class MemoryRead : MonoBehaviour
 
         if (numPicked == 4 && finished == false)
         {
+
             gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
             smoothieRecipe.SetActive(true);
+
+            int timeBonus = (int)Math.Round(remainingTime);
+            timeBonus = timeBonus * 100;
+            counter.IncreaseScore(timeBonus);
+
             leaderboard.SetActive(true);
             score_text.text = Convert.ToString(counter.score);
             scoreScript.SendLeaderboard(counter.score);
