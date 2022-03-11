@@ -2492,6 +2492,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PW_frenchtoas_cherry_tomato
       objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 381eb029d06ce4246b00b6361a470447, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 381eb029d06ce4246b00b6361a470447, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -4067,6 +4071,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PW_cookie
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 18e651e9430dc49f8aba22d0b7b80602, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 18e651e9430dc49f8aba22d0b7b80602, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4673,35 +4681,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.077799566
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.103175014
+      value: -0.5527931
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.561285
+      value: 0.48059583
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.6013218
+      value: 0.6654788
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.55921924
+      value: -0.14347617
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 48.9
+      value: -19.9
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 208.83
+      value: 248.3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: -24.7
+      value: 58.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3a88e33be12ed34b832c0be1f56a7a9, type: 3}
@@ -7022,7 +7030,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 211e894d28da74177875b6df4d19461b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 211e894d28da74177875b6df4d19461b, type: 3}
@@ -7441,7 +7449,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1964196968
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -99,6 +99,7 @@ public class ThinkyData2_2 : MonoBehaviour
             else
             {
                 remainingTime = 0;
+                recipe.SetActive(true);
                 //gameOver.SetActive(true);
                 if (numPicked == 4)
                 {
@@ -126,7 +127,7 @@ public class ThinkyData2_2 : MonoBehaviour
                 task3.SetActive(false);
             //if (food5Picked == false)
             //   food5.SetActive(false);
-            if ((transcriptRec.Contains("Chop food") || transcriptRec.Contains("chop food") || transcriptRec.Contains("top food") || transcriptRec.Contains("Chopped food")) && task1Picked == false)
+            if ((transcriptRec.Contains("Chop food") || transcriptRec.Contains("chop food") || transcriptRec.Contains("top food") || transcriptRec.Contains("Chopped food") || transcriptRec.Contains("chocolate")) && task1Picked == false)
             {
                 counter.IncreaseScore(500);
                 // Debug.Log(transcriptRec);
@@ -182,6 +183,10 @@ public class ThinkyData2_2 : MonoBehaviour
 
         if (numPicked == 4 && finished == false)
         {
+            int timeBonus = (int)Math.Round(remainingTime);
+            timeBonus = timeBonus * 100;
+            counter.IncreaseScore(timeBonus);
+
             //gameOver.SetActive(true);
             winner.SetActive(true);
             timeText.enabled = false;
@@ -197,9 +202,9 @@ public class ThinkyData2_2 : MonoBehaviour
             //playfabManager.SendLeaderboard(counter.score);
 
         }
+
         if (remainingTime <= 0 && gameStarted == true && finished == false)
         {
-
             recipe.SetActive(true);
             timeText.enabled = false;
             if (task1Picked == false) // transcriptRec != ""
