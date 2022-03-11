@@ -73,4 +73,9 @@ public class MainMenuTransition : MonoBehaviour
         Debug.Log("PickyPick loading");
         SceneManager.LoadScene("PickyPick", LoadSceneMode.Single);
     }
+	
+	public void loadOptions()
+    {
+        SceneManager.LoadScene("OptionsInputTest", LoadSceneMode.Single);
+    }
 }
