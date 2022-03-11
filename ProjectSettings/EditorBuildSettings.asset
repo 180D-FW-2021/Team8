@@ -8,22 +8,22 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChoppingMinigame.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SpeechTest.unity
     guid: b72e1a45bba6f41518f4ba527b858cbb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MAINTEST.unity
     guid: b96564d52ddf943e29592bf6b2182d5c
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/GameSelection.unity
     guid: ed2572b487c1d4ec4bc010b093e7b0c5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/3D_Chop.unity
     guid: 23135a42138064ad8bc8752c161051a0
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/3D_Shelf.unity
     guid: d01ea374dce8e4c6689a37ccf670660d
   - enabled: 0
@@ -32,40 +32,40 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fry Fry.unity
     guid: f7215e9f1b680e2438727b727b9a5803
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Leaderboard.unity
     guid: 8349031b26bbb4770b2cab0fd91b3996
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LowPolyKitchen.unity
     guid: 649d0625907964baaa5a6dc083802af1
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MemoryScene.unity
     guid: c1aa4cd3a986d4487abef9868a5eb893
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/OptionsInputTest.unity
     guid: b0b6a1a5b4342484382576736d48b2f9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PickMe.unity
     guid: 2894d73f0035f4048add4dd428fb38c6
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PickyPick.unity
     guid: 25d15bc674ee14b1da90be736734ac46
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Speech2 2.unity
     guid: d9bca0b4ed3a7411595335d05e9a879b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Thinky1.unity
     guid: bc5b942fe41ac4787b158c41dfcd52c4
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Thinky2.2.unity
     guid: 55d98c6ee55504ed79e285db98564f57
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Thinky2.unity
     guid: 1720f52f4f38f418892c717b83832b6a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/RecipeMemory.unity
     guid: 4857895fffc9e4c94ba2ca976a63695e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/ChopChopKitchen.unity
     guid: 7943a9fb2e8f344e3940672ed727ef76
   m_configObjects:
