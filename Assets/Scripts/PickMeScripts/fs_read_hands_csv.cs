@@ -75,7 +75,15 @@ public class fs_read_hands_csv : MonoBehaviour
 			process.Start();
         }
 		*/
-
+		
+		void Start()
+		{
+			if(PlayerPrefs.HasKey("handReadDelay")) // set in the options menu.
+			{
+				// can assume that TryParse() will work on the option input.
+				System.Int32.TryParse(PlayerPrefs.GetString("handReadDelay"), out delay_ms);
+			}
+		}
         // Update is called once per frame
         void Update()
         {
