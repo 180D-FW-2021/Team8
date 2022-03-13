@@ -270,7 +270,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 323911536}
-        m_MethodName: OnButtonClick
+        m_MethodName: sceneChange
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -343,9 +343,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 323911535}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4418200ce983d1499d1913edc9ba033, type: 3}
+  m_Script: {fileID: 11500000, guid: d9e422e11775ea14e962a6f9b75d42dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneTarget: ChopChopKitchen
   input: {fileID: 2003506302}
 --- !u!4 &323911537
 Transform:
