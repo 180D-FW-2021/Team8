@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class optionsButtonScript : MonoBehaviour
 {
 	string optionName = "handReadDelay";
-	public string sceneTarget = "ChopChopKitchen";
 	// Drag the Input Field into this.
 	public InputField input;
 	
@@ -19,7 +18,7 @@ public class optionsButtonScript : MonoBehaviour
 		PlayerPrefs.SetString(optionName, savedText);
 		Debug.Log("Saved Text:");
 		Debug.Log(savedText);
-		sceneChange();
+		gameSelectionScene();
 	}
 	 
 	// If the "optionName" exists when this script is called on start, it will put the text into the inputfield.
@@ -53,8 +52,9 @@ public class optionsButtonScript : MonoBehaviour
 		return inputInt;
 	}
 	
-	public void sceneChange()
+	public void gameSelectionScene()
     {
-        SceneManager.LoadScene(sceneTarget, LoadSceneMode.Single);
+        Debug.Log("Game Selection loading");
+        SceneManager.LoadScene("GameSelection", LoadSceneMode.Single);
     }
 }
