@@ -111,4 +111,8 @@ public class startGame : MonoBehaviour
             ThinkPanel.SetActive(false);
         }
     }
+	
+	public void returnToMain(){
+		SceneManager.LoadScene("ChopChopKitchen", LoadSceneMode.Single);
+	}
 }
