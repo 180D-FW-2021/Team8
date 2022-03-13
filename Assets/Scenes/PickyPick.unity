@@ -20,11 +20,11 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 0
+  m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
   m_HaloStrength: 0.5
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18339516, g: 0.22899665, b: 0.3060517, a: 1}
+  m_IndirectSpecularColor: {r: 0.18339445, g: 0.22899581, b: 0.30605, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -66,12 +66,12 @@ LightmapSettings:
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
-    m_TextureCompression: 1
+    m_TextureCompression: 0
     m_FinalGather: 0
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 2
+    m_MixedBakeMode: 0
     m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
@@ -97,8 +97,9 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_LightingDataAsset: {fileID: 112000000, guid: 8a4839c11e6e443aca6db920f2faa6fa,
+    type: 2}
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -634,6 +635,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Shelf D
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 34ba98899a4674ce8bf68277e67fe4b1,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34ba98899a4674ce8bf68277e67fe4b1, type: 3}
@@ -4740,7 +4746,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -4779,7 +4785,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -6988,8 +6994,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240540110}
   m_LocalRotation: {x: -0.0000061515125, y: -0.0073290933, z: -0.00083859236, w: 0.9999728}
-  m_LocalPosition: {x: 80.957855, y: -2.1212196, z: 8.78418}
-  m_LocalScale: {x: 170.91881, y: 30.759016, z: 0.24345332}
+  m_LocalPosition: {x: 79.7, y: -2.1212196, z: 8.78418}
+  m_LocalScale: {x: 173.4391, y: 30.759016, z: 0.24345332}
   m_Children: []
   m_Father: {fileID: 274761116}
   m_RootOrder: 31
@@ -8247,7 +8253,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.9
+  m_Intensity: 0.6
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -8958,8 +8964,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1620476315}
   m_LocalRotation: {x: -0.0000061515125, y: -0.0073290933, z: -0.00083859236, w: 0.9999728}
-  m_LocalPosition: {x: 40.20627, y: 30.26307, z: 8.188507}
-  m_LocalScale: {x: 89.25808, y: 34.19772, z: 0.24345332}
+  m_LocalPosition: {x: 39.13, y: 30.26307, z: 8.188507}
+  m_LocalScale: {x: 91.40813, y: 34.19772, z: 0.24345332}
   m_Children: []
   m_Father: {fileID: 274761116}
   m_RootOrder: 33
