@@ -1,3 +1,3 @@
-# Chopping Assets
+# Fry Fry Assets
 
-Various assets specific to the Chop Chop minigame and its scene
+Various assets specific to the Fry Fry minigame and its scene
