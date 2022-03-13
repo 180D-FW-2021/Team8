@@ -6574,7 +6574,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1192408315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5cd96c61f494e1a48b2c5d38489a6895, type: 3}
+  m_Script: {fileID: 11500000, guid: ac8d9da3e5a9a4f3085d96cdf321e292, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &1192408317
@@ -9512,7 +9512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Panel: {fileID: 0}
-  pyKiller: {fileID: 1192408316}
+  pyKiller: {fileID: 0}
 --- !u!1 &1766221915
 GameObject:
   m_ObjectHideFlags: 0
