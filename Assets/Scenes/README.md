@@ -1,6 +1,6 @@
 # Scenes
 
-All scenes used for Cooking Bruin. Old scenes used during game development are located in **archivedScenes**. **ChopChopKitchen** contains assets pertaining to the title screen.
+All scenes used for Cooking Bruin.
 
 Current scenes:
 - **ChopChopKitchen:** The main starting menu and title screen of the game where players can log in their username and navigate to the minigame selection scene or options menu
@@ -12,3 +12,7 @@ Current scenes:
 - **Thinky2:** The Thinky Think minigame, medium difficulty
 - **Thinky2.2:** The Thinky Think minigame, hard difficulty
 - **ThinkCute1:** An unused scene for Thinky Think asset development
+
+Current folders:
+- Folders named after a scene contain the extra assets and lightmaps baked for each scene
+- **archivedScenes** contains abandoned, unused scenes that were created during the development process
