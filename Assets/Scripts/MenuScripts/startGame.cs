@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class startGame : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class startGame : MonoBehaviour
     public GameObject IngredientPanel;
     public GameObject ThinkPanel;
     //public Dropdown dropDifficulty;
+    public TMP_Dropdown dropDifficulty;
 
 
     // Start is called before the first frame update
@@ -84,9 +86,17 @@ public class startGame : MonoBehaviour
      public void thinkStart(){
         Debug.Log("Memorization minigame loading");        
         
+        if(dropDifficulty.value == 0){
+            SceneManager.LoadScene("Thinky1", LoadSceneMode.Single);
+        }
+        else if(dropDifficulty.value == 1){
+            SceneManager.LoadScene("Thinky2", LoadSceneMode.Single);
+        }
+        else if(dropDifficulty.value == 2){
+            SceneManager.LoadScene("Thinky2.2", LoadSceneMode.Single);
+        }
         
         
-        SceneManager.LoadScene("Thinky1", LoadSceneMode.Single);
 
 
         if(ThinkPanel != null){

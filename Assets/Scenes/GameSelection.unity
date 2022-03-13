@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18376449, g: 0.22913544, b: 0.30449384, a: 1}
+  m_IndirectSpecularColor: {r: 0.18376377, g: 0.22913425, b: 0.30449188, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -19918,6 +19918,7 @@ MonoBehaviour:
   ChopPanel: {fileID: 1273341466}
   IngredientPanel: {fileID: 244311321}
   ThinkPanel: {fileID: 1727695880}
+  dropDifficulty: {fileID: 1653592946}
 --- !u!4 &2006868103
 Transform:
   m_ObjectHideFlags: 0
