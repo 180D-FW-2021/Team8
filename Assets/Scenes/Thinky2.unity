@@ -6638,7 +6638,7 @@ MonoBehaviour:
   - {fileID: 663521128}
   - {fileID: 2046486229}
   username: {fileID: 0}
-  leaderboardName: thinkLeaderboard2
+  leaderboardName: thinkLeaderboard1
   nameWindow: {fileID: 0}
   leaderboardWindow: {fileID: 110443956}
   nameError: {fileID: 0}
