@@ -8,6 +8,7 @@ public class startGame : MonoBehaviour
     public GameObject ChopPanel;
     public GameObject IngredientPanel;
     public GameObject ThinkPanel;
+    //public Dropdown dropDifficulty;
 
 
     // Start is called before the first frame update
@@ -82,7 +83,12 @@ public class startGame : MonoBehaviour
 
      public void thinkStart(){
         Debug.Log("Memorization minigame loading");        
+        
+        
+        
         SceneManager.LoadScene("Thinky1", LoadSceneMode.Single);
+
+
         if(ThinkPanel != null){
             ThinkPanel.SetActive(false);
         }
