@@ -9,6 +9,7 @@ public class optionsButtonScript : MonoBehaviour
 	string optionName = "handReadDelay";
 	// Drag the Input Field into this.
 	public InputField input;
+	public GameObject canvas1;
 	
 	// Use a button UI that calls this function that saves the input text into Player Prefs.
 	public void OnButtonClick()
@@ -54,7 +55,8 @@ public class optionsButtonScript : MonoBehaviour
 	
 	public void gameSelectionScene()
     {
+		canvas1.SetActive(false);
         Debug.Log("Game Selection loading");
-        SceneManager.LoadScene("GameSelection", LoadSceneMode.Single);
+        SceneManager.LoadScene("ChopChopKitchen", LoadSceneMode.Single);
     }
 }

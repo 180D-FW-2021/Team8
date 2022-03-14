@@ -8,6 +8,7 @@ public class MainMenuTransition : MonoBehaviour
 
     public GameObject Panel;
 	public csvReaderStart pyKiller; // here to properly close python
+    public GameObject Panel2;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +77,8 @@ public class MainMenuTransition : MonoBehaviour
 	
 	public void loadOptions()
     {
-        SceneManager.LoadScene("OptionsInputTest", LoadSceneMode.Single);
+        //SceneManager.LoadScene("OptionsInputTest", LoadSceneMode.Single);
+        Panel2.SetActive(true);
+
     }
 }
