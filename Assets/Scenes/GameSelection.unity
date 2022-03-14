@@ -5097,8 +5097,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 1.8605425e+34, y: 7.1561207e+22, z: 7.745212e+31,
-    w: 1.8335876e+31}
+  m_BoundingSphereOverride: {x: 1e-45, y: 3.4699e-41, z: 0, w: -1}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 10.1
@@ -9741,7 +9740,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 1e-45, y: 3.4441e-41, z: 0, w: -1}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -13627,8 +13626,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 6.9767185e+22, y: 2.0373752e+34, z: 2.5171102e-12,
-    w: 1.579489e-19}
+  m_BoundingSphereOverride: {x: 1e-45, y: 3.459e-41, z: 0, w: -1}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 58.2
@@ -16980,7 +16978,7 @@ MonoBehaviour:
     m_Options:
     - m_Text: easy
       m_Image: {fileID: 0}
-    - m_Text: meduim
+    - m_Text: medium
       m_Image: {fileID: 0}
     - m_Text: hard
       m_Image: {fileID: 0}
@@ -18163,7 +18161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1727695881
 RectTransform:
   m_ObjectHideFlags: 0
