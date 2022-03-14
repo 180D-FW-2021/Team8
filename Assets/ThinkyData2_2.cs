@@ -9,7 +9,7 @@ using TMPro;
 
 public class ThinkyData2_2 : MonoBehaviour
 {
-    private int timeToComplete = 11;
+    private int timeToComplete = 6;
     private float remainingTime = 0;
 
     string transcriptRec;
@@ -159,7 +159,7 @@ public class ThinkyData2_2 : MonoBehaviour
                 pan.SetActive(true);
             }
 
-            if ((transcriptRec.Contains("baked") || transcriptRec.Contains("fake") || transcriptRec.Contains("bake") || transcriptRec.Contains("make") || transcriptRec.Contains("faked")) && task3Picked == false && task1Picked == true && task2Picked == true && task4Picked == true)
+            if ((transcriptRec.Contains("baked") || transcriptRec.Contains("fake") || transcriptRec.Contains("bake") || transcriptRec.Contains("make") || transcriptRec.Contains("faked") || transcriptRec.Contains("think") || transcriptRec.Contains("thanks") || transcriptRec.Contains("hey") || transcriptRec.Contains("eight") || transcriptRec.Contains("8") || transcriptRec.Contains("state") || transcriptRec.Contains("weight") || transcriptRec.Contains("date") || transcriptRec.Contains("pink") || transcriptRec.Contains("take") || transcriptRec.Contains("bait") || transcriptRec.Contains("thank")) && task3Picked == false && task1Picked == true && task2Picked == true && task4Picked == true)
             {
                 pan.SetActive(false);
                 counter.IncreaseScore(500);

@@ -13,9 +13,26 @@ public class csvReaderStart : MonoBehaviour
 	string filepath = "wrist_single.csv";
 	string exitFlag = "exit.txt";
 	Process process = new Process();
+	private static bool opened = false;
+	
+	public static csvReaderStart instance; // used for keeping the object around across scenes
+	
     // Start is called before the first frame update
     void Start() //maybe move startup to game startup time?
 	{
+		if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(this);
+        }
+        else if(this != instance) {
+            Destroy(this.gameObject);
+        }
+		if(opened)
+		{
+			UnityEngine.Debug.Log("Hand reader already started!");
+			return;
+		}
 		UnityEngine.Debug.Log("hands read script start");
 		process.StartInfo.Arguments = ""; // might be used later to feed frame delay to python
 		process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
@@ -56,15 +73,12 @@ public class csvReaderStart : MonoBehaviour
 		process.StartInfo.CreateNoWindow = false;
 		process.StartInfo.WindowStyle = ProcessWindowStyle.Minimized;
 		process.Start();
+		opened = true;
 	}
 
 	// this calls right before game quit.
     void OnApplicationQuit()
 	{
-		process.CloseMainWindow(); // why doesn't this work?
-		//process.Kill()
-		//process.WaitForExit();
-		process.Dispose();
 		// write to file to tell python to close
 		// python will rewrite it on startup.
 		using(FileStream exitwrite = new FileStream(
@@ -73,12 +87,5 @@ public class csvReaderStart : MonoBehaviour
 		{
 			exitwrite.WriteByte((byte) 'f');
 		}
-		/*
-		Thread.Sleep(1000); // give python time to stop
-		using(StreamWriter cursorreset = new StreamWriter(new FileStream(filepath, FileMode.Truncate, FileAccess.Write, FileShare.ReadWrite)))
-		{
-			cursorreset.WriteLine("0,0,0"); // won't really have an effect since the Python program will write even before game start
-		}
-		*/
 	}
 }
