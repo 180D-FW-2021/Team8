@@ -13,8 +13,8 @@ public class MainMenuTransition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(Panel != null){
-            Panel.SetActive(false);
+        if(Panel2 != null){
+            Panel2.SetActive(false);
         }
     }
 
@@ -78,7 +78,9 @@ public class MainMenuTransition : MonoBehaviour
 	public void loadOptions()
     {
         //SceneManager.LoadScene("OptionsInputTest", LoadSceneMode.Single);
-        Panel2.SetActive(true);
+        if(Panel2 != null){
+            Panel2.SetActive(true);
+        }
 
     }
 }
