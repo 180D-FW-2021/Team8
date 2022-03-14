@@ -21,7 +21,7 @@ public enum StateType
 
 public class ChoppingGameManager : MonoBehaviour
 {
-    private int timeToComplete = 40;
+    private int timeToComplete = 50;
 
     private StateType gameState = StateType.DEFAULT;
     private float remainingTime = 0;
