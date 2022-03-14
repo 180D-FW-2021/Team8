@@ -1,5 +1,5 @@
 # Cooking Bruin :fried_egg:
-Alan Dihn, Isabel Dominik, Megan Gronstad, Karalyn Sawchuk
+*Alan Dihn, Isabel Dominik, Megan Gronstad, Karalyn Sawchuk*
 
 Cooking Bruin is a cooking themed video game made up of three minigames Fry Fry, Thinky Think, and Picky Pick! Complete these minigames as quickly as you can to earn the most points.
 
