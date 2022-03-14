@@ -3,7 +3,7 @@ Alan Dihn, Isabel Dominik, Megan Gronstad, Karalyn Sawchuk
 
 Cooking Bruin is a cooking themed video game made up of three minigames Fry Fry, Thinky Think, and Picky Pick! Complete these minigames as quickly as you can to earn the most points.
 
-## Required Hardware:
+## Required Hardware
 - Raspberry Pi
   - It should have `paho-mqtt` and `smbus2` installed as well as have been set up to use the BerryIMU
 - [BerryIMU](https://ozzmaker.com/product/berryimu-accelerometer-gyroscope-magnetometer-barometricaltitude-sensor/)
