@@ -64,7 +64,7 @@ public class PickMe : MonoBehaviour
         float minutes = Mathf.FloorToInt(timeToDisplay / 60);
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
 
-        timeText.text = "timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
+        timeText.text = "Timer: " + string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
     // Start is called before the first frame update
