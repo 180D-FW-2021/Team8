@@ -7,7 +7,7 @@ Cooking Bruin is a cooking themed video game made up of three minigames Fry Fry,
 - Raspberry Pi
   - It should have `paho-mqtt` and `smbus2` installed as well as have been set up to use the BerryIMU
 - [BerryIMU](https://ozzmaker.com/product/berryimu-accelerometer-gyroscope-magnetometer-barometricaltitude-sensor/)
-- Computer with microphone and camera
+- Computer with a microphone, camera, and Python environment
 
 ## How to Set Up Cooking Bruin
 Please visit the [Cooking Bruin User Guide](https://docs.google.com/document/d/1yIKNc6TBcnJRwfBVIDO89yNEvk-Xk_T7ceKAHC5MhDE/edit?usp=sharing) for up to date instructions on how to install and set up Cooking Bruin on your computer.
